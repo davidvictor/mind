@@ -79,10 +79,11 @@ def test_onboard_wrapper_is_no_longer_a_thin_wrapper() -> None:
 def test_readme_mentions_current_operator_surface() -> None:
     text = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
     for snippet in (
-        "Brain is a local-first knowledge engine",
+        "Turn private sources into a self-organizing local knowledge graph you can inspect, rerun, and own.",
         "Why Dreaming Matters",
         "What A Brain Is",
         "Dreaming: Light, Deep, REM",
+        "Build In Public Notes",
         "python3.11 -m venv .venv",
         ".venv/bin/python -m mind onboard import --from-json",
         ".venv/bin/python -m mind orchestrate daily",

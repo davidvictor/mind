@@ -1,8 +1,6 @@
 # Brain
 
-Brain is a local-first knowledge engine that turns private source material into
-an inspectable markdown brain: source pages, structured evidence edges, graph
-attributions, and recurring Dream passes that synthesize what keeps showing up.
+> Turn private sources into a self-organizing local knowledge graph you can inspect, rerun, and own.
 
 The point is not to give a chatbot a larger context window. The point is to
 build a memory system you can inspect, repair, rerun, and own. Brain keeps the
@@ -260,6 +258,13 @@ Run the synthetic graph linter:
 ```bash
 .venv/bin/python -m scripts.lint examples/synthetic
 ```
+
+## Build In Public Notes
+
+Brain is being opened as a working local-first engine, not a hosted product.
+The public core should improve in public while real memory stays private. Useful
+feedback is around cold-clone setup, adapter boundaries, evidence-edge shape,
+and Dream quality/readiness behavior.
 
 ## Repository Map
 
