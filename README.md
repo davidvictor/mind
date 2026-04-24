@@ -1,12 +1,12 @@
 # Brain
 
-> Turn private sources into a self-organizing local knowledge graph you can inspect, rerun, and own.
+> Make your private archive think back: local evidence in, sharper ideas out.
 
 The point is not to give a chatbot a larger context window. The point is to
-build a memory system you can inspect, repair, rerun, and own. Brain keeps the
-evidence in files, records how each idea entered the graph, and then "dreams"
-over that graph so repeated evidence can become better concepts, sharper
-stances, useful playbooks, and non-obvious connections.
+build a memory system that argues from its own evidence. Brain keeps the source
+trail in files, records how each idea entered the graph, and then "dreams" over
+that graph so repeated evidence can become better concepts, sharper stances,
+useful playbooks, and non-obvious connections.
 
 The public repository contains the reusable engine: schemas, ingestion code,
 prompts, Dream runtime, retrieval interfaces, CLI services, tests, and synthetic

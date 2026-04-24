@@ -79,7 +79,7 @@ def test_onboard_wrapper_is_no_longer_a_thin_wrapper() -> None:
 def test_readme_mentions_current_operator_surface() -> None:
     text = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
     for snippet in (
-        "Turn private sources into a self-organizing local knowledge graph you can inspect, rerun, and own.",
+        "Make your private archive think back: local evidence in, sharper ideas out.",
         "Why Dreaming Matters",
         "What A Brain Is",
         "Dreaming: Light, Deep, REM",
