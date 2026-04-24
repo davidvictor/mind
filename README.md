@@ -52,10 +52,6 @@ Dream is the graph-maintenance loop.
   raw reports, and blocks canonical markdown or relation writes until apply mode
   is explicitly trusted.
 
-Legacy Weave is not a Dream stage. Existing cleanup is available through
-`mind repair weave-cleanup`; current structural work belongs in Light, Deep, or
-Kené.
-
 ## Local Data Model
 
 A local mind is a private markdown graph plus rebuildable runtime state.
@@ -188,7 +184,6 @@ Run maintenance:
 ```bash
 .venv/bin/python -m mind repair graph --apply
 .venv/bin/python -m mind repair atom-pages --apply
-.venv/bin/python -m mind repair weave-cleanup --apply
 ```
 
 Run scheduled or accelerated Dream flows:
