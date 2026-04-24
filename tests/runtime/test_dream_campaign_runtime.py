@@ -197,6 +197,55 @@ def test_campaign_yearly_profile_suppresses_operator_nudges(tmp_path: Path, monk
     assert "tail-rescan appended evidence" not in report_text
 
 
+def test_campaign_fast_forward_skips_unchanged_yearly_light_inputs(tmp_path: Path, monkeypatch) -> None:
+    root = _copy_harness(tmp_path)
+    _patch_roots(monkeypatch, root)
+    cfg = root / "config.yaml"
+    cfg.write_text(
+        cfg.read_text(encoding="utf-8").replace(
+            "  probationary_stale_warn_days: 90\n",
+            "  probationary_stale_warn_days: 90\n"
+            "  campaign:\n"
+            "    yearly:\n"
+            "      fast_forward_skip_unchanged_light: true\n",
+        ),
+        encoding="utf-8",
+    )
+    stage_calls: list[str] = []
+
+    def fake_run_stage(*, stage: str, context, progress_callback=None):
+        stage_calls.append(stage)
+        return campaign_module.DreamResult(stage=stage, dry_run=False, summary=f"{stage} complete")
+
+    monkeypatch.setattr("mind.dream.campaign._run_stage", fake_run_stage)
+    monkeypatch.setattr(
+        "mind.dream.campaign._light_fast_forward_fingerprint",
+        lambda _v, *, config, refresh_atom_cache=False: "stable",
+    )
+
+    result = run_campaign(
+        days=3,
+        start_date="2026-01-01",
+        dry_run=False,
+        resume=False,
+        profile="yearly",
+    )
+
+    assert "light=3 deep=1 rem=1" in result.summary
+    assert stage_calls == ["light", "deep", "rem"]
+    state = RuntimeState.for_repo_root(root)
+    adapter = state.get_adapter_state(CAMPAIGN_ADAPTER)
+    assert adapter is not None
+    assert adapter["completed_counts"] == {"light": 3, "deep": 1, "rem": 1}
+    reports = _daily_reports(root, adapter)
+    assert "Light Dream skipped because campaign fast-forward inputs were unchanged" in reports[1].read_text(encoding="utf-8")
+    with state.connect() as conn:
+        skipped = conn.execute(
+            "SELECT count(*) AS count FROM run_events WHERE event_type = 'stage-skipped'"
+        ).fetchone()
+    assert skipped["count"] == 2
+
+
 def test_campaign_live_35_day_rehearsal_writes_real_reports_and_monthly_outputs(tmp_path: Path, monkeypatch) -> None:
     root = _copy_harness(tmp_path)
     _patch_roots(monkeypatch, root)

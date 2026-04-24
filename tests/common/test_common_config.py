@@ -21,8 +21,26 @@ def test_brain_config_loads_minimal_yaml(tmp_path: Path):
     assert cfg.vault.wiki_dir == "memory"
     assert cfg.llm.model == "google/gemini-2.5-pro"
     assert cfg.dream.enabled is True  # default
+    assert cfg.dream.quality.persist_receipts is True  # default
     assert cfg.anti_sales.enabled is True  # default
     assert cfg.anti_sales.allow_brands == []
+
+
+def test_brain_config_dream_quality_override_loads(tmp_path: Path):
+    from scripts.common.config import BrainConfig
+
+    cfg_path = tmp_path / "config.yaml"
+    cfg_path.write_text(
+        "vault:\n  wiki_dir: memory\n  raw_dir: raw\n  owner_profile: me/profile.md\n"
+        "dream:\n"
+        "  quality:\n"
+        "    persist_receipts: false\n",
+        encoding="utf-8",
+    )
+
+    cfg = BrainConfig.load(cfg_path)
+
+    assert cfg.dream.quality.persist_receipts is False
 
 
 def test_brain_config_anti_sales_allow_brands_loads(tmp_path: Path):

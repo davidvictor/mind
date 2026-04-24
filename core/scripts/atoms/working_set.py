@@ -32,6 +32,10 @@ def _overlap_count(left: list[str], right: set[str]) -> int:
     return len(set(left) & right)
 
 
+def _atom_key(atom: Atom) -> tuple[str, str]:
+    return (atom.id, atom.path.as_posix())
+
+
 def _sort_recency_desc(atoms: list[Atom]) -> list[Atom]:
     ordered = sorted(atoms, key=lambda atom: (atom.id, atom.path.as_posix()))
     ordered.sort(key=lambda atom: atom.evidence_count, reverse=True)
@@ -96,13 +100,17 @@ def load_for_source(
         for atom in remaining
         if _overlap_count(atom.domains, source_domains_set) > 0
     ]
+    domain_overlap_keys = {_atom_key(atom) for atom in domain_overlap}
     topic_overlap = [
         atom
         for atom in remaining
-        if atom not in domain_overlap and _overlap_count(atom.topics, source_topics_set) > 0
+        if _atom_key(atom) not in domain_overlap_keys and _overlap_count(atom.topics, source_topics_set) > 0
     ]
+    topic_overlap_keys = {_atom_key(atom) for atom in topic_overlap}
     rest = [
-        atom for atom in remaining if atom not in domain_overlap and atom not in topic_overlap
+        atom
+        for atom in remaining
+        if _atom_key(atom) not in domain_overlap_keys and _atom_key(atom) not in topic_overlap_keys
     ]
 
     return _collect_buckets(
@@ -133,6 +141,22 @@ def load_inverse_for_source(
 ) -> list[Atom]:
     """Return the source-inverse Dream resurfacing working set."""
     atoms = _existing_atoms(_load_atoms(repo_root), repo_root)
+    return load_inverse_for_source_from_atoms(
+        source_topics=source_topics,
+        source_domains=source_domains,
+        cap=cap,
+        atoms=atoms,
+    )
+
+
+def load_inverse_for_source_from_atoms(
+    *,
+    source_topics: list[str],
+    source_domains: list[str],
+    cap: int,
+    atoms: list[Atom],
+) -> list[Atom]:
+    """Return the source-inverse Dream resurfacing working set from a caller-owned snapshot."""
     source_topics_set = {item for item in source_topics if item}
     source_domains_set = {item for item in source_domains if item}
 
@@ -146,13 +170,17 @@ def load_inverse_for_source(
         for atom in remaining
         if _overlap_count(atom.domains, source_domains_set) == 0
     ]
+    domain_inverse_keys = {_atom_key(atom) for atom in domain_inverse}
     topic_inverse = [
         atom
         for atom in remaining
-        if atom not in domain_inverse and _overlap_count(atom.topics, source_topics_set) == 0
+        if _atom_key(atom) not in domain_inverse_keys and _overlap_count(atom.topics, source_topics_set) == 0
     ]
+    topic_inverse_keys = {_atom_key(atom) for atom in topic_inverse}
     rest = [
-        atom for atom in remaining if atom not in domain_inverse and atom not in topic_inverse
+        atom
+        for atom in remaining
+        if _atom_key(atom) not in domain_inverse_keys and _atom_key(atom) not in topic_inverse_keys
     ]
 
     return _collect_buckets(

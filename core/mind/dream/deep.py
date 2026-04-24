@@ -444,7 +444,8 @@ def run_deep(
                     else:
                         contradiction_escalations += 1
                     _archive_nudge(nudge_dir, action=action, nudge=nudge)
-                    record_mutation(f"{action}d contradiction {nudge.name}")
+                    past_action = "applied" if action == "apply" else f"{action}d"
+                    record_mutation(f"{past_action} contradiction {nudge.name}")
 
                 for nudge in sorted(nudge_dir.glob("*-polarity-audit-*.md")):
                     archive_status, archive_target = _archive_nudge_status(

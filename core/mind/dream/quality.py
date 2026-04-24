@@ -188,6 +188,7 @@ def evaluate_and_persist_quality(
     report_key: str,
 ) -> dict[str, Any]:
     v = vault()
+    persist_receipts = persist and bool(v.config.dream.quality.persist_receipts)
     acceptable_identities = _acceptable_dream_identities()
     grouped: dict[str, list[LaneSourceRecord]] = {lane: [] for lane in CANONICAL_LANES}
     for path in source_pages(v):
@@ -201,7 +202,7 @@ def evaluate_and_persist_quality(
                 path=path,
                 frontmatter=frontmatter,
                 acceptable_identities=acceptable_identities,
-                persist_receipt=persist,
+                persist_receipt=persist_receipts,
             )
         )
 

@@ -20,15 +20,15 @@ def _load_atoms(repo_root: Path) -> list[Atom]:
         return cache.load(repo_root)
 
 
-def _existing(atom: Atom, *, repo_root: Path) -> bool:
-    return Vault.load(repo_root).resolve_logical_path(atom.path).exists()
+def _existing(atom: Atom, *, v: Vault) -> bool:
+    return v.resolve_logical_path(atom.path).exists()
 
 
 def active_atoms(v: Vault) -> list[Atom]:
     return [
         atom
         for atom in _load_atoms(v.root)
-        if atom.lifecycle_state != "probationary" and _existing(atom, repo_root=v.root)
+        if atom.lifecycle_state != "probationary" and _existing(atom, v=v)
     ]
 
 
@@ -36,7 +36,7 @@ def probationary_atoms(v: Vault) -> list[Atom]:
     return [
         atom
         for atom in _load_atoms(v.root)
-        if atom.lifecycle_state == "probationary" and _existing(atom, repo_root=v.root)
+        if atom.lifecycle_state == "probationary" and _existing(atom, v=v)
     ]
 
 
@@ -61,6 +61,21 @@ def inverse_tail_candidates(
         source_domains=source_domains,
         cap=cap,
         repo_root=v.root,
+    )
+
+
+def inverse_tail_candidates_from_atoms(
+    *,
+    atoms: list[Atom],
+    source_topics: list[str],
+    source_domains: list[str],
+    cap: int,
+) -> list[Atom]:
+    return working_set.load_inverse_for_source_from_atoms(
+        source_topics=source_topics,
+        source_domains=source_domains,
+        cap=cap,
+        atoms=atoms,
     )
 
 
@@ -107,7 +122,7 @@ def probationary_atom_lookup(v: Vault) -> dict[str, Atom]:
 
 
 def known_atom_ids(v: Vault) -> set[str]:
-    return {atom.id for atom in _load_atoms(v.root) if _existing(atom, repo_root=v.root)}
+    return {atom.id for atom in _load_atoms(v.root) if _existing(atom, v=v)}
 
 
 def atom_dirs() -> tuple[str, ...]:

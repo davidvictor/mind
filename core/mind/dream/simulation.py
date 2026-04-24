@@ -240,6 +240,19 @@ def _write_simulation_config(live_vault: Vault, roots: _SimulationRoots) -> Path
         "retrieval": {
             "vector_db": (roots.state / "graph-vectors.sqlite3").as_posix(),
         },
+        "dream": {
+            "external_grounding": {
+                "enabled": False,
+            },
+            "quality": {
+                "persist_receipts": False,
+            },
+            "campaign": {
+                "yearly": {
+                    "fast_forward_skip_unchanged_light": True,
+                },
+            },
+        },
     }
     config_path.write_text(yaml.safe_dump(payload, sort_keys=False), encoding="utf-8")
     return config_path

@@ -100,6 +100,7 @@ class DreamConfig(BaseModel):
     probationary_stale_warn_days: int = 90
     active_synthesis: "DreamActiveSynthesisConfig" = Field(default_factory=lambda: DreamActiveSynthesisConfig())
     external_grounding: "DreamExternalGroundingConfig" = Field(default_factory=lambda: DreamExternalGroundingConfig())
+    quality: "DreamQualityConfig" = Field(default_factory=lambda: DreamQualityConfig())
     campaign: "DreamCampaignConfig" = Field(default_factory=lambda: DreamCampaignConfig())
     v2: "DreamV2Config" = Field(default_factory=lambda: DreamV2Config())
 
@@ -129,6 +130,10 @@ class DreamExternalGroundingConfig(BaseModel):
     max_results_per_query: int = 3
 
 
+class DreamQualityConfig(BaseModel):
+    persist_receipts: bool = True
+
+
 class DreamCampaignProfileConfig(BaseModel):
     light_interval_days: Optional[int] = None
     deep_interval_days: Optional[int] = None
@@ -150,6 +155,7 @@ class DreamCampaignProfileConfig(BaseModel):
     write_audit_nudges: Optional[bool] = None
     emit_verbose_mutations: Optional[bool] = None
     checkpoint_every_sources: Optional[int] = None
+    fast_forward_skip_unchanged_light: Optional[bool] = None
 
 
 class DreamCampaignConfig(BaseModel):
@@ -173,6 +179,7 @@ class DreamCampaignConfig(BaseModel):
     write_audit_nudges: bool = True
     emit_verbose_mutations: bool = True
     checkpoint_every_sources: int = 50
+    fast_forward_skip_unchanged_light: bool = False
     yearly: DreamCampaignProfileConfig = Field(
         default_factory=lambda: DreamCampaignProfileConfig(
             deep_interval_days=14,

@@ -245,6 +245,40 @@ def test_evaluate_and_persist_quality_accepts_text_prompt_fingerprint_compatibil
     assert "route_policy_stale" not in youtube["reasons"]
 
 
+def test_evaluate_and_persist_quality_can_skip_receipt_writes(tmp_path: Path, monkeypatch) -> None:
+    root = _copy_harness(tmp_path)
+    _patch_roots(monkeypatch, root)
+    cfg = root / "config.yaml"
+    cfg.write_text(
+        cfg.read_text(encoding="utf-8")
+        + "\ndream:\n  quality:\n    persist_receipts: false\n",
+        encoding="utf-8",
+    )
+    identity = LLMCacheIdentity(
+        task_class=PASS_D_TASK_CLASS,
+        provider="google",
+        model="gemini-2.5-flash",
+        transport="ai_gateway",
+        api_family="responses",
+        input_mode="text",
+        prompt_version=PASS_D_PROMPT_VERSION,
+    )
+    monkeypatch.setattr(
+        "mind.dream.quality._acceptable_dream_identities",
+        lambda: [identity.to_dict()],
+    )
+    video_id = "no-receipt-write"
+    _write_youtube_summary(root, video_id)
+    _write_youtube_quality_artifacts(root, video_id, pass_d_identity=identity)
+    receipt_path = quality_receipt_path(repo_root=root, lane="youtube", source_id=f"youtube-{video_id}")
+    assert not receipt_path.exists()
+
+    snapshot = evaluate_and_persist_quality(persist=True, report_key="no-receipts")
+
+    assert snapshot["lanes"]["youtube"]["recent_sources"] >= 1
+    assert not receipt_path.exists()
+
+
 def test_source_grounded_reads_wrapped_youtube_transcription_cache(tmp_path: Path) -> None:
     from mind.services.llm_cache import LLMCacheIdentity, write_llm_cache
 

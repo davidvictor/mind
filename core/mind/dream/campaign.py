@@ -3,9 +3,12 @@ from __future__ import annotations
 from calendar import monthrange
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta, timezone
+import hashlib
+import json
 from pathlib import Path
 from typing import Any, Callable, Iterable
 
+from scripts.atoms import cache as atom_cache
 from scripts.common.frontmatter import today_str
 
 from .common import (
@@ -18,8 +21,10 @@ from .common import (
     ensure_onboarded,
     maybe_locked,
     runtime_state,
+    source_pages,
     vault,
 )
+from .substrate_queries import active_atoms
 from .v2.runtime import run_dream_v2_stage
 
 CAMPAIGN_ADAPTER = "dream.campaign"
@@ -46,6 +51,7 @@ CONFIG_SNAPSHOT_KEYS = (
     "write_audit_nudges",
     "emit_verbose_mutations",
     "checkpoint_every_sources",
+    "fast_forward_skip_unchanged_light",
 )
 SUPPORTED_PROFILES = ("aggressive", "yearly")
 
@@ -79,6 +85,7 @@ class CampaignResolvedConfig:
     write_audit_nudges: bool
     emit_verbose_mutations: bool
     checkpoint_every_sources: int
+    fast_forward_skip_unchanged_light: bool
 
     def snapshot(self) -> dict[str, Any]:
         return {key: getattr(self, key) for key in CONFIG_SNAPSHOT_KEYS}
@@ -112,6 +119,7 @@ def _resolve_campaign_config(*, raw_config, dream_config, profile: str) -> Campa
         write_audit_nudges=bool(raw_config.write_audit_nudges),
         emit_verbose_mutations=bool(raw_config.emit_verbose_mutations),
         checkpoint_every_sources=int(raw_config.checkpoint_every_sources),
+        fast_forward_skip_unchanged_light=bool(raw_config.fast_forward_skip_unchanged_light),
     )
     if profile != "yearly":
         return resolved
@@ -161,6 +169,9 @@ def _resolve_campaign_config(*, raw_config, dream_config, profile: str) -> Campa
         write_audit_nudges=bool(override("write_audit_nudges", False)),
         emit_verbose_mutations=bool(override("emit_verbose_mutations", False)),
         checkpoint_every_sources=max(1, int(override("checkpoint_every_sources", resolved.checkpoint_every_sources))),
+        fast_forward_skip_unchanged_light=bool(
+            override("fast_forward_skip_unchanged_light", resolved.fast_forward_skip_unchanged_light)
+        ),
     )
 
 
@@ -239,6 +250,47 @@ def _projected_counts(schedule: Iterable[CampaignDayPlan]) -> dict[str, int]:
 
 def _campaign_config_snapshot(config: CampaignResolvedConfig) -> dict[str, Any]:
     return config.snapshot()
+
+
+def _light_fast_forward_fingerprint(
+    v,
+    *,
+    config: CampaignResolvedConfig,
+    refresh_atom_cache: bool = False,
+) -> str:
+    """Fingerprint the static inputs that make a campaign Light pass meaningful."""
+
+    if refresh_atom_cache:
+        atom_cache.rebuild(v.root)
+    digest = hashlib.sha256()
+    digest.update(repr(sorted(config.snapshot().items())).encode("utf-8"))
+    for path in sorted({item for item in source_pages(v) if item.exists()}, key=lambda item: item.relative_to(v.wiki).as_posix()):
+        rel = path.relative_to(v.wiki).as_posix()
+        digest.update(rel.encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(path.read_bytes())
+        digest.update(b"\0")
+    for atom in active_atoms(v):
+        digest.update(
+            json.dumps(
+                {
+                    "id": atom.id,
+                    "type": atom.type,
+                    "path": atom.path.as_posix(),
+                    "lifecycle_state": atom.lifecycle_state,
+                    "domains": atom.domains,
+                    "topics": atom.topics,
+                    "last_evidence_date": atom.last_evidence_date,
+                    "evidence_count": atom.evidence_count,
+                    "tldr": atom.tldr,
+                    "last_dream_pass": atom.last_dream_pass,
+                },
+                sort_keys=True,
+                separators=(",", ":"),
+            ).encode("utf-8")
+        )
+        digest.update(b"\0")
+    return digest.hexdigest()
 
 
 def _snapshot_mismatch_keys(*, current: dict[str, Any], expected: dict[str, Any]) -> list[str]:
@@ -422,6 +474,8 @@ def _progress_payload(
         "plan_path": None,
         "inflight_stage": None,
         "stage_progress": None,
+        "light_fast_forward_fingerprint": None,
+        "light_fast_forward_cache_dirty": True,
     }
 
 
@@ -639,7 +693,51 @@ def run_campaign(
                                 progress["stage_progress"] = dict(payload)
                                 state.upsert_adapter_state(adapter=CAMPAIGN_ADAPTER, state=progress)
 
-                        result = _run_stage(stage=stage, context=context, progress_callback=progress_callback)
+                        pre_light_fingerprint = None
+                        if (
+                            stage == "light"
+                            and campaign_cfg.fast_forward_skip_unchanged_light
+                            and resume_from_source_index == 0
+                            and progress.get("light_fast_forward_fingerprint")
+                        ):
+                            pre_light_fingerprint = _light_fast_forward_fingerprint(
+                                v,
+                                config=campaign_cfg,
+                                refresh_atom_cache=bool(progress.get("light_fast_forward_cache_dirty", True)),
+                            )
+                        if (
+                            stage == "light"
+                            and pre_light_fingerprint
+                            and progress.get("light_fast_forward_fingerprint") == pre_light_fingerprint
+                        ):
+                            result = DreamResult(
+                                stage="light",
+                                dry_run=False,
+                                summary=(
+                                    "Light Dream skipped because campaign fast-forward inputs "
+                                    "were unchanged since the last Light pass."
+                                ),
+                                mutations=["skipped unchanged campaign Light inputs"],
+                            )
+                            runtime.add_run_event(
+                                run_record_id,
+                                stage="campaign",
+                                event_type="stage-skipped",
+                                message=f"{day.effective_date}:light unchanged",
+                                payload={"campaign_run_id": run_id, "effective_date": day.effective_date},
+                            )
+                            progress["light_fast_forward_cache_dirty"] = False
+                        else:
+                            result = _run_stage(stage=stage, context=context, progress_callback=progress_callback)
+                            if stage == "light" and campaign_cfg.fast_forward_skip_unchanged_light:
+                                progress["light_fast_forward_fingerprint"] = _light_fast_forward_fingerprint(
+                                    v,
+                                    config=campaign_cfg,
+                                    refresh_atom_cache=True,
+                                )
+                                progress["light_fast_forward_cache_dirty"] = False
+                            elif stage != "light":
+                                progress["light_fast_forward_cache_dirty"] = True
                         stage_results.append(result)
                         last_scheduled_stage = stage
                         completed_counts[stage] += 1

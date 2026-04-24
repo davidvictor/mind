@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from dataclasses import replace
 from datetime import date
 from itertools import combinations
 from pathlib import Path
@@ -7,6 +8,7 @@ import re
 from typing import Any, Callable
 
 from mind.services.content_policy import working_set_domains
+from scripts.atoms import cache as atom_cache
 from scripts.atoms.evidence_writer import append_evidence
 
 from mind.dream.common import (
@@ -35,7 +37,7 @@ from mind.dream.quality import (
     lane_state_for_frontmatter,
     supports_full_dream_mutation,
 )
-from mind.dream.substrate_queries import active_atoms, atom_path, inverse_tail_candidates, probationary_atoms
+from mind.dream.substrate_queries import active_atoms, atom_path, inverse_tail_candidates_from_atoms, probationary_atoms
 
 
 CONTRADICTION_RE = re.compile(r"\b(however|contradict|tension|but)\b", re.IGNORECASE)
@@ -191,6 +193,10 @@ def _evidence_sources(path: Path) -> set[str]:
     return {match for match in EVIDENCE_SOURCE_RE.findall(evidence)}
 
 
+def _replace_atom_snapshot(atoms: list, atom_id: str, **changes) -> list:
+    return [replace(atom, **changes) if atom.id == atom_id else atom for atom in atoms]
+
+
 def run_light(
     *,
     dry_run: bool,
@@ -256,7 +262,9 @@ def run_light(
                 }
             )
         with maybe_locked("light", dry_run=dry_run, acquire_lock=acquire_lock):
-            active_count = max(1, len(active_atoms(v)))
+            atom_cache.rebuild(v.root)
+            active_atom_snapshot = active_atoms(v)
+            active_count = max(1, len(active_atom_snapshot))
             for index, path in enumerate(candidates, start=resume_from_index + 1):
                 emit_progress = bool(
                     not dry_run
@@ -295,8 +303,8 @@ def run_light(
                     source_topics = _source_topics(frontmatter, body)
                     source_domains = _source_domains(frontmatter)
                     inverse_atoms = (
-                        inverse_tail_candidates(
-                            v,
+                        inverse_tail_candidates_from_atoms(
+                            atoms=active_atom_snapshot,
                             source_topics=source_topics,
                             source_domains=source_domains,
                             cap=active_count,
@@ -333,9 +341,16 @@ def run_light(
                                 record_mutation(f"{source_id}: skipped existing working-set-cap audit {name} ({existing_path})")
                         if allow_full_mutation and apply_cap_miss_lifecycle_changes:
                             for atom in overflow_atoms:
+                                if atom.lifecycle_state == "dormant":
+                                    continue
                                 demoted, miss_count = _record_cap_miss(v=v, atom=atom, today=today)
                                 if demoted:
                                     lifecycle_updates += 1
+                                    active_atom_snapshot = _replace_atom_snapshot(
+                                        active_atom_snapshot,
+                                        atom.id,
+                                        lifecycle_state="dormant",
+                                    )
                                     record_mutation(f"{atom.id}: set dormant after {miss_count} cap misses")
 
                     matched_ids: list[str] = []
@@ -363,9 +378,20 @@ def run_light(
                         )
                         if appended:
                             evidence_updates += 1
+                            active_atom_snapshot = _replace_atom_snapshot(
+                                active_atom_snapshot,
+                                atom.id,
+                                last_evidence_date=today,
+                                evidence_count=atom.evidence_count + 1,
+                            )
                             record_mutation(f"{source_id}: tail-rescan appended evidence to {atom.type}:{atom.id}")
                         if _reactivate_if_needed(v=v, atom=atom, today=today):
                             lifecycle_updates += 1
+                            active_atom_snapshot = _replace_atom_snapshot(
+                                active_atom_snapshot,
+                                atom.id,
+                                lifecycle_state="active",
+                            )
                             record_mutation(f"{atom.id}: reactivated after inverse-tail match")
 
                     if allow_relation_only_bootstrap and matched_ids:
@@ -488,7 +514,7 @@ def run_light(
                     record_mutation(f"skipped existing merge-detection nudge {name} ({existing_path})")
 
             source_to_atoms: dict[str, set[str]] = {}
-            for atom in active_atoms(v):
+            for atom in active_atom_snapshot:
                 for source_id in _evidence_sources(atom_path(v, atom)) & light_window_sources:
                     source_to_atoms.setdefault(source_id, set()).add(atom.id)
             for source_id, atom_ids in relaxed_bootstrap_source_atoms.items():
