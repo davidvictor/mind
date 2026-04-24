@@ -51,6 +51,14 @@ ingestors:
 
 dream:
   enabled: true
+  v2:
+    artifact_root: raw/reports/dream/v2
+    kene:
+      enabled: true
+      mode: shadow
+      max_atoms: 80
+      max_prior_artifacts: 24
+      campaign_enabled: false
 
 anti_sales:
   enabled: true

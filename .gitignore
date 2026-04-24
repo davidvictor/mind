@@ -13,10 +13,20 @@ Untitled*.base
 /config.yaml
 /2026-*.md
 
-# Local planning/history archives. Keep these machine-local for public release.
+# Local prompts, planning drafts, and history archives. Keep these machine-local.
+/ONBOARDING_PROMPT.md
 /docs/archive/
+/docs/drafts/
+/docs/internal/
 /docs/plans/
+/docs/private/
 /docs/spikes/
+/plans/
+/planning/
+/roadmap/
+/notes/
+*.local.md
+*.scratch.md
 
 # Python
 .venv/

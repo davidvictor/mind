@@ -24,6 +24,10 @@ def run_rem(*, dry_run: bool):
     return run_dream_v2_stage(stage="rem", dry_run=dry_run)
 
 
+def run_kene(*, dry_run: bool):
+    return run_dream_v2_stage(stage="kene", dry_run=dry_run)
+
+
 def _run(stage: str, *, dry_run: bool) -> int:
     try:
         if stage == "light":
@@ -32,6 +36,8 @@ def _run(stage: str, *, dry_run: bool) -> int:
             result = run_deep(dry_run=dry_run)
         elif stage == "rem":
             result = run_rem(dry_run=dry_run)
+        elif stage == "kene":
+            result = run_kene(dry_run=True)
         else:
             raise KeyError(stage)
     except DreamPreconditionError as exc:
@@ -51,6 +57,10 @@ def cmd_dream_deep(args: argparse.Namespace) -> int:
 
 def cmd_dream_rem(args: argparse.Namespace) -> int:
     return _run("rem", dry_run=bool(args.dry_run))
+
+
+def cmd_dream_kene(args: argparse.Namespace) -> int:
+    return _run("kene", dry_run=True)
 
 
 def cmd_dream_bootstrap(args: argparse.Namespace) -> int:

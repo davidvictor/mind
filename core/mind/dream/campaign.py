@@ -29,7 +29,13 @@ from .v2.runtime import run_dream_v2_stage
 
 CAMPAIGN_ADAPTER = "dream.campaign"
 CAMPAIGN_REPORT_ROOT = ("raw", "reports", "dream", "campaign")
-STAGE_ORDER = ("light", "deep", "rem")
+STAGE_ORDER = ("light", "deep", "rem", "kene")
+STAGE_LABELS = {
+    "light": "Light",
+    "deep": "Deep",
+    "rem": "REM",
+    "kene": "Ken\u00e9",
+}
 CONFIG_SNAPSHOT_KEYS = (
     "light_interval_days",
     "deep_interval_days",
@@ -52,6 +58,7 @@ CONFIG_SNAPSHOT_KEYS = (
     "emit_verbose_mutations",
     "checkpoint_every_sources",
     "fast_forward_skip_unchanged_light",
+    "kene_enabled",
 )
 SUPPORTED_PROFILES = ("aggressive", "yearly")
 
@@ -86,6 +93,7 @@ class CampaignResolvedConfig:
     emit_verbose_mutations: bool
     checkpoint_every_sources: int
     fast_forward_skip_unchanged_light: bool
+    kene_enabled: bool
 
     def snapshot(self) -> dict[str, Any]:
         return {key: getattr(self, key) for key in CONFIG_SNAPSHOT_KEYS}
@@ -120,6 +128,7 @@ def _resolve_campaign_config(*, raw_config, dream_config, profile: str) -> Campa
         emit_verbose_mutations=bool(raw_config.emit_verbose_mutations),
         checkpoint_every_sources=int(raw_config.checkpoint_every_sources),
         fast_forward_skip_unchanged_light=bool(raw_config.fast_forward_skip_unchanged_light),
+        kene_enabled=bool(dream_config.v2.kene.campaign_enabled),
     )
     if profile != "yearly":
         return resolved
@@ -172,6 +181,7 @@ def _resolve_campaign_config(*, raw_config, dream_config, profile: str) -> Campa
         fast_forward_skip_unchanged_light=bool(
             override("fast_forward_skip_unchanged_light", resolved.fast_forward_skip_unchanged_light)
         ),
+        kene_enabled=resolved.kene_enabled,
     )
 
 
@@ -236,6 +246,8 @@ def _build_schedule(*, start_date: str, days: int, config) -> list[CampaignDayPl
             stages.append("deep")
         if effective_date in rem_dates:
             stages.append("rem")
+            if bool(getattr(config, "kene_enabled", False)):
+                stages.append("kene")
         schedule.append(CampaignDayPlan(day_index=day_index, effective_date=effective_date, stages=tuple(stages)))
     return schedule
 
@@ -246,6 +258,10 @@ def _projected_counts(schedule: Iterable[CampaignDayPlan]) -> dict[str, int]:
         for stage in day.stages:
             counts[stage] += 1
     return counts
+
+
+def _stage_label(stage: str) -> str:
+    return STAGE_LABELS.get(stage, stage.title())
 
 
 def _campaign_config_snapshot(config: CampaignResolvedConfig) -> dict[str, Any]:
@@ -296,7 +312,10 @@ def _light_fast_forward_fingerprint(
 def _snapshot_mismatch_keys(*, current: dict[str, Any], expected: dict[str, Any]) -> list[str]:
     mismatches: list[str] = []
     for key in CONFIG_SNAPSHOT_KEYS:
-        if current.get(key) != expected.get(key):
+        expected_value = expected.get(key)
+        if key == "kene_enabled" and key not in expected:
+            expected_value = False
+        if current.get(key) != expected_value:
             mismatches.append(key)
     return mismatches
 
@@ -359,6 +378,7 @@ def _write_plan_report(
         f"- Projected Light runs: {projected_counts['light']}",
         f"- Projected Deep runs: {projected_counts['deep']}",
         f"- Projected REM runs: {projected_counts['rem']}",
+        f"- Projected Ken\u00e9 runs: {projected_counts['kene']}",
         "",
         "## Schedule",
         "",
@@ -391,6 +411,7 @@ def _write_daily_report(
         f"- Completed Light runs: {completed_counts['light']}",
         f"- Completed Deep runs: {completed_counts['deep']}",
         f"- Completed REM runs: {completed_counts['rem']}",
+        f"- Completed Ken\u00e9 runs: {completed_counts['kene']}",
         "",
     ]
     if resumed_from_stage and not stage_results:
@@ -405,7 +426,7 @@ def _write_daily_report(
     if not day.stages:
         lines.extend(["## Activity", "", "- No Dream stages were scheduled for this simulated date.", ""])
     for result in stage_results:
-        lines.extend([f"## {result.stage.title()}", "", result.render(), ""])
+        lines.extend([f"## {_stage_label(result.stage)}", "", result.render(), ""])
     target.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
     return target
 
@@ -439,7 +460,7 @@ def _run_stage(
 ) -> DreamResult:
     return run_dream_v2_stage(
         stage=stage,
-        dry_run=False,
+        dry_run=stage == "kene",
         acquire_lock=False,
         context=context,
         progress_callback=progress_callback,
@@ -484,6 +505,7 @@ def _render_preview(schedule: list[CampaignDayPlan], *, projected_counts: dict[s
         f"Projected Light runs: {projected_counts['light']}",
         f"Projected Deep runs: {projected_counts['deep']}",
         f"Projected REM runs: {projected_counts['rem']}",
+        f"Projected Ken\u00e9 runs: {projected_counts['kene']}",
         "Preview:",
     ]
     preview_days = schedule if len(schedule) <= 8 else schedule[:5]
@@ -564,7 +586,8 @@ def run_campaign(
         summary = (
             f"Campaign rehearsal planned for {len(schedule)} simulated days "
             f"from {start_date} through {end_date}: "
-            f"light={projected_counts['light']} deep={projected_counts['deep']} rem={projected_counts['rem']}."
+            f"light={projected_counts['light']} deep={projected_counts['deep']} "
+            f"rem={projected_counts['rem']} kene={projected_counts['kene']}."
         )
         return DreamResult(
             stage="campaign",
@@ -789,6 +812,7 @@ def run_campaign(
     summary = (
         f"Campaign processed {len(schedule)} simulated days "
         f"from {start_date} through {end_date}: "
-        f"light={completed_counts['light']} deep={completed_counts['deep']} rem={completed_counts['rem']}."
+        f"light={completed_counts['light']} deep={completed_counts['deep']} "
+        f"rem={completed_counts['rem']} kene={completed_counts['kene']}."
     )
     return DreamResult(stage="campaign", dry_run=False, summary=summary, mutations=mutations, warnings=warnings)

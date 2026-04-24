@@ -1177,6 +1177,9 @@ def test_mind_dream_simulate_year_help_exposes_current_flags():
     assert "simulate-year" in subcommand_names(parser, "dream")
     assert option_strings(parser, "dream", "simulate-year") >= {"--days", "--start-date", "--run-id", "--dry-run"}
 
-def test_mind_dream_does_not_expose_fourth_stage():
+
+def test_mind_dream_kene_help_exposes_shadow_surface_without_weave():
     parser = build_parser()
+    assert "kene" in subcommand_names(parser, "dream")
+    assert option_strings(parser, "dream", "kene") >= {"--dry-run"}
     assert "weave" not in subcommand_names(parser, "dream")

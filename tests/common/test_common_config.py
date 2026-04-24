@@ -206,6 +206,12 @@ def test_brain_config_dream_v2_override_loads(tmp_path: Path):
         "dream:\n"
         "  v2:\n"
         "    artifact_root: raw/reports/dream/v2-custom\n"
+        "    kene:\n"
+        "      enabled: false\n"
+        "      mode: shadow\n"
+        "      max_atoms: 12\n"
+        "      max_prior_artifacts: 7\n"
+        "      campaign_enabled: true\n"
         "    weave_shadow_enabled: true\n"
         "    weave_window_size: 18\n"
         "    weave_max_local_clusters: 2\n",
@@ -215,6 +221,11 @@ def test_brain_config_dream_v2_override_loads(tmp_path: Path):
     cfg = BrainConfig.load(cfg_path)
 
     assert cfg.dream.v2.artifact_root == "raw/reports/dream/v2-custom"
+    assert cfg.dream.v2.kene.enabled is False
+    assert cfg.dream.v2.kene.mode == "shadow"
+    assert cfg.dream.v2.kene.max_atoms == 12
+    assert cfg.dream.v2.kene.max_prior_artifacts == 7
+    assert cfg.dream.v2.kene.campaign_enabled is True
     assert not hasattr(cfg.dream.v2, "weave_shadow_enabled")
 
 

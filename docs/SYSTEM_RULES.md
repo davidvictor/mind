@@ -35,8 +35,9 @@ These are the current high-level rules for the Brain runtime.
 - `mind dream campaign` is an explicit operator-only reorg lane, not part of unattended daily cadence.
 - In campaign `aggressive`, Light rescans the current source corpus on every scheduled day, Deep keeps day-interval cadence, and REM runs on day 0 then once per calendar month.
 - In campaign `yearly`, Light still rescans the current source corpus on every scheduled day, but it keeps strict lane behavior, suppresses campaign-generated inbox nudges, and checkpoints long Light passes for operator resume.
+- Kené may run after REM in campaign mode only when `dream.v2.kene.campaign_enabled` is true; it remains a shadow/dry-run artifact pass and must not perform canonical graph writes.
 - Campaign resume must reuse the persisted schedule/config snapshot for that run and fail fast if schedule-affecting `dream.campaign` knobs have drifted.
-- `mind dream simulate-year` is the accelerated Dream feature. It must run under ignored `local_data/simulations/<run-id>/` roots, seed simulation-local memory plus Dream raw transcript/cache inputs, force separate memory/raw/state/vector DB paths, use Light/Deep/REM only, and emit candidate graph deltas instead of mutating the live timeline or live Dream state.
+- `mind dream simulate-year` is the accelerated Dream feature. It must run under ignored `local_data/simulations/<run-id>/` roots, seed simulation-local memory plus Dream raw transcript/cache inputs, force separate memory/raw/state/vector DB paths, use Light/Deep/REM scheduling, and emit candidate graph deltas instead of mutating the live timeline or live Dream state.
 - Unattended Dream cadence belongs to the orchestrator.
 - Dream readiness depends on validated onboarding state plus projected core onboarding outputs, not only on file existence.
 - Ingest lanes materialize one canonical durable source page per item under configured memory `sources/...`; summary pages are reserved for synthetic/operator outputs.
@@ -45,9 +46,11 @@ These are the current high-level rules for the Brain runtime.
 - Light Dream runs through the Dream v2 stage dispatcher and stays a bounded cross-source consolidator over shared distillation selectors.
 - Deep Dream runs through the Dream v2 stage dispatcher as the weekly relation editor and may regenerate digest/index/open-inquiries outputs.
 - REM Dream runs through the Dream v2 stage dispatcher as the monthly graph-pruning and reflection pass. Its canonical durable outputs live under configured memory `dreams/rem/` and `me/reflections/`.
+- Kené Dream runs through the Dream v2 stage dispatcher as the fourth, explicit shadow pass after REM. Its artifacts live under configured raw `reports/dream/v2/`, and canonical writes stay blocked until a later apply-mode approval.
 - Dream v2 artifacts are durable operator evidence under configured raw `reports/dream/v2/`.
-- Structural link-weaving belongs inside Light as safe relation hints or inside Deep as bounded consolidation. It is not a standalone Dream stage.
-- REM must interpret what the graph is becoming; it must not depend on a separate structural clustering handoff.
+- Legacy Weave is cleanup-only and must not return as `mind dream weave`.
+- Structural link-weaving belongs inside Light as safe relation hints or inside Deep as bounded consolidation. Kené is the future final map/regraphing pass, not legacy Weave revived under another command.
+- REM must interpret what the graph is becoming before Kené reorganizes the resulting map.
 
 ## Documentation Rules
 

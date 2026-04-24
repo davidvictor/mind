@@ -691,6 +691,22 @@ def test_mind_dream_campaign_dispatches_runtime(tmp_path, monkeypatch, capsys):
     assert "campaign-ok" in capsys.readouterr().out
 
 
+def test_mind_dream_kene_dispatches_shadow_runtime(tmp_path, capsys):
+    _write_config(tmp_path)
+    seen: list[tuple[str, bool]] = []
+
+    def fake_run_kene(*, dry_run):
+        seen.append(("kene", dry_run))
+        return types.SimpleNamespace(render=lambda: "kene-ok")
+
+    with patch("mind.commands.dream.run_kene", fake_run_kene):
+        rc = main(["dream", "kene", "--dry-run"])
+
+    assert rc == 0
+    assert seen == [("kene", True)]
+    assert "kene-ok" in capsys.readouterr().out
+
+
 def test_mind_dream_simulate_year_dispatches_runtime(tmp_path, monkeypatch, capsys):
     _write_config(tmp_path)
     monkeypatch.setattr("mind.commands.dream.project_root", lambda: tmp_path)

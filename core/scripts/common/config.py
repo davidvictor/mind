@@ -204,6 +204,15 @@ class DreamCampaignConfig(BaseModel):
 
 class DreamV2Config(BaseModel):
     artifact_root: str = "raw/reports/dream/v2"
+    kene: "DreamV2KeneConfig" = Field(default_factory=lambda: DreamV2KeneConfig())
+
+
+class DreamV2KeneConfig(BaseModel):
+    enabled: bool = True
+    mode: Literal["shadow"] = "shadow"
+    max_atoms: int = 80
+    max_prior_artifacts: int = 24
+    campaign_enabled: bool = False
 
 
 class AntiSalesConfig(BaseModel):

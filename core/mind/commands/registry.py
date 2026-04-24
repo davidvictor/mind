@@ -10,6 +10,7 @@ from .dream import (
     cmd_dream_bootstrap,
     cmd_dream_campaign,
     cmd_dream_deep,
+    cmd_dream_kene,
     cmd_dream_light,
     cmd_dream_rem,
     cmd_dream_simulate_year,
@@ -395,6 +396,9 @@ def register_additional_commands(sub: argparse._SubParsersAction[argparse.Argume
     dream_rem_p = dream_sub.add_parser("rem", help="Run or validate REM Dream")
     dream_rem_p.add_argument("--dry-run", action="store_true")
     dream_rem_p.set_defaults(func=cmd_dream_rem)
+    dream_kene_p = dream_sub.add_parser("kene", help="Run Kene Dream in shadow dry-run mode")
+    dream_kene_p.add_argument("--dry-run", action="store_true", default=True)
+    dream_kene_p.set_defaults(func=cmd_dream_kene)
     dream_bootstrap_p = dream_sub.add_parser("bootstrap", help="Replay historical sources through bootstrap consolidation")
     dream_bootstrap_p.add_argument("--dry-run", action="store_true")
     dream_bootstrap_p.add_argument("--force-pass-d", action="store_true")
