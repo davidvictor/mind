@@ -1,9 +1,16 @@
-# Brain
+# mind
+
+```text
+       _       _
+ _____|_|___ _| |
+|     | |   | . |
+|_|_|_|_|_|_|___|
+```
 
 > Make your private archive think back: local evidence in, sharper ideas out.
 
 The point is not to give a chatbot a larger context window. The point is to
-build a memory system that argues from its own evidence. Brain keeps the source
+build a memory system that argues from its own evidence. mind keeps the source
 trail in files, records how each idea entered the graph, and then "dreams" over
 that graph so repeated evidence can become better concepts, sharper stances,
 useful playbooks, and non-obvious connections.
@@ -15,7 +22,7 @@ vector indexes, and generated graph output stay in ignored local storage.
 
 ## Why Dreaming Matters
 
-Most personal memory tools store notes. Brain tries to keep the reasoning trail.
+Most personal memory tools store notes. mind tries to keep the reasoning trail.
 Each source can become a durable source page, and the ingestion pipeline can
 distill that source into atom-level evidence:
 
@@ -65,9 +72,9 @@ same underlying idea.
 - Exposes one canonical operator surface: `python -m mind`.
 - Keeps public code and private knowledge separated by default.
 
-## What A Brain Is
+## What A Local Mind Is
 
-In this implementation, a brain is not a hidden database of embeddings. It is a
+In this implementation, a mind is not a hidden database of embeddings. It is a
 private markdown graph plus rebuildable runtime state.
 
 - **Raw evidence** lives under the configured raw root.
@@ -98,8 +105,8 @@ point at another YAML config or overlay.
 This path verifies a fresh checkout without requiring private data or API keys.
 
 ```bash
-git clone <repo-url> Brain
-cd Brain
+git clone <repo-url> mind
+cd mind
 python3.11 -m venv .venv
 .venv/bin/pip install -r requirements.txt
 mkdir -p local_data/{memory,raw,dropbox,state}
@@ -261,7 +268,7 @@ Run the synthetic graph linter:
 
 ## Build In Public Notes
 
-Brain is being opened as a working local-first engine, not a hosted product.
+mind is being opened as a working local-first engine, not a hosted product.
 The public core should improve in public while real memory stays private. Useful
 feedback is around cold-clone setup, adapter boundaries, evidence-edge shape,
 and Dream quality/readiness behavior.
@@ -269,7 +276,7 @@ and Dream quality/readiness behavior.
 ## Repository Map
 
 ```text
-Brain/
+mind/
 |-- core/mind/              # Canonical CLI and runtime services
 |-- core/scripts/           # Ingestion, parsing, writing, and atom mechanics
 |-- contracts/              # Machine-readable schema contract

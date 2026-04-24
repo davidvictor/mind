@@ -80,8 +80,10 @@ def test_readme_mentions_current_operator_surface() -> None:
     text = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
     for snippet in (
         "Make your private archive think back: local evidence in, sharper ideas out.",
+        "# mind",
+        " _____|_|___ _| |",
         "Why Dreaming Matters",
-        "What A Brain Is",
+        "What A Local Mind Is",
         "Dreaming: Light, Deep, REM",
         "Build In Public Notes",
         "python3.11 -m venv .venv",
