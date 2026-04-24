@@ -1,7 +1,7 @@
 # Brain
 
 Brain is a local-first knowledge engine that turns private source material into
-an inspectable markdown brain: source pages, atomic evidence, graph
+an inspectable markdown brain: source pages, structured evidence edges, graph
 attributions, and recurring Dream passes that synthesize what keeps showing up.
 
 The point is not to give a chatbot a larger context window. The point is to
@@ -11,9 +11,9 @@ over that graph so repeated evidence can become better concepts, sharper
 stances, useful playbooks, and non-obvious connections.
 
 The public repository contains the reusable engine: schemas, ingestion code,
-prompts, Dream runtime, CLI services, tests, and synthetic examples. Your real
-memory, raw evidence, credentials, runtime databases, and generated graph output
-stay in ignored local storage.
+prompts, Dream runtime, retrieval interfaces, CLI services, tests, and synthetic
+examples. Your real memory, raw evidence, credentials, runtime databases,
+vector indexes, and generated graph output stay in ignored local storage.
 
 ## Why Dreaming Matters
 
@@ -39,6 +39,11 @@ cycle that revisits this substrate after more evidence accumulates.
 - **REM Dream** looks at hot or stale clusters against the owner's identity
   context, writes reflections, and proposes pruning or lifecycle changes.
 
+There is no standalone fourth Dream stage. Structural link-weaving belongs
+inside Light as safe relation hints or inside Deep as bounded consolidation.
+REM interprets what the graph is becoming; it does not depend on a separate
+cluster handoff.
+
 The user-facing result is a brain that gets more useful because it can notice
 recurrence, tension, and structure across sources. Instead of only remembering
 "you read this," it can show that several sources are pointing at the same
@@ -52,6 +57,10 @@ same underlying idea.
 - Normalizes source material into stable source records with provenance.
 - Runs an enrichment lifecycle: understand, personalize, attribute, distill,
   materialize, and propagate.
+- Persists structured evidence edges with source IDs, atom IDs, polarity,
+  confidence, evidence strength, relation kind, snippets, topics, entities, and
+  provenance so future graph and retrieval layers do not have to scrape
+  markdown.
 - Writes durable markdown pages under the configured memory root.
 - Tracks runtime, source registry, graph registry, and optional vector index
   state under the configured state root.
@@ -68,6 +77,9 @@ private markdown graph plus rebuildable runtime state.
   root.
 - **Atom pages** represent concepts, playbooks, stances, and inquiries that can
   gather evidence across sources.
+- **Evidence edges** are machine-readable JSONL records under configured raw
+  `evidence-edges/`; markdown evidence logs are the readable view, not the
+  entire substrate.
 - **Dream outputs** live as markdown under memory and as operator artifacts
   under raw reports.
 - **Runtime state** lives in SQLite under the configured state root and is not
@@ -88,7 +100,7 @@ point at another YAML config or overlay.
 This path verifies a fresh checkout without requiring private data or API keys.
 
 ```bash
-git clone <repo-url>
+git clone <repo-url> Brain
 cd Brain
 python3.11 -m venv .venv
 .venv/bin/pip install -r requirements.txt
@@ -114,8 +126,9 @@ For LLM-backed ingestion, onboarding, Dream, and provider flows, put
 .venv/bin/python -m mind doctor
 ```
 
-`doctor` is expected to fail until the memory/raw roots exist and gateway
-credentials are configured.
+`doctor` reports the state of your local config, paths, and credentials. On a
+fresh public checkout it may report missing gateway credentials until `.env` is
+configured.
 
 ## Configuration
 
@@ -159,16 +172,20 @@ Move inbox material into ingest lanes:
 .venv/bin/python -m mind dropbox status
 .venv/bin/python -m mind dropbox sweep
 .venv/bin/python -m mind ingest readiness
+.venv/bin/python -m mind readiness --scope new-user
 ```
 
 Run the staged onboarding backend:
 
 ```bash
-.venv/bin/python -m mind onboard import --from-json local_data/raw/onboarding/seeds/me.json
+.venv/bin/python -m mind onboard import --from-json <path-to-onboarding.json>
+.venv/bin/python -m mind onboard status --bundle <bundle-id>
 .venv/bin/python -m mind onboard normalize --bundle <bundle-id>
 .venv/bin/python -m mind onboard synthesize --bundle <bundle-id>
 .venv/bin/python -m mind onboard verify --bundle <bundle-id>
+.venv/bin/python -m mind onboard validate --bundle <bundle-id>
 .venv/bin/python -m mind onboard materialize --bundle <bundle-id>
+.venv/bin/python -m mind onboard replay --bundle <bundle-id>
 .venv/bin/python -m mind onboard status --bundle <bundle-id>
 ```
 
@@ -182,6 +199,18 @@ Run Dream directly:
 .venv/bin/python -m mind state
 ```
 
+Run explicit maintenance and cleanup:
+
+```bash
+.venv/bin/python -m mind repair graph --apply
+.venv/bin/python -m mind repair atom-pages --apply
+.venv/bin/python -m mind repair weave-cleanup --apply
+```
+
+`repair weave-cleanup` is a legacy cleanup tool. It strips old Weave metadata,
+archives experimental Weave pages, clears stale Weave runtime state, and does
+not reintroduce Weave as a Dream stage.
+
 Run operator schedules:
 
 ```bash
@@ -189,12 +218,18 @@ Run operator schedules:
 .venv/bin/python -m mind worker run-once
 .venv/bin/python -m mind worker drain-until-empty
 .venv/bin/python -m mind dream campaign --days 7 --dry-run
-.venv/bin/python -m mind dream simulate-year --start-date 2025-01-01 --days 7 --dry-run
+.venv/bin/python -m mind dream simulate-year --run-id first-year --dry-run
 ```
 
 Some Dream and ingest commands call routed models even in dry-run mode. If
 `AI_GATEWAY_API_KEY` is missing, they may fail with a configuration error rather
 than producing a local-only preview.
+
+`mind dream simulate-year` is the accelerated Dream feature. It runs against an
+isolated private simulation root under `local_data/simulations/<run-id>/`, uses
+Light, Deep, and REM only, and emits graph-delta reports without forward-dating
+the live timeline or polluting live Dream state. The default horizon is 365
+simulated days; use `--days` for a shorter smoke run.
 
 ## Synthetic Harness
 
@@ -237,6 +272,7 @@ Brain/
 |-- examples/synthetic/     # Safe synthetic harness
 |-- tests/                  # Unit, integration, runtime, and safety tests
 |-- config.example.yaml     # Public config template
+|-- .env.example            # Public env template
 |-- AGENTS.md               # Agent/operator rules for this repo
 `-- README.md               # Public overview
 ```
@@ -250,15 +286,17 @@ These paths must not be public release artifacts:
 - `raw/`
 - `dropbox/`
 - `.obsidian/`
-- `.env` and `.env.*`
+- real env files such as `.env`, `.env.local`, and `.env.production`
 - root `config.yaml`
 - runtime databases and vector indexes
-- generated Dream reports and simulations
+- generated Dream reports, evidence-edge files, and simulations under private
+  roots
 - local planning archives and agent runtime folders
 
 The repo includes ignore rules, a pre-commit private-data guard, and a tracked
-file scanner for private roots, database artifacts, secrets, and owner-specific
-markers.
+file scanner for private roots, database artifacts, secrets, and
+owner-specific markers. `.env.example` and `config.example.yaml` are public
+templates; real values belong only in ignored local files.
 
 ## Limitations
 
@@ -267,7 +305,11 @@ markers.
   exports depending on the lane.
 - LLM-backed stages require a configured AI Gateway key unless you deliberately
   override routing.
-- Full-year Dream simulation can be compute-heavy on a large private graph.
+- Dream lane trust is evidence-quality aware. A lane can be ready for ingest
+  while Dream still treats it as partial-fidelity or bootstrap-only because of
+  low quote coverage, low entity yield, or insufficient sample size.
+- Full-year Dream simulation can be compute-heavy on a large private graph, so
+  use a shorter `--days` smoke run before a full 365-day pass.
 - The graph is intentionally inspectable, so schema hygiene matters: run lint,
   readiness, and graph checks before trusting a private vault.
 
