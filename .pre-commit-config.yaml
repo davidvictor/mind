@@ -1,0 +1,8 @@
+repos:
+  - repo: local
+    hooks:
+      - id: brain-private-data-guard
+        name: Brain private-data guard
+        entry: python3 core/tools/check_no_private_data.py --staged
+        language: system
+        pass_filenames: false

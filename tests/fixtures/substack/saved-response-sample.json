@@ -1,0 +1,54 @@
+{
+  "posts": [
+    {
+      "id": 140000001,
+      "title": "On Trust",
+      "subtitle": "Why the internet runs on it",
+      "slug": "on-trust",
+      "post_date": "2026-03-15T09:00:00Z",
+      "canonical_url": "https://thegeneralist.substack.com/p/on-trust",
+      "publication": {
+        "id": 5001,
+        "name": "The Generalist",
+        "subdomain": "thegeneralist"
+      },
+      "publishedBylines": [
+        {"id": 9001, "name": "Mario Gabriele"}
+      ],
+      "body_html": "<p>Trust is the root of everything.</p>",
+      "audience": "everyone",
+      "saved_at": "2026-04-02T18:00:00Z"
+    },
+    {
+      "id": 140000002,
+      "title": "The Second Post",
+      "subtitle": null,
+      "slug": "the-second-post",
+      "post_date": "2026-03-20T12:00:00Z",
+      "canonical_url": "https://stratechery.com/2026/the-second-post",
+      "publication": {
+        "id": 5002,
+        "name": "Stratechery",
+        "subdomain": "stratechery"
+      },
+      "publishedBylines": [
+        {"id": 9002, "name": "Ben Thompson"}
+      ],
+      "body_html": null,
+      "audience": "only_paid",
+      "saved_at": "2026-04-03T09:00:00Z"
+    },
+    {
+      "id": 140000003,
+      "title": "Degenerate Post",
+      "slug": "degenerate-post",
+      "post_date": "2026-03-22T12:00:00Z",
+      "canonical_url": "https://example.com/p/degenerate",
+      "published_bylines": [],
+      "body_html": null,
+      "audience": "everyone",
+      "saved_at": "2026-04-04T09:00:00Z"
+    }
+  ],
+  "next_cursor": null
+}

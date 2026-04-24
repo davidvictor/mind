@@ -1,0 +1,157 @@
+schema_version: "phase0"
+
+canonical_family:
+  - concept
+  - stance
+  - playbook
+  - inquiry
+  - skill
+
+page_types:
+  profile:
+    required_fields: [id, type, title]
+    optional_fields: [aliases, tags, domains]
+  project:
+    required_fields: [id, type, title, status]
+    optional_fields: [created, last_updated]
+  person:
+    required_fields: [id, type, title]
+    optional_fields: [sources, aliases]
+  company:
+    required_fields: [id, type, title]
+    optional_fields: [sources, aliases]
+  channel:
+    required_fields: [id, type, title]
+    optional_fields: [sources, aliases]
+  concept:
+    required_fields: [id, type, title]
+    optional_fields: [sources, lifecycle_state, last_evidence_date, evidence_count, weave_cluster_refs, last_weaved_at]
+  decision:
+    required_fields: [id, type, title]
+    optional_fields: []
+  summary:
+    required_fields: [id, type, title, source_type, source_date, ingested]
+    optional_fields: [external_id]
+  video:
+    required_fields: [id, type, title]
+    optional_fields: [youtube_id, transcript_path, external_id, argument_graph, entities, in_conversation_with, memorable_examples, steelman, strongest_rebuttal, would_change_mind_if, socratic_questions]
+  book:
+    required_fields: [id, type, title]
+    optional_fields: [author, external_id]
+  podcast:
+    required_fields: [id, type, title]
+    optional_fields: []
+  article:
+    required_fields: [id, type, title]
+    optional_fields: [external_id, argument_graph, entities, in_conversation_with, memorable_examples, steelman, strongest_rebuttal, would_change_mind_if, socratic_questions]
+  web-discovery:
+    required_fields: [id, type, title, canonical_url]
+    optional_fields: [object_type, crawl_status, first_seen_at, last_seen_at, evidence_edge_count]
+  meeting:
+    required_fields: [id, type, title]
+    optional_fields: []
+  goal:
+    required_fields: [id, type, title]
+    optional_fields: []
+  note:
+    required_fields: [id, type, title]
+    optional_fields: []
+  journal-entry:
+    required_fields: [id, type, title]
+    optional_fields: []
+  place:
+    required_fields: [id, type, title]
+    optional_fields: []
+  event:
+    required_fields: [id, type, title]
+    optional_fields: []
+  tool:
+    required_fields: [id, type, title]
+    optional_fields: []
+  quote:
+    required_fields: [id, type, title]
+    optional_fields: []
+  health-log:
+    required_fields: [id, type, title]
+    optional_fields: []
+  playbook:
+    required_fields: [id, type, title]
+    optional_fields: [derived_from, lifecycle_state, last_evidence_date, evidence_count, weave_cluster_refs, last_weaved_at]
+  stance:
+    required_fields: [id, type, title]
+    optional_fields: [position, confidence, lifecycle_state, last_evidence_date, weave_cluster_refs, last_weaved_at]
+  inquiry:
+    required_fields: [id, type, title]
+    optional_fields: [question, origin, status, resolution, last_evidence_date, weave_cluster_refs, last_weaved_at]
+  skill:
+    required_fields: [id, type, title]
+    optional_fields: [name, description, trigger_patterns, tools_required, last_used]
+
+tag_taxonomy:
+  domain:
+    - work
+    - craft
+    - health
+    - money
+    - identity
+    - creative
+    - learning
+    - relationships
+    - finance
+    - civic
+    - meta
+  function:
+    - source
+    - summary
+    - concept
+    - playbook
+    - stance
+    - inquiry
+    - skill
+    - reference
+    - note
+    - log
+    - identity
+  signal:
+    - canon
+    - working
+    - archive
+    - noise
+  legacy_aliases:
+    function:
+      thread: inquiry
+
+default_tag_triples:
+  profile: [identity, identity, canon]
+  project: [work, note, working]
+  article: [learning, source, canon]
+  web-discovery: [learning, source, canon]
+  video: [learning, source, canon]
+  book: [learning, source, canon]
+  podcast: [learning, source, canon]
+  summary: [learning, summary, canon]
+  person: [relationships, reference, canon]
+  company: [work, reference, canon]
+  channel: [learning, reference, canon]
+  concept: [meta, concept, working]
+  playbook: [meta, playbook, working]
+  stance: [meta, stance, working]
+  inquiry: [meta, inquiry, working]
+  skill: [meta, skill, working]
+  note: [meta, note, working]
+  journal-entry: [meta, log, canon]
+  decision: [work, log, canon]
+  goal: [work, log, working]
+  meeting: [work, log, canon]
+  health-log: [health, log, canon]
+  quote: [creative, reference, canon]
+  tool: [work, reference, canon]
+  place: [relationships, reference, canon]
+  event: [relationships, log, canon]
+
+skill_metadata:
+  required_frontmatter_order:
+    - name
+    - description
+  description_single_line: true
+  bundled_resources_allowed: true

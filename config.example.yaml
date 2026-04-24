@@ -1,0 +1,60 @@
+# Public example configuration for Brain.
+# Copy to local_data/config.yaml or point BRAIN_CONFIG_PATH at a private config.
+# Do not commit a real local config.
+
+paths:
+  local_data_root: local_data
+  memory_root: local_data/memory
+  raw_root: local_data/raw
+  dropbox_root: local_data/dropbox
+  state_root: local_data/state
+
+vault:
+  wiki_dir: local_data/memory
+  raw_dir: local_data/raw
+  dropbox_dir: local_data/dropbox
+  state_dir: local_data/state
+  owner_profile: me/profile.md
+
+state:
+  runtime_db: local_data/state/brain-runtime.sqlite3
+  graph_db: local_data/state/brain-graph.sqlite3
+  sources_db: local_data/state/brain-sources.sqlite3
+
+retrieval:
+  backend: sqlite
+  vector_db: local_data/state/graph-vectors.sqlite3
+
+llm:
+  routes:
+    default:
+      model: anthropic/claude-sonnet-4.6
+      timeout_seconds: 300
+    classification:
+      model: google/gemini-3.1-flash-lite-preview
+    dream_decision:
+      model: openai/gpt-5-mini
+      supports_strict_schema: true
+      truncation: disabled
+      timeout_seconds: 480
+
+user:
+  name: Example User
+  role: local-first knowledge worker
+  business_interests: []
+  personal_interests: []
+  exclude_always: []
+  classification_rules: []
+
+ingestors:
+  enabled: []
+
+dream:
+  enabled: true
+
+anti_sales:
+  enabled: true
+  allow_brands: []
+
+skills:
+  auto_activate_skills: false

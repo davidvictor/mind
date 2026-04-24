@@ -1,0 +1,79 @@
+{
+  "schema_version": "2.3",
+  "last_light_dream_at": null,
+  "last_deep_dream_at": null,
+  "last_rem_dream_at": null,
+  "light_passes_since_deep": 0,
+  "deep_passes_since_rem": 0,
+  "last_lock_holder": null,
+  "last_lock_acquired_at": null,
+  "last_skip_reason": null,
+  "atoms": {
+    "last_built_at": "2026-04-09T17:51:00Z",
+    "count": 4,
+    "by_type": {
+      "concept": 1,
+      "playbook": 1,
+      "stance": 1,
+      "inquiry": 1
+    },
+    "index": [
+      {
+        "id": "local-first-systems",
+        "type": "concept",
+        "path": "memory/concepts/local-first-systems.md",
+        "lifecycle_state": "active",
+        "domains": [
+          "work",
+          "identity"
+        ],
+        "topics": [],
+        "last_evidence_date": "2026-04-08",
+        "evidence_count": 1,
+        "tldr": "Local-first systems keep user data legible and portable while still allowing AI assistance."
+      },
+      {
+        "id": "weekly-review-loop",
+        "type": "playbook",
+        "path": "memory/playbooks/weekly-review-loop.md",
+        "lifecycle_state": "active",
+        "domains": [
+          "work",
+          "creative"
+        ],
+        "topics": [],
+        "last_evidence_date": "2026-04-08",
+        "evidence_count": 1,
+        "tldr": "Review the week, collect fresh evidence, and update the system before adding new complexity."
+      },
+      {
+        "id": "user-owned-ai",
+        "type": "stance",
+        "path": "memory/stances/user-owned-ai.md",
+        "lifecycle_state": "active",
+        "domains": [
+          "work",
+          "identity"
+        ],
+        "topics": [],
+        "last_evidence_date": "2026-04-08",
+        "evidence_count": 0,
+        "tldr": "AI is most trustworthy when it runs against artifacts the user can see, move, and audit."
+      },
+      {
+        "id": "how-to-balance-depth-and-speed",
+        "type": "inquiry",
+        "path": "memory/inquiries/how-to-balance-depth-and-speed.md",
+        "lifecycle_state": "active",
+        "domains": [
+          "work",
+          "creative"
+        ],
+        "topics": [],
+        "last_evidence_date": "2026-04-08",
+        "evidence_count": 0,
+        "tldr": "The system should grow sophistication only when the user can still understand and operate it."
+      }
+    ]
+  }
+}

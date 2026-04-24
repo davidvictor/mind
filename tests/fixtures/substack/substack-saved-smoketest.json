@@ -1,0 +1,71 @@
+{
+  "posts": [
+    {
+      "id": 190000001,
+      "title": "On Trust",
+      "subtitle": "Why the internet runs on it",
+      "slug": "on-trust",
+      "post_date": "2026-03-15T09:00:00Z",
+      "canonical_url": "https://thegeneralist.substack.com/p/on-trust",
+      "publication": {
+        "id": 5001,
+        "name": "The Generalist",
+        "subdomain": "thegeneralist"
+      },
+      "publishedBylines": [
+        {
+          "id": 9001,
+          "name": "Mario Gabriele"
+        }
+      ],
+      "body_html": "<div class=\"body markup\"><p>Trust is the root of everything. Read <a href=\"https://stratechery.com/2024/aggregators\">aggregators</a>, ignore <a href=\"https://twitter.com/patrickc\">twitter</a>, and revisit <a href=\"https://other.substack.com/p/marketplaces\">marketplaces</a>.</p></div>",
+      "audience": "everyone",
+      "saved_at": "2026-04-02T18:00:00Z"
+    },
+    {
+      "id": 190000002,
+      "title": "Why Aggregators Win",
+      "subtitle": null,
+      "slug": "why-aggregators-win",
+      "post_date": "2026-03-20T12:00:00Z",
+      "canonical_url": "https://stratechery.substack.com/p/why-aggregators-win",
+      "publication": {
+        "id": 5002,
+        "name": "Stratechery",
+        "subdomain": "stratechery"
+      },
+      "publishedBylines": [
+        {
+          "id": 9002,
+          "name": "Ben Thompson"
+        }
+      ],
+      "body_html": "<div class=\"body markup\"><p>Distribution compounds when aggregators own the interface.</p></div>",
+      "audience": "everyone",
+      "saved_at": "2026-04-03T09:00:00Z"
+    },
+    {
+      "id": 190000003,
+      "title": "Paywalled Example",
+      "subtitle": null,
+      "slug": "paywalled-example",
+      "post_date": "2026-03-22T12:00:00Z",
+      "canonical_url": "https://example.substack.com/p/paywalled-example",
+      "publication": {
+        "id": 5003,
+        "name": "Example",
+        "subdomain": "example"
+      },
+      "publishedBylines": [
+        {
+          "id": 9003,
+          "name": "Example Author"
+        }
+      ],
+      "body_html": null,
+      "audience": "only_paid",
+      "saved_at": "2026-04-04T09:00:00Z"
+    }
+  ],
+  "next_cursor": null
+}

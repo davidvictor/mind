@@ -1,0 +1,24 @@
+llm:
+  routes:
+    dream_decision:
+      model: google/gemini-3.1-pro-preview
+      supports_strict_schema: false
+      truncation: disabled
+      gateway_options:
+        only:
+          - vertex
+      provider_options:
+        google:
+          thinkingConfig:
+            includeThoughts: false
+    dream_writer:
+      model: google/gemini-3.1-pro-preview
+      supports_strict_schema: false
+      truncation: disabled
+      gateway_options:
+        only:
+          - vertex
+      provider_options:
+        google:
+          thinkingConfig:
+            includeThoughts: false

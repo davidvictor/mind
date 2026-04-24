@@ -1,0 +1,46 @@
+{
+  "roots": {
+    "bookmark_bar": {
+      "children": [
+        {
+          "children": [
+            {
+              "date_added": "13388342400000000",
+              "id": "11",
+              "name": "Design MCP",
+              "type": "url",
+              "url": "https://example.com/tools/design-mcp?utm_source=newsletter"
+            },
+            {
+              "date_added": "13388342410000000",
+              "id": "12",
+              "name": "Gmail",
+              "type": "url",
+              "url": "https://mail.google.com/mail/u/0/#inbox"
+            }
+          ],
+          "date_added": "13388342390000000",
+          "date_modified": "0",
+          "id": "10",
+          "name": "Tools",
+          "type": "folder"
+        }
+      ],
+      "date_added": "13388342380000000",
+      "date_modified": "0",
+      "id": "1",
+      "name": "Bookmarks Bar",
+      "type": "folder"
+    },
+    "other": {
+      "children": [],
+      "name": "Other Bookmarks",
+      "type": "folder"
+    },
+    "synced": {
+      "children": [],
+      "name": "Mobile Bookmarks",
+      "type": "folder"
+    }
+  }
+}

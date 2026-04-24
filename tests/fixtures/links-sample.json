@@ -1,0 +1,21 @@
+{
+  "bookmarks": [
+    {
+      "name": "AI",
+      "children": [
+        {
+          "name": "Latency Post",
+          "url": "https://example.com/posts/latency",
+          "description": "A post about latency tradeoffs",
+          "image_url": "https://example.com/latency.png",
+          "date_added": "2026-04-08T10:00:00Z"
+        }
+      ]
+    },
+    {
+      "title": "Systems Essay",
+      "url": "https://example.com/posts/systems",
+      "notes": "Useful for the brain architecture work"
+    }
+  ]
+}

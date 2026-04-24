@@ -1,0 +1,31 @@
+{
+  "applied_paragraph": "the owner builds tools for himself (Brain wiki, Example Health App) and potentially for others. The platform trap framing is directly applicable: the Brain wiki pipeline is a platform for the owner's knowledge work. Every time the pipeline requires expertise to operate — understanding the cache format, knowing which flags to pass — it is failing the junior-engineer test. The question is whether a future the owner (or a collaborator) can use it without reading the source.",
+  "applied_bullets": [
+    {
+      "claim": "The most impactful platform work is embarrassingly simple",
+      "why_it_matters": "The Brain wiki enrichment pipeline has complex caching, multi-pass processing, and stance doc logic — high cognitive overhead for anyone new",
+      "action": "Write a one-command entry point for the full pipeline; hide all the passes behind a single CLI call"
+    },
+    {
+      "claim": "Adoption metrics reward visibility over productivity",
+      "why_it_matters": "Measuring 'number of posts ingested' could incentivize running the pipeline on low-value posts to hit a count",
+      "action": "Define success as 'posts I actually re-read or referenced' not 'posts processed'"
+    },
+    {
+      "claim": "Embedding with users surfaces friction that surveys miss",
+      "why_it_matters": "the owner is both the platform builder and the user — the equivalent of the rotation is doing a real ingest run without any prep",
+      "action": "Once a month, run the pipeline on a new post from scratch with no prior context, and document every friction point"
+    },
+    {
+      "claim": "The test is whether a junior can deploy without help",
+      "why_it_matters": "Brain wiki should be usable by a future collaborator or the owner after a 6-month gap",
+      "action": "Write a 5-step getting-started guide that covers the full pipeline with no assumed knowledge"
+    }
+  ],
+  "socratic_questions": [
+    "If you came back to the Brain wiki pipeline after a 6-month break, what would confuse you most?",
+    "Is there a sophistication trap in the current enrichment pipeline — things that signal technical ambition but do not actually help you learn from what you read?",
+    "What is the Brain wiki equivalent of the junior-engineer test: who is the user you should be optimizing for?"
+  ],
+  "thread_links": []
+}

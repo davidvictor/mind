@@ -1,0 +1,26 @@
+{
+  "applied_paragraph": "For Example Health App and the Brain wiki pipeline, this post reframes latency ownership: slow Gemini API calls are not 'infra noise' to absorb — they are a product experience problem. If the enrichment pipeline takes 40 seconds, the owner stops using it. Owning that number as a product metric, not a backend detail, changes what you optimize.",
+  "applied_bullets": [
+    {
+      "claim": "Fan-out depth multiplies tail latency problems",
+      "why_it_matters": "The enrichment pipeline fans out to 3 Gemini calls per post — if any one is slow, the whole run feels slow",
+      "action": "Consider parallelizing Pass B and Pass C calls; they do not depend on each other"
+    },
+    {
+      "claim": "Monitoring mean throughput hides the tail",
+      "why_it_matters": "A single slow Gemini call that takes 30s will look fine in average metrics",
+      "action": "Log per-call latency with percentile breakdowns, not just total run time"
+    },
+    {
+      "claim": "Only production traffic reveals true latency distribution",
+      "why_it_matters": "The fixture-based integration tests run under ideal conditions — they will not surface real API latency behavior",
+      "action": "Run the pipeline against a real post monthly to track actual Gemini latency trends"
+    }
+  ],
+  "socratic_questions": [
+    "Is there a fan-out in the Brain wiki pipeline that compounds tail latency in ways the integration tests cannot detect?",
+    "What would it mean to own tail latency of Gemini calls as a product metric — what SLO would you set?",
+    "If the enrichment pipeline felt 'broken' to you, would you know whether the cause was p99 Gemini latency or a logical bug?"
+  ],
+  "thread_links": []
+}

@@ -1,0 +1,304 @@
+{
+  "bundle_id": "20260414t151530z",
+  "status": "materialized",
+  "updated_at": "2026-04-14T19:19:27Z",
+  "raw_input_path": "/private/brain/synthetic/onboarding/bundles/20260414t151530z/raw-input.json",
+  "uploads": [
+    {
+      "id": "upload-0001",
+      "file_name": "example-owner-canonical-bio.md",
+      "path": "/private/brain/synthetic/onboarding/bundles/20260414t151530z/uploads/0001-5b8b09403607-example-owner-canonical-bio.md",
+      "media_type": "text/markdown",
+      "size_bytes": 10676,
+      "evidence_refs": [
+        "upload:0001:example-owner-canonical-bio.md"
+      ]
+    }
+  ],
+  "next_questions": [],
+  "validation": {
+    "ready_for_materialization": true,
+    "errors": [],
+    "warnings": []
+  },
+  "materialized_pages": [
+    "/private/brain/memory/me/profile.md",
+    "/private/brain/memory/me/values.md",
+    "/private/brain/memory/me/positioning.md",
+    "/private/brain/memory/me/open-inquiries.md",
+    "/private/brain/memory/people/example-owner-person.md",
+    "/private/brain/memory/projects/example-forecast-lab.md",
+    "/private/brain/memory/projects/example-studio.md",
+    "/private/brain/memory/projects/example-data-studio-2025.md",
+    "/private/brain/memory/projects/example-care-journal-2025.md",
+    "/private/brain/memory/projects/example-market-2024.md",
+    "/private/brain/memory/projects/example-wellness-2025.md",
+    "/private/brain/memory/projects/example-logistics-2024.md",
+    "/private/brain/memory/projects/example-golf-2024.md",
+    "/private/brain/memory/projects/example-hr-2017-2024.md",
+    "/private/brain/memory/projects/example-care-2014-2016.md",
+    "/private/brain/memory/projects/example-arts-festival-2012-2013.md",
+    "/private/brain/memory/projects/example-audio.md",
+    "/private/brain/memory/projects/example-labs.md",
+    "/private/brain/memory/projects/example-events-2013.md",
+    "/private/brain/memory/projects/example-fitness.md",
+    "/private/brain/memory/concepts/design-engineering-compression.md",
+    "/private/brain/memory/concepts/three-window-temporal-validation.md",
+    "/private/brain/memory/concepts/ai-assisted-velocity-coaching.md",
+    "/private/brain/memory/concepts/senior-builder-plus-ai-studio-model.md",
+    "/private/brain/memory/concepts/semantic-design-tokens-with-1-1-figma-to-code-mapping.md",
+    "/private/brain/memory/concepts/conversational-ai-clinical-arc.md",
+    "/private/brain/memory/playbooks/zero-to-one-ai-product-build.md",
+    "/private/brain/memory/playbooks/embedded-design-engineering-partnership.md",
+    "/private/brain/memory/stances/software-as-an-architectural-problem.md",
+    "/private/brain/memory/stances/brand-architecture-and-interface-are-one-discipline.md",
+    "/private/brain/memory/stances/small-studio-by-conviction.md",
+    "/private/brain/memory/inquiries/prediction-engine-ip-path.md",
+    "/private/brain/memory/inquiries/studio-scale-ceiling.md",
+    "/private/brain/memory/inquiries/agentic-architecture-maturity.md"
+  ],
+  "summary_pages": [
+    "/private/brain/memory/summaries/example-owner-overview.md",
+    "/private/brain/memory/summaries/example-owner-profile-summary.md",
+    "/private/brain/memory/summaries/example-owner-values-summary.md",
+    "/private/brain/memory/summaries/example-owner-positioning-summary.md",
+    "/private/brain/memory/summaries/example-owner-open-inquiries-summary.md"
+  ],
+  "decision_page": "/private/brain/memory/decisions/onboarding-20260414t151530z.md",
+  "readiness": {
+    "ready": false,
+    "checks": [
+      {
+        "check": "state-materialized",
+        "valid": true
+      },
+      {
+        "check": "validation-ready",
+        "valid": true
+      },
+      {
+        "check": "bundle-live-sha",
+        "valid": true
+      },
+      {
+        "check": "current-pointer-sha",
+        "valid": true
+      },
+      {
+        "check": "materialization-manifest-hash",
+        "valid": true
+      },
+      {
+        "check": "exists:profile.md",
+        "valid": true
+      },
+      {
+        "check": "exists:values.md",
+        "valid": true
+      },
+      {
+        "check": "exists:positioning.md",
+        "valid": true
+      },
+      {
+        "check": "exists:open-inquiries.md",
+        "valid": true
+      },
+      {
+        "check": "exists:example-owner-person.md",
+        "valid": true
+      },
+      {
+        "check": "exists:example-forecast-lab.md",
+        "valid": true
+      },
+      {
+        "check": "exists:example-studio.md",
+        "valid": true
+      },
+      {
+        "check": "exists:example-data-studio-2025.md",
+        "valid": true
+      },
+      {
+        "check": "exists:example-care-journal-2025.md",
+        "valid": true
+      },
+      {
+        "check": "exists:example-market-2024.md",
+        "valid": true
+      },
+      {
+        "check": "exists:example-wellness-2025.md",
+        "valid": true
+      },
+      {
+        "check": "exists:example-logistics-2024.md",
+        "valid": true
+      },
+      {
+        "check": "exists:example-golf-2024.md",
+        "valid": true
+      },
+      {
+        "check": "exists:example-hr-2017-2024.md",
+        "valid": true
+      },
+      {
+        "check": "exists:example-care-2014-2016.md",
+        "valid": true
+      },
+      {
+        "check": "exists:example-arts-festival-2012-2013.md",
+        "valid": true
+      },
+      {
+        "check": "exists:example-audio.md",
+        "valid": true
+      },
+      {
+        "check": "exists:example-labs.md",
+        "valid": true
+      },
+      {
+        "check": "exists:example-events-2013.md",
+        "valid": true
+      },
+      {
+        "check": "exists:example-fitness.md",
+        "valid": true
+      },
+      {
+        "check": "exists:design-engineering-compression.md",
+        "valid": true
+      },
+      {
+        "check": "exists:three-window-temporal-validation.md",
+        "valid": true
+      },
+      {
+        "check": "exists:ai-assisted-velocity-coaching.md",
+        "valid": true
+      },
+      {
+        "check": "exists:senior-builder-plus-ai-studio-model.md",
+        "valid": true
+      },
+      {
+        "check": "exists:semantic-design-tokens-with-1-1-figma-to-code-mapping.md",
+        "valid": true
+      },
+      {
+        "check": "exists:conversational-ai-clinical-arc.md",
+        "valid": true
+      },
+      {
+        "check": "exists:zero-to-one-ai-product-build.md",
+        "valid": true
+      },
+      {
+        "check": "exists:embedded-design-engineering-partnership.md",
+        "valid": true
+      },
+      {
+        "check": "exists:software-as-an-architectural-problem.md",
+        "valid": true
+      },
+      {
+        "check": "exists:brand-architecture-and-interface-are-one-discipline.md",
+        "valid": true
+      },
+      {
+        "check": "exists:small-studio-by-conviction.md",
+        "valid": true
+      },
+      {
+        "check": "exists:prediction-engine-ip-path.md",
+        "valid": true
+      },
+      {
+        "check": "exists:studio-scale-ceiling.md",
+        "valid": true
+      },
+      {
+        "check": "exists:agentic-architecture-maturity.md",
+        "valid": true
+      },
+      {
+        "check": "exists:example-owner-overview.md",
+        "valid": true
+      },
+      {
+        "check": "exists:example-owner-profile-summary.md",
+        "valid": true
+      },
+      {
+        "check": "exists:example-owner-values-summary.md",
+        "valid": true
+      },
+      {
+        "check": "exists:example-owner-positioning-summary.md",
+        "valid": true
+      },
+      {
+        "check": "exists:example-owner-open-inquiries-summary.md",
+        "valid": true
+      },
+      {
+        "check": "exists:onboarding-20260414t151530z.md",
+        "valid": true
+      },
+      {
+        "page": "profile.md",
+        "path": "/private/brain/memory/me/profile.md",
+        "valid": false,
+        "reason": "expected id=profile"
+      },
+      {
+        "page": "values.md",
+        "path": "/private/brain/memory/me/values.md",
+        "valid": false,
+        "reason": "expected id=values"
+      },
+      {
+        "page": "positioning.md",
+        "path": "/private/brain/memory/me/positioning.md",
+        "valid": false,
+        "reason": "expected id=positioning"
+      },
+      {
+        "page": "open-inquiries.md",
+        "path": "/private/brain/memory/me/open-inquiries.md",
+        "valid": false,
+        "reason": "expected id=open-inquiries"
+      }
+    ],
+    "errors": [
+      "profile.md is invalid: expected id=profile",
+      "values.md is invalid: expected id=values",
+      "positioning.md is invalid: expected id=positioning",
+      "open-inquiries.md is invalid: expected id=open-inquiries"
+    ]
+  },
+  "synthesis_status": "verified",
+  "verifier_verdict": "approved",
+  "blocking_reasons": [],
+  "materialization_plan_path": "/private/brain/synthetic/onboarding/bundles/20260414t151530z/materialization-plan.json",
+  "replay_provenance": "/private/brain/synthetic/onboarding/bundles/20260414t151530z/materialization-plan.json",
+  "artifact_paths": {
+    "semantic": "/private/brain/synthetic/onboarding/bundles/20260414t151530z/synthesis-semantic.json",
+    "graph": "/private/brain/synthetic/onboarding/bundles/20260414t151530z/synthesis-graph.json",
+    "candidate_context": "/private/brain/synthetic/onboarding/bundles/20260414t151530z/merge-candidate-context.json",
+    "merge": "/private/brain/synthetic/onboarding/bundles/20260414t151530z/merge-decisions.json",
+    "verify": "/private/brain/synthetic/onboarding/bundles/20260414t151530z/verify-report.json",
+    "materialization_plan": "/private/brain/synthetic/onboarding/bundles/20260414t151530z/materialization-plan.json",
+    "semantic_markdown": "/private/brain/synthetic/onboarding/bundles/20260414t151530z/synthesis-semantic.md",
+    "graph_markdown": "/private/brain/synthetic/onboarding/bundles/20260414t151530z/synthesis-graph.md",
+    "candidate_context_markdown": "/private/brain/synthetic/onboarding/bundles/20260414t151530z/merge-candidate-context.md",
+    "merge_markdown": "/private/brain/synthetic/onboarding/bundles/20260414t151530z/merge-decisions.md",
+    "verify_markdown": "/private/brain/synthetic/onboarding/bundles/20260414t151530z/verify-report.md",
+    "materialization_plan_markdown": "/private/brain/synthetic/onboarding/bundles/20260414t151530z/materialization-plan.md"
+  },
+  "bundle_sha256": "937f67af9f0d0dd132512ce726ff507d27ba037bce4f1b18a018c35267d4b243",
+  "materialization_manifest": "/private/brain/synthetic/onboarding/bundles/20260414t151530z/materialization.json"
+}

@@ -1,0 +1,8 @@
+llm:
+  routes:
+    dream_decision:
+      model: google/gemini-3.1-flash-lite-preview
+      supports_strict_schema: false
+    dream_writer:
+      model: google/gemini-3.1-flash-lite-preview
+      supports_strict_schema: false

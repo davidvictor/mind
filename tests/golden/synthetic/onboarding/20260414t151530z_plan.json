@@ -1,0 +1,251 @@
+{
+  "bundle_id": "20260414t151530z",
+  "page_count": 35,
+  "pages": [
+    {
+      "target_kind": "owner_profile",
+      "slug": "example-owner",
+      "page_type": "profile",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "owner_values",
+      "slug": "example-owner-values",
+      "page_type": "note",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "owner_positioning",
+      "slug": "example-owner-positioning",
+      "page_type": "note",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "owner_open_inquiries",
+      "slug": "example-owner-open-inquiries",
+      "page_type": "note",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "owner_person",
+      "slug": "example-owner-person",
+      "page_type": "person",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "example-forecast-lab",
+      "page_type": "project",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "example-studio",
+      "page_type": "project",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "example-data-studio-2025",
+      "page_type": "project",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "example-care-journal-2025",
+      "page_type": "project",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "example-market-2024",
+      "page_type": "project",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "example-wellness-2025",
+      "page_type": "project",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "example-logistics-2024",
+      "page_type": "project",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "example-golf-2024",
+      "page_type": "project",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "example-hr-2017-2024",
+      "page_type": "project",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "example-care-2014-2016",
+      "page_type": "project",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "example-arts-festival-2012-2013",
+      "page_type": "project",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "example-audio",
+      "page_type": "project",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "example-labs",
+      "page_type": "project",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "example-events-2013",
+      "page_type": "project",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "example-fitness",
+      "page_type": "project",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "design-engineering-compression",
+      "page_type": "concept",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "three-window-temporal-validation",
+      "page_type": "concept",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "ai-assisted-velocity-coaching",
+      "page_type": "concept",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "senior-builder-plus-ai-studio-model",
+      "page_type": "concept",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "semantic-design-tokens-with-1-1-figma-to-code-mapping",
+      "page_type": "concept",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "conversational-ai-clinical-arc",
+      "page_type": "concept",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "zero-to-one-ai-product-build",
+      "page_type": "playbook",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "embedded-design-engineering-partnership",
+      "page_type": "playbook",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "software-as-an-architectural-problem",
+      "page_type": "stance",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "brand-architecture-and-interface-are-one-discipline",
+      "page_type": "stance",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "small-studio-by-conviction",
+      "page_type": "stance",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "prediction-engine-ip-path",
+      "page_type": "inquiry",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "studio-scale-ceiling",
+      "page_type": "inquiry",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "canonical",
+      "slug": "agentic-architecture-maturity",
+      "page_type": "inquiry",
+      "write_mode": "create",
+      "summary_kind": null
+    },
+    {
+      "target_kind": "decision",
+      "slug": "onboarding-20260414t151530z",
+      "page_type": "decision",
+      "write_mode": "create",
+      "summary_kind": null
+    }
+  ]
+}

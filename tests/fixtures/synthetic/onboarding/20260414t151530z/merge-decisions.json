@@ -1,0 +1,737 @@
+{
+  "data": {
+    "bundle_id": "20260414t151530z",
+    "decisions": [
+      {
+        "proposal_id": "ent-001",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates exist. All vector candidates are generic Brain system pages (inbox-intake-flow, contradiction-review, source-to-atom-promotion) with scores ≤0.28 — none represent Example Forecast Lab or any synthetic-forecasting platform. This is a meaningfully new project node.",
+        "evidence_refs": [
+          "input:project:0",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "proposal_id": "ent-002",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates. Vector candidates are generic Brain hub pages (projects, stances, current-focus) with scores ≤0.28 — none represent Example Studio. Meaningfully new project node for the owner's creative technology studio.",
+        "evidence_refs": [
+          "input:project:1",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "proposal_id": "ent-003",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates. Vector candidates are generic Brain playbook/hub pages with scores ≤0.24 — none represent the Example Data Studio engagement. Meaningfully new project node.",
+        "evidence_refs": [
+          "input:project:2",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "proposal_id": "ent-004",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates. Vector candidates are generic Brain hub pages with scores ≤0.16 — none represent Example Care Journal. Meaningfully new project node for the conversational health AI.",
+        "evidence_refs": [
+          "input:project:3",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "proposal_id": "ent-005",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates. Vector candidates are generic Brain pages with scores ≤0.24 — none represent Example Market. Meaningfully new project node.",
+        "evidence_refs": [
+          "input:project:4",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "proposal_id": "ent-006",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates. Vector candidates are generic Brain pages with scores ≤0.22 — none represent Example Wellness. Meaningfully new project node.",
+        "evidence_refs": [
+          "input:project:5",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "proposal_id": "ent-007",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates. Vector candidates are generic Brain pages (inquiries, how-should-the-system-evolve) with scores ≤0.22 — none represent Example Logistics. Meaningfully new project node.",
+        "evidence_refs": [
+          "input:project:6",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "proposal_id": "ent-008",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates. Vector candidates are generic Brain pages with scores ≤0.19 — none represent Example Golf. Meaningfully new project node.",
+        "evidence_refs": [
+          "input:project:7",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "proposal_id": "ent-009",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates. Vector candidates are generic Brain pages with scores ≤0.18 — none represent Example HR. Meaningfully new project node for the 6-year Director of Product Design role.",
+        "evidence_refs": [
+          "input:project:8",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "proposal_id": "ent-010",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates. Vector candidates are generic Brain pages with scores ≤0.20 — none represent Example Care. Meaningfully new project node for the veterinary telehealth co-founding.",
+        "evidence_refs": [
+          "input:project:9",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "proposal_id": "ent-011",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates. Vector candidates are generic Brain pages with scores ≤0.12 — none represent Example Arts Festival. Meaningfully new project node.",
+        "evidence_refs": [
+          "input:project:10",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "proposal_id": "ent-012",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates. Vector candidates are generic Brain pages with scores ≤0.18 — none represent Example Audio. Meaningfully new project node.",
+        "evidence_refs": [
+          "input:project:11",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "proposal_id": "ent-013",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates. Vector candidates are generic Brain pages with scores ≤0.21 — none represent Example Labs. Meaningfully new project node.",
+        "evidence_refs": [
+          "input:project:12",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "proposal_id": "ent-014",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates. Vector candidates are generic Brain playbook pages with scores ≤0.22 — none represent Example Events. Meaningfully new project node.",
+        "evidence_refs": [
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "proposal_id": "ent-015",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates. Vector candidates are generic Brain pages with scores ≤0.20 — none represent Example Fitness. Meaningfully new project node.",
+        "evidence_refs": [
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "proposal_id": "ent-016",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates. Vector candidates are generic Brain pages with scores ≤0.26 — the highest match (how-should-the-system-evolve) is about Brain's own evolution, not design-engineering compression as a professional concept. Meaningfully new concept node.",
+        "evidence_refs": [
+          "input:concept:0",
+          "input:values:2",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "proposal_id": "ent-017",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates. Vector candidates are generic Brain pages with scores ≤0.20 — none represent the three-window temporal validation methodology. Meaningfully new concept node.",
+        "evidence_refs": [
+          "input:concept:1",
+          "input:project:0",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "proposal_id": "ent-018",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates. Vector candidates are generic Brain pages with scores ≤0.25 — none represent AI-assisted velocity coaching. Meaningfully new concept node.",
+        "evidence_refs": [
+          "input:concept:2",
+          "input:project:2",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "proposal_id": "ent-019",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates. Vector candidates are generic Brain pages with scores ≤0.27 — the highest match (brain project page) concerns the knowledge management system, not Example Studio's operating model. Meaningfully new concept node.",
+        "evidence_refs": [
+          "input:concept:3",
+          "input:stance:2",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "proposal_id": "ent-020",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates. The highest vector match (relationship-map, score 0.33) concerns people/company connections, not design token methodology. No existing node covers semantic design tokens or Figma-to-code mapping. Meaningfully new concept node.",
+        "evidence_refs": [
+          "input:concept:4",
+          "input:project:2",
+          "input:project:6",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "proposal_id": "ent-021",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates. Vector candidates are generic Brain pages with scores ≤0.27 — none represent the 7-phase clinical conversation arc. Meaningfully new concept node.",
+        "evidence_refs": [
+          "input:playbook:2",
+          "input:project:3",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "proposal_id": "ent-022",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates. Vector candidates are generic Brain playbook pages (source-to-atom-promotion, inbox-intake-flow) with scores ≤0.28 — these concern knowledge management, not product-building methodology. Meaningfully new playbook node.",
+        "evidence_refs": [
+          "input:playbook:0",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "proposal_id": "ent-023",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates. Vector candidates are generic Brain hub pages (relationship-map, companies, projects) with scores ≤0.27 — none represent an embedded design-engineering client engagement model. Meaningfully new playbook node.",
+        "evidence_refs": [
+          "input:playbook:1",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "proposal_id": "ent-024",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates. The highest vector match (how-should-the-system-evolve, score 0.32) concerns Brain's own system evolution, not the philosophical stance about software as architecture. The existing stance local-first-knowledge-should-stay-file-first (score 0.24) is about file storage, not architectural thinking. Meaningfully new stance node.",
+        "evidence_refs": [
+          "input:stance:0",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "proposal_id": "ent-025",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates. Vector candidates are generic Brain pages with scores ≤0.33 — even the highest match (brain project page) concerns the knowledge management project, not the unified discipline stance. Meaningfully new stance node.",
+        "evidence_refs": [
+          "input:stance:1",
+          "input:values:1",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "proposal_id": "ent-026",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates. Vector candidates are generic Brain pages with scores ≤0.30 — none represent the small-studio-by-conviction operating philosophy. Meaningfully new stance node.",
+        "evidence_refs": [
+          "input:stance:2",
+          "input:values:4",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "proposal_id": "ent-027",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates. Vector candidates are generic Brain pages with scores ≤0.26 — none represent the prediction-engine IP path inquiry. The how-should-the-system-evolve page (not matched here) concerns Brain's evolution, not synthetic forecasting IP strategy. Meaningfully new inquiry node.",
+        "evidence_refs": [
+          "input:inquiry:0",
+          "input:open-inquiries:2"
+        ]
+      },
+      {
+        "proposal_id": "ent-028",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates. The highest vector match (how-should-the-system-evolve, score 0.20) concerns the Brain knowledge system's evolution — a structural question — not the ceiling of a human+AI studio model. Meaningfully new inquiry node.",
+        "evidence_refs": [
+          "input:inquiry:1",
+          "input:open-inquiries:3"
+        ]
+      },
+      {
+        "proposal_id": "ent-029",
+        "action": "create",
+        "target_page_id": null,
+        "target_page_type": null,
+        "target_path": null,
+        "rationale": "No exact candidates. The highest vector match (how-should-the-system-evolve, score 0.30) concerns Brain's structural evolution, not agentic framework durability (LangGraph vs. Agent SDKs). Meaningfully new inquiry node.",
+        "evidence_refs": [
+          "input:inquiry:2"
+        ]
+      }
+    ],
+    "relationship_decisions": [
+      {
+        "source_ref": "owner",
+        "target_ref": "ent-001",
+        "action": "keep",
+        "rationale": "the owner is the sole technical founder of Example Forecast Lab — the founding relationship is well-evidenced and structurally important.",
+        "evidence_refs": [
+          "input:project:0",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "owner",
+        "target_ref": "ent-002",
+        "action": "keep",
+        "rationale": "the owner is Principal & Founder of Example Studio since 2021 — the founding relationship is well-evidenced and central to his identity.",
+        "evidence_refs": [
+          "input:project:1",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "owner",
+        "target_ref": "ent-009",
+        "action": "keep",
+        "rationale": "the owner held the Director of Product Design role at Example HR for 6 years — a formative career relationship worth preserving.",
+        "evidence_refs": [
+          "input:project:8",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "owner",
+        "target_ref": "ent-010",
+        "action": "keep",
+        "rationale": "the owner co-founded Example Care — a category-defining co-founding relationship with documented outcomes.",
+        "evidence_refs": [
+          "input:project:9",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "owner",
+        "target_ref": "ent-011",
+        "action": "keep",
+        "rationale": "the owner was Head of Design at Example Arts Festival — a significant early career role with documented impact.",
+        "evidence_refs": [
+          "input:project:10",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "owner",
+        "target_ref": "ent-012",
+        "action": "keep",
+        "rationale": "the owner co-founded Example Audio — a durable co-founding relationship worth preserving in the career graph.",
+        "evidence_refs": [
+          "input:project:11",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "owner",
+        "target_ref": "ent-013",
+        "action": "keep",
+        "rationale": "the owner worked on Example Labs dashboards — a background project with clear ownership signal from upload evidence.",
+        "evidence_refs": [
+          "input:project:12",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "owner",
+        "target_ref": "ent-014",
+        "action": "keep",
+        "rationale": "the owner worked on Example Events in 2013 — evidenced in the canonical bio upload.",
+        "evidence_refs": [
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "owner",
+        "target_ref": "ent-015",
+        "action": "keep",
+        "rationale": "the owner led the Data team at Example Fitness — evidenced in the canonical bio upload.",
+        "evidence_refs": [
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-002",
+        "target_ref": "ent-003",
+        "action": "keep",
+        "rationale": "Example Data Studio was a Example Studio client engagement — the studio-to-engagement relationship is structurally important for tracing the embedded partner model.",
+        "evidence_refs": [
+          "input:project:2",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-002",
+        "target_ref": "ent-004",
+        "action": "keep",
+        "rationale": "Example Care Journal was built under Example Studio — preserving this link connects the conversational AI work to the studio operating model.",
+        "evidence_refs": [
+          "input:project:3",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-002",
+        "target_ref": "ent-005",
+        "action": "keep",
+        "rationale": "Example Market was a co-founder/Example Studio engagement — preserves the studio's portfolio scope.",
+        "evidence_refs": [
+          "input:project:4",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-002",
+        "target_ref": "ent-006",
+        "action": "keep",
+        "rationale": "Example Wellness was a Example Studio engagement — preserves the studio's brand/wellness portfolio work.",
+        "evidence_refs": [
+          "input:project:5",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-002",
+        "target_ref": "ent-007",
+        "action": "keep",
+        "rationale": "Example Logistics was a Example Studio engagement — demonstrates the embedded design-engineering partnership playbook in practice.",
+        "evidence_refs": [
+          "input:project:6",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-002",
+        "target_ref": "ent-008",
+        "action": "keep",
+        "rationale": "Example Golf was a Example Studio engagement — preserves the studio's sports/commerce portfolio work.",
+        "evidence_refs": [
+          "input:project:7",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-019",
+        "target_ref": "ent-002",
+        "action": "keep",
+        "rationale": "The senior-builder-plus-AI model defines Example Studio's operating model — this relationship is the conceptual backbone of the studio identity.",
+        "evidence_refs": [
+          "input:concept:3",
+          "input:project:1",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-016",
+        "target_ref": "ent-019",
+        "action": "keep",
+        "rationale": "Design-engineering compression enables the senior-builder-plus-AI model — a durable causal relationship between the foundational concept and operating model.",
+        "evidence_refs": [
+          "input:concept:0",
+          "input:concept:3",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-001",
+        "target_ref": "ent-017",
+        "action": "keep",
+        "rationale": "Example Forecast Lab implements three-window temporal validation — the implementation relationship connects the live product to its proprietary methodology.",
+        "evidence_refs": [
+          "input:project:0",
+          "input:concept:1",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-003",
+        "target_ref": "ent-018",
+        "action": "keep",
+        "rationale": "Example Data Studio demonstrated AI-assisted velocity coaching concretely (50→300+ commits/week) — the primary evidence base for the concept.",
+        "evidence_refs": [
+          "input:project:2",
+          "input:concept:2",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-003",
+        "target_ref": "ent-020",
+        "action": "keep",
+        "rationale": "Example Data Studio produced a 66-component design system using semantic tokens — a primary concrete demonstration of the concept.",
+        "evidence_refs": [
+          "input:project:2",
+          "input:concept:4",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-007",
+        "target_ref": "ent-020",
+        "action": "keep",
+        "rationale": "Example Logistics rebuilt its design system with semantic tokens and 1:1 Figma-to-code mapping — a second strong demonstration of the concept.",
+        "evidence_refs": [
+          "input:project:6",
+          "input:concept:4",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-004",
+        "target_ref": "ent-021",
+        "action": "keep",
+        "rationale": "Example Care Journal implements the conversational AI clinical arc — the direct application relationship between project and framework.",
+        "evidence_refs": [
+          "input:project:3",
+          "input:playbook:2",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-022",
+        "target_ref": "ent-001",
+        "action": "keep",
+        "rationale": "Example Forecast Lab is the primary live demonstration of the zero-to-one AI product build playbook — preserving this surfaces the playbook's strongest evidence.",
+        "evidence_refs": [
+          "input:playbook:0",
+          "input:project:0",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-022",
+        "target_ref": "ent-004",
+        "action": "keep",
+        "rationale": "Example Care Journal is a secondary demonstration of the zero-to-one playbook — 60,000 waitlist as sole designer-engineer reinforces the playbook's applicability.",
+        "evidence_refs": [
+          "input:playbook:0",
+          "input:project:3",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-023",
+        "target_ref": "ent-003",
+        "action": "keep",
+        "rationale": "Example Data Studio is the primary demonstration of the embedded design-engineering partnership playbook.",
+        "evidence_refs": [
+          "input:playbook:1",
+          "input:project:2",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-023",
+        "target_ref": "ent-007",
+        "action": "keep",
+        "rationale": "Example Logistics is a secondary demonstration of the embedded design-engineering partnership playbook — onboarding compression from 2 months to 2 weeks.",
+        "evidence_refs": [
+          "input:playbook:1",
+          "input:project:6",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-024",
+        "target_ref": "ent-002",
+        "action": "keep",
+        "rationale": "Software as an architectural problem is the foundational philosophical stance of Example Studio — grounds the studio's intellectual identity.",
+        "evidence_refs": [
+          "input:stance:0",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-025",
+        "target_ref": "ent-016",
+        "action": "keep",
+        "rationale": "The unified discipline stance directly reinforces design-engineering compression — brand/architecture/interface as one discipline is the philosophical expression of the compression concept.",
+        "evidence_refs": [
+          "input:stance:1",
+          "input:values:1",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-026",
+        "target_ref": "ent-019",
+        "action": "keep",
+        "rationale": "Small-studio-by-conviction is the philosophical grounding for the senior-builder-plus-AI operating model — the stance and model are conceptually inseparable.",
+        "evidence_refs": [
+          "input:stance:2",
+          "input:values:4",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-027",
+        "target_ref": "ent-001",
+        "action": "keep",
+        "rationale": "The prediction-engine IP path inquiry concerns the future of IP currently housed in Example Forecast Lab — a direct strategic concern relationship.",
+        "evidence_refs": [
+          "input:inquiry:0",
+          "input:open-inquiries:2"
+        ]
+      },
+      {
+        "source_ref": "ent-027",
+        "target_ref": "ent-017",
+        "action": "keep",
+        "rationale": "The inquiry specifically calls out the factor-discovery + temporal-validation methodology as the IP asset — connects the open question directly to the underlying concept.",
+        "evidence_refs": [
+          "input:inquiry:0",
+          "input:open-inquiries:2"
+        ]
+      },
+      {
+        "source_ref": "ent-028",
+        "target_ref": "ent-019",
+        "action": "keep",
+        "rationale": "The studio scale ceiling inquiry directly questions the limits of the senior-builder-plus-AI model — the relationship is the core of the inquiry.",
+        "evidence_refs": [
+          "input:inquiry:1",
+          "input:open-inquiries:3"
+        ]
+      },
+      {
+        "source_ref": "ent-029",
+        "target_ref": "ent-001",
+        "action": "keep",
+        "rationale": "Example Forecast Lab uses LangGraph and multi-model routing — agentic architecture maturity is directly relevant to this active project.",
+        "evidence_refs": [
+          "input:inquiry:2",
+          "input:project:0"
+        ]
+      },
+      {
+        "source_ref": "ent-029",
+        "target_ref": "ent-004",
+        "action": "keep",
+        "rationale": "Example Care Journal uses OpenAI Agent Kit — agentic architecture maturity is directly relevant to this active project.",
+        "evidence_refs": [
+          "input:inquiry:2",
+          "input:project:3"
+        ]
+      }
+    ],
+    "notes": [
+      "All 29 node proposals are assigned 'create' because the existing graph contains only Brain system starter pages (brain, projects, stances, concepts, playbooks, inquiries, current-focus, inbox-intake-flow, source-to-atom-promotion, contradiction-review, how-should-the-system-evolve, local-first-knowledge-should-stay-file-first, starter-graph, relationship-map, channels, companies, people). None of these are substantively related to Example Owner's projects, concepts, stances, or inquiries.",
+      "All vector match scores across all 29 proposals are below 0.35 and in every case the top match is a generic Brain infrastructure page, not a domain-equivalent node. No merge or update is warranted.",
+      "All 34 edge proposals are kept. Every relationship is grounded in direct evidence from the input bundle and represents a meaningful semantic connection between newly created nodes. No edges reference existing Brain system pages as source or target.",
+      "The 'ent-028 concerns ent-002' edge from the proposal artifact was not listed as a formal edge_proposal in the bundle but is implied by the inquiry's relates_to_refs. It is omitted from relationship_decisions as it was not formally proposed; it should be added during write.",
+      "The two open inquiries not entityized (how-should-example-forecast-lab-evolve and where-is-the-next-frontier-for-example-studio-engagements) remain non-nodes per the synthesis artifact's treatment and are not addressed here."
+    ]
+  },
+  "_llm": {
+    "task_class": "onboarding_merge",
+    "provider": "anthropic",
+    "model": "anthropic/claude-sonnet-4.6",
+    "transport": "ai_gateway",
+    "api_family": "responses",
+    "input_mode": "text",
+    "prompt_version": "onboarding.merge.v1",
+    "request_fingerprint": {
+      "kind": "text-prompt"
+    },
+    "temperature": null,
+    "max_tokens": null,
+    "timeout_seconds": 300,
+    "reasoning_effort": null
+  }
+}

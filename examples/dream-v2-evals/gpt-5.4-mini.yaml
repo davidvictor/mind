@@ -1,0 +1,10 @@
+llm:
+  routes:
+    dream_decision:
+      model: openai/gpt-5.4-mini
+      supports_strict_schema: true
+      truncation: disabled
+    dream_writer:
+      model: openai/gpt-5.4-mini
+      supports_strict_schema: true
+      truncation: disabled

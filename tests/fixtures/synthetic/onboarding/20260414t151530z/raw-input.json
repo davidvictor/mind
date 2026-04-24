@@ -1,0 +1,190 @@
+{
+  "name": "Example Owner",
+  "role": "Designer, Engineer, Builder — Principal & Founder, Example Studio",
+  "location": "Los Angeles / Venice (Remote)",
+  "summary": "Example Owner designs, engineers, and ships AI products end-to-end. He works across the full stack — product design and design systems, data science and ML pipelines, and agentic architecture. He builds AI into products and uses AI to build. His range spans sole technical founder to embedded partner with engineering teams of eleven. He thinks in systems and holds design, engineering, and product in the same head, which removes an entire class of translation errors and ships better software faster.",
+  "values": [
+    "Clarity — the best products come from someone who can hold the user's experience and the technical architecture simultaneously.",
+    "Systems thinking — brand, architecture, and interface are one discipline, not three.",
+    "Compression over handoff — fewer translation layers between design, engineering, and product produces better outcomes.",
+    "Craft at every layer — from semantic design tokens to ML temporal validation boundaries.",
+    "Small by conviction — one senior builder augmented by AI, embedded with the team.",
+    "AI as force multiplier — AI-assisted development is a genuine velocity shift, not a gimmick.",
+    "Ship the thing — product quality and methodology over marketing spend.",
+    "Evidence over assertion — backtest, measure, validate before claiming results."
+  ],
+  "positioning": {
+    "summary": "Design engineer and technical founder who builds AI products from zero across every layer — product design, design systems, full-stack engineering, ML pipelines, and agentic architecture. Operates as sole founder or embedded partner with engineering teams; compresses the design-engineering handoff to ship faster, cleaner software.",
+    "work_priorities": [
+      "Build and scale Example Forecast Lab — synthetic forecasting prediction + decision automation platform.",
+      "Run Example Studio engagements as embedded design-engineering partner.",
+      "Advance agentic architecture practice (LangGraph, OpenAI Agent Kit, Anthropic Agent SDK, multi-agent orchestration).",
+      "Coach engineering teams to sustained high velocity with AI-assisted development.",
+      "Design and ship design systems with 1:1 Figma-to-code mapping and semantic tokens."
+    ],
+    "life_priorities": [
+      "Health and well-being (prior career break Oct 2021 – Jul 2022).",
+      "Remote life based in Los Angeles / Venice."
+    ],
+    "constraints": [
+      "Small studio by conviction — one senior builder model.",
+      "Prefers sole-founder or embedded-partner engagements over large team hierarchies.",
+      "Zero marketing spend model for Example Forecast Lab; funded on product quality."
+    ]
+  },
+  "open_threads": [
+    "How should Example Forecast Lab evolve beyond current subscriber base and trading stack?",
+    "Where is the next frontier for Example Studio engagements?",
+    "What is the right long-term vehicle for the prediction-engine IP and methodology?",
+    "How to scale the AI-assisted velocity coaching practice without losing craft?"
+  ],
+  "projects": [
+    {
+      "project": "Example Forecast Lab",
+      "summary": "11-service AI platform for synthetic forecasting, built from zero as design engineer / sole technical founder (2025–present). Next.js 15 + React 19 web, SwiftUI iOS, Kotlin/Jetpack Compose Android, RevenueCat payments. Conversational AI via LangGraph with multi-model routing (OpenAI, Anthropic, Groq) and SSE streaming tool calls for live synthetic scenarios. Proprietary factor-discovery prediction engine (XGBoost, LightGBM) with three-window temporal validation and market-aware evaluation after the ~4.5% vig. Decision automation on NautilusTrader + Kalshi with Redis-backed control state, circuit breakers, daily P&L monitoring. Real-time data pipeline from ESPN, SportsGameOdds, BallDontLie; dbt analytics with Dagster orchestration. Research tool 'Example Research Shell' (terminal agent on Bun with WhatsApp gateway). Results: positive ROI across every synthetic forecast type (improved calibration across all synthetic forecast categories) validated on 1,000+ synthetic evaluations. 50 pilot users, weekly active cohort, no paid acquisition.",
+      "priorities": ["Scale subscribers", "Harden decision automation", "Expand sports / prop coverage"],
+      "constraints": ["Zero marketing spend", "Sole technical founder"]
+    },
+    {
+      "project": "Example Studio",
+      "summary": "Creative technology studio — Principal + Founder since 2021. One senior builder, augmented by AI, embedded with client teams. many products shipped, many launch impressions. Engagements span AI transformation, frontend architecture, design systems, brand identity, and zero-to-one product.",
+      "priorities": ["Embedded partner engagements", "AI transformation work", "Design-systems as engineering discipline"],
+      "constraints": ["Small by conviction", "Senior builder + AI model only"]
+    },
+    {
+      "project": "Example Data Studio (2025)",
+      "summary": "AI Transformation & Frontend Architecture engagement. Embedded with 11-person engineering team. Designed complete UI/UX for a browser-based SQL IDE. Built 66-component design system on Radix/shadcn/ui with Tailwind CSS 4. Monaco Editor integration with multi-dialect SQL tokenizers. Coached the team from 50 commits/week to 300+ sustained (high velocity increase)."
+    },
+    {
+      "project": "Example Care Journal (2025)",
+      "summary": "Conversational Health AI. Sole designer-engineer. Designed a 7-phase clinical conversation arc (Mirror, System Explanation, Reframe, Keystone Action, What NOT to Do, Tracking Prompt, Anchoring Truth). Built a 5-category persistent memory system and multi-store RAG across four vector stores. Three persona modes: Guide, Deep Dive, Practitioner. early waitlist. Stack: Next.js 15, React 19, Python/FastAPI, OpenAI Agent Kit, Mem0, Redis, PostgreSQL."
+    },
+    {
+      "project": "Example Market (2024)",
+      "summary": "Co-founder. HR Consultant Marketplace — CRM + marketplace for independent HR consultants. Led product strategy from 80 user interviews through launch. Designed client workspaces, cross-client dashboard, marketplace, invoicing. Built brand identity and investor materials. Raised small pre-seed round."
+    },
+    {
+      "project": "Example Wellness (2025)",
+      "summary": "Luxury wellness brand. Brand identity, web experience (Framer), physical space integration. Dark-and-gold palette, infinity moonmark logomark. Took the brand from zero patients to six weeks fully booked."
+    },
+    {
+      "project": "Example Logistics (2024)",
+      "summary": "Logistics Compliance SaaS. Rebuilt the design system with engineering-grade structure — semantic tokens, 1:1 Figma-to-code mapping. Co-designed rules-engine taxonomy for ML-powered invoice auditing. Redesigned onboarding from a 2-month human process into a 2-week software pipeline. Clients include True Classic, Magic Spoon, Seed Health, Nood."
+    },
+    {
+      "project": "Example Golf (2024)",
+      "summary": "Sports & commerce platform across three surfaces: consumer mobile (GPS, shot tracking, 8+ game modes), on-course ordering with cart GPS delivery, and a web admin with POS integration. Designed for direct sunlight readability and one-handed use. Recognized at SXSW; Alberta Innovates grant recipient."
+    },
+    {
+      "project": "Example HR (2017–2024)",
+      "summary": "Director, Product Design. Joined as employee #2 at 5 people, seed funding. Grew over 6 years from first design hire to Director of Product Design reporting to the CEO. Built the entire customer-facing product from scratch (onboarding, compliance management, employee records, HR policy library, communication hub, termination compliance workflow) and the internal HR manager platform for 200+ HR managers (unified client timeline, customer context, guided compliance workflows). Designed the conversion funnel (primary revenue engine), adaptive onboarding, and the 5-tier pricing system. Built the 'Example Design System' design system. Produced investor decks and Figma prototypes supporting staged capital raised across seed–Series C. Managed a team of 3 designers. Company went $0 → growth-stage revenue, growth-stage valuation, 5 → 200 employees, 0 → many customers served."
+    },
+    {
+      "project": "Example Care (2014–2016)",
+      "summary": "Co-Founder / Designer + Engineer. Designed and engineered the first veterinary telehealth platform — category creation before the category existed. Native iOS (Objective-C), native Android (Java), provider web portal (Rails), real-time video on TokBox/OpenTok with reconnection handling for 3G/4G. 20,000+ users, press in Forbes and Yahoo Finance. Mapped the VCPR regulatory boundary that shaped every pet telehealth platform that followed."
+    },
+    {
+      "project": "Example Arts Festival (2012–2013)",
+      "summary": "Head of Design. Won a competitive brand pitch against 5 agencies at age 24. Created the iconic paint-splattered heart logo. Designed 10,000+ pieces of environmental signage across 18 city blocks of downtown Las Vegas. Built custom CMS + API layer syncing website, mobile app, and artist management. Designed stage graphics, merchandise, maps, wristbands. large attendance on opening day; the festival still runs a decade later."
+    },
+    {
+      "project": "Example Audio",
+      "summary": "Creator discovery platform (co-founder). Strategy, branding, UI, UX, code."
+    },
+    {
+      "project": "Example Labs",
+      "summary": "Environmental testing dashboards. Complex data visualization under IE9 constraints."
+    }
+  ],
+  "people": [],
+  "concepts": [
+    {
+      "concept": "Design-engineering compression",
+      "summary": "Holding design, engineering, and product in the same head removes an entire class of translation errors — interfaces get better, architecture gets cleaner, and products ship faster."
+    },
+    {
+      "concept": "Three-window temporal validation",
+      "summary": "Prediction methodology with frozen boundaries and market-aware evaluation after the ~4.5% synthetic-forecasting vig."
+    },
+    {
+      "concept": "AI-assisted velocity coaching",
+      "summary": "Coaching engineering teams to sustain 5–7x commit velocity (e.g., 50/week → 300+/week) through AI-assisted development workflows."
+    },
+    {
+      "concept": "Senior-builder-plus-AI studio model",
+      "summary": "Example Studio's operating model: one senior builder, augmented by AI, embedded with the client team — only works when that person holds design, engineering, and product together."
+    },
+    {
+      "concept": "Semantic design tokens with 1:1 Figma-to-code mapping",
+      "summary": "Engineering-grade design systems where Figma tokens map directly to code tokens without translation drift."
+    }
+  ],
+  "playbooks": [
+    {
+      "playbook": "Zero-to-one AI product build",
+      "summary": "Own every layer — design, frontend, backend, data pipeline, ML, agent orchestration — as sole technical founder or embedded partner."
+    },
+    {
+      "playbook": "Embedded design-engineering partnership",
+      "summary": "Drop into a client team, rebuild the design system with engineering rigor, and coach velocity upward with AI-assisted workflows."
+    },
+    {
+      "playbook": "Conversational AI clinical arc",
+      "summary": "7-phase health conversation design: Mirror → System Explanation → Reframe → Keystone Action → What NOT to Do → Tracking Prompt → Anchoring Truth."
+    }
+  ],
+  "stances": [
+    {
+      "stance": "Software as an architectural problem",
+      "summary": "We think about software the way architects think about light — where it enters, how it moves, what it reveals. The interface is a consequence of that thinking, not the starting point."
+    },
+    {
+      "stance": "Brand, architecture, and interface are one discipline",
+      "summary": "Most teams fracture them across departments; Example Studio holds them as one."
+    },
+    {
+      "stance": "Small studio by conviction",
+      "summary": "Not a resource constraint — a product decision. Compression is the feature."
+    }
+  ],
+  "inquiries": [
+    {
+      "inquiry": "Prediction-engine IP path",
+      "summary": "What is the right long-term vehicle (product, license, platform) for the factor-discovery + temporal-validation methodology proven on NBA props?"
+    },
+    {
+      "inquiry": "Studio scale ceiling",
+      "summary": "How far can the senior-builder-plus-AI model scale before craft degrades or another model is needed?"
+    },
+    {
+      "inquiry": "Agentic architecture maturity",
+      "summary": "Which agentic patterns (LangGraph vs. Agent Kit vs. Anthropic Agent SDK) are durable vs. transient as the tooling shifts?"
+    }
+  ],
+  "identity_links": {
+    "email_primary": "owner@example.invalid",
+    "emails": ["owner@example.invalid", "owner@example.invalid", "studio@example.invalid"],
+    "phone": "(555) 010-0142",
+    "github": "github.com/example-owner",
+    "linkedin": "linkedin.com/in/example-owner",
+    "twitter": "twitter.com/example-owner",
+    "domains": ["example-owner.invalid", "example-labs.invalid"]
+  },
+  "education": [
+    {
+      "institution": "Example University",
+      "year": 2010,
+      "degrees": [
+        "BS Advertising Art Direction (School of Journalism & Mass Communication)",
+        "BFA Creative Writing"
+      ]
+    }
+  ],
+  "skills": {
+    "design": ["Product Design", "Design Systems", "Interaction Design", "Visual Design", "Prototyping", "User Research", "Typography", "Motion Design", "Information Architecture", "Brand Identity", "Figma", "Framer", "Adobe Creative Cloud"],
+    "engineering": ["TypeScript", "JavaScript", "React", "Next.js", "Node.js", "Python", "FastAPI", "PostgreSQL", "Supabase", "Redis", "GraphQL", "REST APIs", "Tailwind CSS", "SwiftUI", "Kotlin/Jetpack Compose", "HTML/CSS", "Express", "Drizzle ORM", "Vite", "Radix", "shadcn/ui", "Monaco Editor"],
+    "data_ml": ["XGBoost", "LightGBM", "Feature Engineering", "Temporal Validation", "dbt", "Dagster", "Pandas", "DuckDB"],
+    "ai_agents": ["LangGraph", "OpenAI Agent Kit", "Anthropic Agent SDK", "RAG Architecture", "Prompt Engineering", "Multi-Agent Systems", "Conversational AI", "Tool Orchestration", "Mem0", "Zep", "Vector Databases", "Evaluation Frameworks", "Tracing", "Guardrails"],
+    "strategy": ["Zero-to-One Product", "Team Velocity Coaching", "AI Transformation", "Technical Architecture"]
+  }
+}

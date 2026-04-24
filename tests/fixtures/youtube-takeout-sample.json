@@ -1,0 +1,33 @@
+[
+  {
+    "header": "YouTube",
+    "title": "Watched Let's reproduce GPT-2 (124M)",
+    "titleUrl": "https://www.youtube.com/watch?v=l8pRSuU81PU",
+    "subtitles": [
+      {
+        "name": "Andrej Karpathy",
+        "url": "https://www.youtube.com/channel/UCXUPKJO5MZQN11PqgIvyuvQ"
+      }
+    ],
+    "time": "2026-04-01T12:34:56.000Z",
+    "products": ["YouTube"],
+    "activityControls": ["YouTube watch history"]
+  },
+  {
+    "header": "YouTube",
+    "title": "Watched lofi hip hop radio - beats to relax/study to",
+    "titleUrl": "https://www.youtube.com/watch?v=jfKfPfyJRdk",
+    "subtitles": [
+      {"name": "Lofi Girl", "url": "https://www.youtube.com/channel/UCSJ4gkVC6NrvII8umztf0Ow"}
+    ],
+    "time": "2026-04-02T08:15:00.000Z",
+    "products": ["YouTube"]
+  },
+  {
+    "header": "YouTube",
+    "title": "Visited a YouTube page",
+    "titleUrl": "https://www.youtube.com/results?search_query=foo",
+    "time": "2026-04-02T08:20:00.000Z",
+    "products": ["YouTube"]
+  }
+]

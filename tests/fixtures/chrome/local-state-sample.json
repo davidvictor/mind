@@ -1,0 +1,14 @@
+{
+  "profile": {
+    "info_cache": {
+      "Default": {
+        "name": "Default",
+        "user_name": "default@example.com"
+      },
+      "Profile 1": {
+        "name": "Research",
+        "user_name": "research@example.com"
+      }
+    }
+  }
+}

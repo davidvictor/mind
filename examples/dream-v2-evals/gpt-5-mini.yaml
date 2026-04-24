@@ -1,0 +1,23 @@
+llm:
+  routes:
+    dream_decision:
+      model: openai/gpt-5-mini
+      supports_strict_schema: true
+      truncation: disabled
+      gateway_options:
+        models:
+          - anthropic/claude-sonnet-4.6
+    dream_writer:
+      model: openai/gpt-5-mini
+      supports_strict_schema: true
+      truncation: disabled
+      gateway_options:
+        models:
+          - anthropic/claude-sonnet-4.6
+    dream_reflection:
+      model: openai/gpt-5-mini
+      supports_strict_schema: true
+      truncation: disabled
+      gateway_options:
+        models:
+          - anthropic/claude-sonnet-4.6

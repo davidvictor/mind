@@ -1,0 +1,1327 @@
+{
+  "data": {
+    "bundle_id": "20260414t151530z",
+    "node_proposals": [
+      {
+        "proposal_id": "ent-001",
+        "page_type": "project",
+        "slug": "example-forecast-lab",
+        "title": "Example Forecast Lab",
+        "summary": "11-service AI platform for synthetic forecasting, built from zero as design engineer and sole technical founder (2025–present). Web: Next.js 15, React 19, Apollo GraphQL, Tailwind, Clerk auth. Native mobile: SwiftUI (iOS), Kotlin/Jetpack Compose (Android), RevenueCat payments. Conversational AI via LangGraph with multi-model routing (OpenAI, Anthropic, Groq) and SSE streaming tool calls for live synthetic scenarios. Proprietary factor-discovery prediction engine (XGBoost, LightGBM) with three-window temporal validation and market-aware evaluation after the ~4.5% vig. Decision automation on NautilusTrader + Kalshi with Redis-backed control state, circuit breakers, daily P&L monitoring. Real-time data pipeline from ESPN, SportsGameOdds, BallDontLie; dbt analytics with Dagster orchestration. Research tool 'Example Research Shell' (terminal agent on Bun with WhatsApp gateway). Results: positive ROI across every synthetic forecast type (improved calibration across all synthetic forecast categories), validated on 1,000+ synthetic evaluations. 50 pilot users, weekly active cohort, no paid acquisition.",
+        "domains": [
+          "work",
+          "business"
+        ],
+        "aliases": [],
+        "evidence_refs": [
+          "input:project:0",
+          "upload:0001:example-owner-canonical-bio.md"
+        ],
+        "attributes": {
+          "role": "Design Engineer / Sole Technical Founder",
+          "start_date": "2025",
+          "status": "active",
+          "priorities": [
+            "Scale subscribers",
+            "Harden decision automation",
+            "Expand sports / prop coverage"
+          ],
+          "constraints": [
+            "Zero marketing spend",
+            "Sole technical founder"
+          ],
+          "stack": {
+            "web": [
+              "Next.js 15",
+              "React 19",
+              "Apollo GraphQL",
+              "Tailwind",
+              "Clerk"
+            ],
+            "mobile": [
+              "SwiftUI",
+              "Kotlin/Jetpack Compose",
+              "RevenueCat"
+            ],
+            "ai": [
+              "LangGraph",
+              "OpenAI",
+              "Anthropic",
+              "Groq",
+              "SSE streaming"
+            ],
+            "ml": [
+              "XGBoost",
+              "LightGBM",
+              "dbt",
+              "Dagster"
+            ],
+            "trading": [
+              "NautilusTrader",
+              "Kalshi",
+              "Redis"
+            ],
+            "data": [
+              "ESPN API",
+              "SportsGameOdds",
+              "BallDontLie"
+            ]
+          },
+          "metrics": {
+            "subscribers": 500,
+            "subscription_range": "$12–$29/mo",
+            "daily_active_rate": "30%",
+            "marketing_spend": "$0",
+            "backtested_bets": "1,000+",
+            "roi_by_prop": {
+              "blocks": "+32%",
+              "threes": "+13%",
+              "rebounds": "+9%",
+              "steals": "+9%",
+              "assists": "+8%",
+              "points": "+5%"
+            }
+          }
+        },
+        "relates_to_refs": [
+          "owner"
+        ]
+      },
+      {
+        "proposal_id": "ent-002",
+        "page_type": "project",
+        "slug": "example-studio",
+        "title": "Example Studio",
+        "summary": "Creative technology studio — Principal + Founder since 2021. One senior builder, augmented by AI, embedded with client teams. many products shipped, many launch impressions. Engagements span AI transformation, frontend architecture, design systems, brand identity, and zero-to-one product. Philosophy: software as an architectural problem; brand, architecture, and interface as one discipline.",
+        "domains": [
+          "work",
+          "business"
+        ],
+        "aliases": [
+          "Example Studio",
+          "mdrn"
+        ],
+        "evidence_refs": [
+          "input:project:1",
+          "upload:0001:example-owner-canonical-bio.md"
+        ],
+        "attributes": {
+          "role": "Principal & Founder",
+          "start_date": "2021",
+          "status": "active",
+          "operating_model": "One senior builder + AI, embedded with client team",
+          "priorities": [
+            "Embedded partner engagements",
+            "AI transformation work",
+            "Design systems as engineering discipline"
+          ],
+          "constraints": [
+            "Small by conviction",
+            "Senior builder + AI model only"
+          ],
+          "domains_web": [
+            "example-labs.invalid"
+          ],
+          "metrics": {
+            "products_shipped": "27+",
+            "brand_impressions": "30M+"
+          }
+        },
+        "relates_to_refs": [
+          "owner"
+        ]
+      },
+      {
+        "proposal_id": "ent-003",
+        "page_type": "project",
+        "slug": "example-data-studio-2025",
+        "title": "Example Data Studio (2025)",
+        "summary": "AI Transformation & Frontend Architecture engagement under Example Studio. Embedded with 11-person engineering team. Designed complete UI/UX for a browser-based SQL IDE. Built 66-component design system on Radix/shadcn/ui with Tailwind CSS 4. Monaco Editor integration with multi-dialect SQL tokenizers. Coached the team from 50 commits/week to 300+ sustained (high velocity increase).",
+        "domains": [
+          "work",
+          "craft"
+        ],
+        "aliases": [],
+        "evidence_refs": [
+          "input:project:2",
+          "upload:0001:example-owner-canonical-bio.md"
+        ],
+        "attributes": {
+          "engagement_type": "AI Transformation & Frontend Architecture",
+          "year": "2025",
+          "team_size": 11,
+          "design_system_components": 66,
+          "stack": [
+            "Radix",
+            "shadcn/ui",
+            "Tailwind CSS 4",
+            "Monaco Editor"
+          ],
+          "velocity_before": "50 commits/week",
+          "velocity_after": "300+ commits/week",
+          "velocity_multiplier": "5–7x"
+        },
+        "relates_to_refs": [
+          "ent-002"
+        ]
+      },
+      {
+        "proposal_id": "ent-004",
+        "page_type": "project",
+        "slug": "example-care-journal-2025",
+        "title": "Example Care Journal (2025)",
+        "summary": "Conversational Health AI, sole designer-engineer. Designed a 7-phase clinical conversation arc (Mirror → System Explanation → Reframe → Keystone Action → What NOT to Do → Tracking Prompt → Anchoring Truth). Built a 5-category persistent memory system and multi-store RAG across four vector stores. Three persona modes: Guide, Deep Dive, Practitioner. early waitlist. Stack: Next.js 15, React 19, Python/FastAPI, OpenAI Agent Kit, Mem0, Redis, PostgreSQL.",
+        "domains": [
+          "work",
+          "craft"
+        ],
+        "aliases": [],
+        "evidence_refs": [
+          "input:project:3",
+          "upload:0001:example-owner-canonical-bio.md"
+        ],
+        "attributes": {
+          "engagement_type": "Conversational Health AI",
+          "role": "Sole designer-engineer",
+          "year": "2025",
+          "conversation_arc_phases": 7,
+          "memory_categories": 5,
+          "vector_stores": 4,
+          "persona_modes": [
+            "Guide",
+            "Deep Dive",
+            "Practitioner"
+          ],
+          "waitlist": 60000,
+          "stack": [
+            "Next.js 15",
+            "React 19",
+            "Python/FastAPI",
+            "OpenAI Agent Kit",
+            "Mem0",
+            "Redis",
+            "PostgreSQL"
+          ]
+        },
+        "relates_to_refs": [
+          "ent-002"
+        ]
+      },
+      {
+        "proposal_id": "ent-005",
+        "page_type": "project",
+        "slug": "example-market-2024",
+        "title": "Example Market (2024)",
+        "summary": "Co-founder. HR Consultant Marketplace — CRM + marketplace for independent HR consultants. Led product strategy from 80 user interviews through launch. Designed client workspaces, cross-client dashboard, marketplace, invoicing. Built brand identity and investor materials. Raised small pre-seed round.",
+        "domains": [
+          "work",
+          "business"
+        ],
+        "aliases": [],
+        "evidence_refs": [
+          "input:project:4",
+          "upload:0001:example-owner-canonical-bio.md"
+        ],
+        "attributes": {
+          "category": "HR Consultant Marketplace",
+          "role": "Co-founder",
+          "year": "2024",
+          "user_interviews": 80,
+          "raised": "small pre-seed round"
+        },
+        "relates_to_refs": [
+          "ent-002"
+        ]
+      },
+      {
+        "proposal_id": "ent-006",
+        "page_type": "project",
+        "slug": "example-wellness-2025",
+        "title": "Example Wellness (2025)",
+        "summary": "Luxury wellness brand engagement. Brand identity, web experience (Framer), physical space integration. Dark-and-gold palette, infinity moonmark logomark. Took the brand from zero patients to six weeks fully booked.",
+        "domains": [
+          "work",
+          "craft"
+        ],
+        "aliases": [],
+        "evidence_refs": [
+          "input:project:5",
+          "upload:0001:example-owner-canonical-bio.md"
+        ],
+        "attributes": {
+          "category": "Luxury wellness brand",
+          "year": "2025",
+          "stack": [
+            "Framer"
+          ],
+          "outcome": "Zero patients to six weeks fully booked"
+        },
+        "relates_to_refs": [
+          "ent-002"
+        ]
+      },
+      {
+        "proposal_id": "ent-007",
+        "page_type": "project",
+        "slug": "example-logistics-2024",
+        "title": "Example Logistics (2024)",
+        "summary": "Logistics Compliance SaaS. Rebuilt the design system with engineering-grade structure — semantic tokens, 1:1 Figma-to-code mapping. Co-designed rules-engine taxonomy for ML-powered invoice auditing. Redesigned onboarding from a 2-month human process into a 2-week software pipeline. Clients include True Classic, Magic Spoon, Seed Health, Nood.",
+        "domains": [
+          "work",
+          "craft"
+        ],
+        "aliases": [],
+        "evidence_refs": [
+          "input:project:6",
+          "upload:0001:example-owner-canonical-bio.md"
+        ],
+        "attributes": {
+          "category": "Logistics Compliance SaaS",
+          "year": "2024",
+          "onboarding_before": "2-month human process",
+          "onboarding_after": "2-week software pipeline",
+          "clients": [
+            "True Classic",
+            "Magic Spoon",
+            "Seed Health",
+            "Nood"
+          ]
+        },
+        "relates_to_refs": [
+          "ent-002"
+        ]
+      },
+      {
+        "proposal_id": "ent-008",
+        "page_type": "project",
+        "slug": "example-golf-2024",
+        "title": "Example Golf (2024)",
+        "summary": "Sports & commerce platform across three surfaces: consumer mobile (GPS, shot tracking, 8+ game modes), on-course ordering with cart GPS delivery, and a web admin with POS integration. Designed for direct sunlight readability and one-handed use. Recognized at SXSW; Alberta Innovates grant recipient.",
+        "domains": [
+          "work",
+          "craft"
+        ],
+        "aliases": [],
+        "evidence_refs": [
+          "input:project:7",
+          "upload:0001:example-owner-canonical-bio.md"
+        ],
+        "attributes": {
+          "category": "Sports & commerce platform",
+          "year": "2024",
+          "surfaces": [
+            "Consumer mobile",
+            "On-course ordering",
+            "Web admin / POS"
+          ],
+          "recognitions": [
+            "SXSW",
+            "Alberta Innovates grant"
+          ]
+        },
+        "relates_to_refs": [
+          "ent-002"
+        ]
+      },
+      {
+        "proposal_id": "ent-009",
+        "page_type": "project",
+        "slug": "example-hr-2017-2024",
+        "title": "Example HR (2017–2024)",
+        "summary": "Director, Product Design. Joined as employee #2 at 5 people with seed funding. Grew over 6 years to Director of Product Design reporting to CEO. Built entire customer-facing product from scratch (onboarding, compliance management, employee records, HR policy library, communication hub, termination compliance workflow) and internal HR manager platform for 200+ HR managers. Designed conversion funnel, adaptive onboarding, 5-tier pricing system. Built 'Example Design System' design system. Produced investor materials supporting staged capital raised across seed–Series C. Managed 3 designers. Company: $0 → growth-stage revenue, growth-stage valuation, 5 → 200 employees, 0 → 10,000 businesses.",
+        "domains": [
+          "work"
+        ],
+        "aliases": [
+          "Example HR"
+        ],
+        "evidence_refs": [
+          "input:project:8",
+          "upload:0001:example-owner-canonical-bio.md"
+        ],
+        "attributes": {
+          "role": "Director, Product Design",
+          "start_date": "2017",
+          "end_date": "2024",
+          "employee_number": 2,
+          "designers_managed": 3,
+          "design_system": "Example Design System",
+          "company_metrics": {
+            "arr_start": "$0",
+            "arr_end": "$25M",
+            "employees_start": 5,
+            "employees_end": 200,
+            "raised": "staged capital",
+            "valuation": "growth-stage",
+            "businesses_served": "10,000"
+          }
+        },
+        "relates_to_refs": [
+          "owner"
+        ]
+      },
+      {
+        "proposal_id": "ent-010",
+        "page_type": "project",
+        "slug": "example-care-2014-2016",
+        "title": "Example Care (2014–2016)",
+        "summary": "Co-Founder / Designer + Engineer. Designed and engineered the first veterinary telehealth platform — category creation before the category existed. Native iOS (Objective-C), native Android (Java), provider web portal (Rails), real-time video on TokBox/OpenTok with reconnection handling for 3G/4G. 20,000+ users, press in Forbes and Yahoo Finance. Mapped the VCPR regulatory boundary that shaped every pet telehealth platform that followed.",
+        "domains": [
+          "work",
+          "business"
+        ],
+        "aliases": [
+          "Example Care"
+        ],
+        "evidence_refs": [
+          "input:project:9",
+          "upload:0001:example-owner-canonical-bio.md"
+        ],
+        "attributes": {
+          "category": "Veterinary telehealth",
+          "role": "Co-Founder / Designer + Engineer",
+          "start_date": "2014",
+          "end_date": "2016",
+          "stack": [
+            "Objective-C (iOS)",
+            "Java (Android)",
+            "Rails",
+            "TokBox/OpenTok"
+          ],
+          "users": "20,000+",
+          "press": [
+            "Forbes",
+            "Yahoo Finance"
+          ]
+        },
+        "relates_to_refs": [
+          "owner"
+        ]
+      },
+      {
+        "proposal_id": "ent-011",
+        "page_type": "project",
+        "slug": "example-arts-festival-2012-2013",
+        "title": "Example Arts Festival (2012–2013)",
+        "summary": "Head of Design. Won a competitive brand pitch against 5 agencies at age 24. Created the iconic paint-splattered heart logo. Designed 10,000+ pieces of environmental signage across 18 city blocks of downtown Las Vegas. Built custom CMS + API layer syncing website, mobile app, and artist management. Designed stage graphics, merchandise, maps, wristbands. large attendance on opening day; the festival still runs a decade later.",
+        "domains": [
+          "work",
+          "craft"
+        ],
+        "aliases": [
+          "Life is Beautiful"
+        ],
+        "evidence_refs": [
+          "input:project:10",
+          "upload:0001:example-owner-canonical-bio.md"
+        ],
+        "attributes": {
+          "role": "Head of Design",
+          "start_date": "2012",
+          "end_date": "2013",
+          "city": "Las Vegas",
+          "city_blocks": 18,
+          "signage_pieces": "10,000+",
+          "opening_day_attendees": 70000
+        },
+        "relates_to_refs": [
+          "owner"
+        ]
+      },
+      {
+        "proposal_id": "ent-012",
+        "page_type": "project",
+        "slug": "example-audio",
+        "title": "Example Audio",
+        "summary": "Creator discovery platform (co-founder). Responsibilities: strategy, branding, UI, UX, code.",
+        "domains": [
+          "work"
+        ],
+        "aliases": [],
+        "evidence_refs": [
+          "input:project:11",
+          "upload:0001:example-owner-canonical-bio.md"
+        ],
+        "attributes": {
+          "category": "Creator discovery platform",
+          "role": "Co-founder"
+        },
+        "relates_to_refs": [
+          "owner"
+        ]
+      },
+      {
+        "proposal_id": "ent-013",
+        "page_type": "project",
+        "slug": "example-labs",
+        "title": "Example Labs",
+        "summary": "Environmental testing dashboards. Complex data visualization under IE9 constraints.",
+        "domains": [
+          "work"
+        ],
+        "aliases": [],
+        "evidence_refs": [
+          "input:project:12",
+          "upload:0001:example-owner-canonical-bio.md"
+        ],
+        "attributes": {
+          "category": "Environmental testing",
+          "constraint": "IE9 compatibility"
+        },
+        "relates_to_refs": [
+          "owner"
+        ]
+      },
+      {
+        "proposal_id": "ent-014",
+        "page_type": "project",
+        "slug": "example-events-2013",
+        "title": "Example Events (2013)",
+        "summary": "Platform for the electronic music community to promote and discover events and festivals.",
+        "domains": [
+          "work"
+        ],
+        "aliases": [],
+        "evidence_refs": [
+          "upload:0001:example-owner-canonical-bio.md"
+        ],
+        "attributes": {
+          "category": "Music event discovery platform",
+          "year": "2013"
+        },
+        "relates_to_refs": [
+          "owner"
+        ]
+      },
+      {
+        "proposal_id": "ent-015",
+        "page_type": "project",
+        "slug": "example-fitness",
+        "title": "Example Fitness",
+        "summary": "Home fitness / AI platform. Led Data team. Example Data + Braze customer engagement.",
+        "domains": [
+          "work"
+        ],
+        "aliases": [],
+        "evidence_refs": [
+          "upload:0001:example-owner-canonical-bio.md"
+        ],
+        "attributes": {
+          "category": "Home fitness / AI platform",
+          "role": "Data team lead",
+          "stack": [
+            "Example Data",
+            "Braze"
+          ]
+        },
+        "relates_to_refs": [
+          "owner"
+        ]
+      },
+      {
+        "proposal_id": "ent-016",
+        "page_type": "concept",
+        "slug": "design-engineering-compression",
+        "title": "Design-Engineering Compression",
+        "summary": "Holding design, engineering, and product in the same head removes an entire class of translation errors — interfaces get better, architecture gets cleaner, and products ship faster. The core intellectual property of the owner's working method and the Example Studio model.",
+        "domains": [
+          "work",
+          "craft"
+        ],
+        "aliases": [
+          "compression",
+          "handoff elimination"
+        ],
+        "evidence_refs": [
+          "input:concept:0",
+          "input:values:2",
+          "upload:0001:example-owner-canonical-bio.md"
+        ],
+        "attributes": {
+          "origin": "Evolved through career spanning design and engineering simultaneously",
+          "applied_in": [
+            "Example Studio",
+            "Example Forecast Lab",
+            "Example HR",
+            "Example Care"
+          ]
+        },
+        "relates_to_refs": [
+          "owner",
+          "ent-002"
+        ]
+      },
+      {
+        "proposal_id": "ent-017",
+        "page_type": "concept",
+        "slug": "three-window-temporal-validation",
+        "title": "Three-Window Temporal Validation",
+        "summary": "Proprietary prediction methodology used in Example Forecast Lab: frozen temporal boundaries across three evaluation windows with market-aware scoring after the ~4.5% synthetic-forecasting vig. Prevents data leakage and grounds ROI claims in realistic market conditions.",
+        "domains": [
+          "work",
+          "craft"
+        ],
+        "aliases": [
+          "temporal validation",
+          "frozen boundary validation"
+        ],
+        "evidence_refs": [
+          "input:concept:1",
+          "input:project:0",
+          "upload:0001:example-owner-canonical-bio.md"
+        ],
+        "attributes": {
+          "applied_in": "Example Forecast Lab",
+          "models": [
+            "XGBoost",
+            "LightGBM"
+          ],
+          "vig_adjustment": "~4.5%",
+          "backtested_bets": "1,000+"
+        },
+        "relates_to_refs": [
+          "ent-001"
+        ]
+      },
+      {
+        "proposal_id": "ent-018",
+        "page_type": "concept",
+        "slug": "ai-assisted-velocity-coaching",
+        "title": "AI-Assisted Velocity Coaching",
+        "summary": "Coaching engineering teams to sustain 5–7x commit velocity increases through AI-assisted development workflows. Demonstrated concretely at Example Data Studio: small-team baseline to sustained high-throughput delivery.",
+        "domains": [
+          "work",
+          "craft"
+        ],
+        "aliases": [
+          "velocity coaching",
+          "AI transformation coaching"
+        ],
+        "evidence_refs": [
+          "input:concept:2",
+          "input:project:2",
+          "upload:0001:example-owner-canonical-bio.md"
+        ],
+        "attributes": {
+          "multiplier": "5–7x",
+          "velocity_before": "50 commits/week",
+          "velocity_after": "300+ commits/week",
+          "demonstrated_at": "Example Data Studio"
+        },
+        "relates_to_refs": [
+          "ent-003"
+        ]
+      },
+      {
+        "proposal_id": "ent-019",
+        "page_type": "concept",
+        "slug": "senior-builder-plus-ai-studio-model",
+        "title": "Senior-Builder-Plus-AI Studio Model",
+        "summary": "Example Studio's operating model: one senior builder augmented by AI, embedded with the client team. Only works when that person holds design, engineering, and product together. Small by conviction — the compression is the feature, not a resource constraint.",
+        "domains": [
+          "work",
+          "business"
+        ],
+        "aliases": [
+          "one senior builder model",
+          "compression studio model"
+        ],
+        "evidence_refs": [
+          "input:concept:3",
+          "input:stance:2",
+          "upload:0001:example-owner-canonical-bio.md"
+        ],
+        "attributes": {
+          "headcount": 1,
+          "augmentation": "AI tooling",
+          "engagement_mode": "Embedded with client team",
+          "products_shipped": "27+",
+          "brand_impressions": "30M+"
+        },
+        "relates_to_refs": [
+          "ent-002"
+        ]
+      },
+      {
+        "proposal_id": "ent-020",
+        "page_type": "concept",
+        "slug": "semantic-design-tokens-with-1-1-figma-to-code-mapping",
+        "title": "Semantic Design Tokens with 1:1 Figma-to-Code Mapping",
+        "summary": "Engineering-grade design systems where Figma tokens map directly to code tokens without translation drift. Applied at Example Logistics and Example Data Studio. A concrete expression of the design-engineering compression value.",
+        "domains": [
+          "work",
+          "craft"
+        ],
+        "aliases": [
+          "semantic tokens",
+          "Figma-to-code mapping",
+          "engineering-grade design systems"
+        ],
+        "evidence_refs": [
+          "input:concept:4",
+          "input:project:2",
+          "input:project:6",
+          "upload:0001:example-owner-canonical-bio.md"
+        ],
+        "attributes": {
+          "applied_in": [
+            "Example Logistics",
+            "Example Data Studio",
+            "Example HR (Example Design System)"
+          ],
+          "tooling": [
+            "Figma",
+            "Radix",
+            "shadcn/ui",
+            "Tailwind CSS"
+          ]
+        },
+        "relates_to_refs": [
+          "ent-003",
+          "ent-007"
+        ]
+      },
+      {
+        "proposal_id": "ent-021",
+        "page_type": "concept",
+        "slug": "conversational-ai-clinical-arc",
+        "title": "Conversational AI Clinical Arc",
+        "summary": "7-phase health conversation design framework developed for Example Care Journal: Mirror → System Explanation → Reframe → Keystone Action → What NOT to Do → Tracking Prompt → Anchoring Truth. Paired with a 5-category persistent memory system and multi-store RAG.",
+        "domains": [
+          "work",
+          "craft"
+        ],
+        "aliases": [
+          "7-phase clinical arc",
+          "Example Care Journal conversation arc"
+        ],
+        "evidence_refs": [
+          "input:playbook:2",
+          "input:project:3",
+          "upload:0001:example-owner-canonical-bio.md"
+        ],
+        "attributes": {
+          "phases": [
+            "Mirror",
+            "System Explanation",
+            "Reframe",
+            "Keystone Action",
+            "What NOT to Do",
+            "Tracking Prompt",
+            "Anchoring Truth"
+          ],
+          "memory_categories": 5,
+          "vector_stores": 4,
+          "applied_in": "Example Care Journal"
+        },
+        "relates_to_refs": [
+          "ent-004"
+        ]
+      },
+      {
+        "proposal_id": "ent-022",
+        "page_type": "playbook",
+        "slug": "zero-to-one-ai-product-build",
+        "title": "Zero-to-One AI Product Build",
+        "summary": "Own every layer — design, frontend, backend, data pipeline, ML, agent orchestration — as sole technical founder or embedded partner. Demonstrated at Example Forecast Lab (11-service platform, 50 pilot users, no paid acquisition) and Example Care Journal (60,000 waitlist).",
+        "domains": [
+          "work",
+          "craft"
+        ],
+        "aliases": [
+          "full-stack AI founder playbook"
+        ],
+        "evidence_refs": [
+          "input:playbook:0",
+          "upload:0001:example-owner-canonical-bio.md"
+        ],
+        "attributes": {
+          "layers": [
+            "Product design",
+            "Design systems",
+            "Frontend",
+            "Backend",
+            "Data pipeline",
+            "ML",
+            "Agent orchestration"
+          ],
+          "demonstrated_at": [
+            "Example Forecast Lab",
+            "Example Care Journal",
+            "Example Care"
+          ]
+        },
+        "relates_to_refs": [
+          "ent-001",
+          "ent-004"
+        ]
+      },
+      {
+        "proposal_id": "ent-023",
+        "page_type": "playbook",
+        "slug": "embedded-design-engineering-partnership",
+        "title": "Embedded Design-Engineering Partnership",
+        "summary": "Drop into a client team, rebuild the design system with engineering rigor, and coach velocity upward with AI-assisted workflows. Demonstrated at Example Data Studio (11-person team, high velocity) and Example Logistics (onboarding from 2 months to 2 weeks).",
+        "domains": [
+          "work",
+          "craft"
+        ],
+        "aliases": [
+          "embedded partner model",
+          "design-engineering partner"
+        ],
+        "evidence_refs": [
+          "input:playbook:1",
+          "upload:0001:example-owner-canonical-bio.md"
+        ],
+        "attributes": {
+          "deliverables": [
+            "Design system rebuild",
+            "Velocity coaching",
+            "AI workflow adoption"
+          ],
+          "demonstrated_at": [
+            "Example Data Studio",
+            "Example Logistics",
+            "Example Golf"
+          ]
+        },
+        "relates_to_refs": [
+          "ent-003",
+          "ent-007"
+        ]
+      },
+      {
+        "proposal_id": "ent-024",
+        "page_type": "stance",
+        "slug": "software-as-an-architectural-problem",
+        "title": "Software as an Architectural Problem",
+        "summary": "We think about software the way architects think about light — where it enters, how it moves, what it reveals. The interface is a consequence of that thinking, not the starting point. The foundational Example Studio stance.",
+        "domains": [
+          "work",
+          "craft"
+        ],
+        "aliases": [],
+        "evidence_refs": [
+          "input:stance:0",
+          "upload:0001:example-owner-canonical-bio.md"
+        ],
+        "attributes": {
+          "origin": "Example Studio philosophy"
+        },
+        "relates_to_refs": [
+          "ent-002"
+        ]
+      },
+      {
+        "proposal_id": "ent-025",
+        "page_type": "stance",
+        "slug": "brand-architecture-and-interface-are-one-discipline",
+        "title": "Brand, Architecture, and Interface Are One Discipline",
+        "summary": "Most teams fracture brand, architecture, and interface across departments. Example Studio holds them as one. This unification is the source of compression advantages.",
+        "domains": [
+          "work",
+          "craft"
+        ],
+        "aliases": [
+          "unified discipline stance"
+        ],
+        "evidence_refs": [
+          "input:stance:1",
+          "input:values:1",
+          "upload:0001:example-owner-canonical-bio.md"
+        ],
+        "attributes": {},
+        "relates_to_refs": [
+          "ent-002",
+          "ent-016"
+        ]
+      },
+      {
+        "proposal_id": "ent-026",
+        "page_type": "stance",
+        "slug": "small-studio-by-conviction",
+        "title": "Small Studio by Conviction",
+        "summary": "Not a resource constraint — a product decision. Compression is the feature. The single senior builder + AI model produces better outcomes than larger teams with translation layers.",
+        "domains": [
+          "work",
+          "business"
+        ],
+        "aliases": [],
+        "evidence_refs": [
+          "input:stance:2",
+          "input:values:4",
+          "upload:0001:example-owner-canonical-bio.md"
+        ],
+        "attributes": {},
+        "relates_to_refs": [
+          "ent-002",
+          "ent-019"
+        ]
+      },
+      {
+        "proposal_id": "ent-027",
+        "page_type": "inquiry",
+        "slug": "prediction-engine-ip-path",
+        "title": "Prediction-Engine IP Path",
+        "summary": "What is the right long-term vehicle (product, license, platform) for the factor-discovery + temporal-validation methodology proven on NBA props? The IP could stay inside Example Forecast Lab, be licensed, or become a standalone platform.",
+        "domains": [
+          "work",
+          "business"
+        ],
+        "aliases": [],
+        "evidence_refs": [
+          "input:inquiry:0",
+          "input:open-inquiries:2"
+        ],
+        "attributes": {
+          "question": "What is the right long-term vehicle (product, license, platform) for the factor-discovery + temporal-validation methodology proven on NBA props?",
+          "current_home": "Example Forecast Lab",
+          "ip_components": [
+            "Factor discovery system",
+            "Three-window temporal validation",
+            "Market-aware evaluation"
+          ]
+        },
+        "relates_to_refs": [
+          "ent-001",
+          "ent-017"
+        ]
+      },
+      {
+        "proposal_id": "ent-028",
+        "page_type": "inquiry",
+        "slug": "studio-scale-ceiling",
+        "title": "Studio Scale Ceiling",
+        "summary": "How far can the senior-builder-plus-AI model scale before craft degrades or another model is needed? Open question about the ceiling of compression and what lies beyond it.",
+        "domains": [
+          "work",
+          "business"
+        ],
+        "aliases": [],
+        "evidence_refs": [
+          "input:inquiry:1",
+          "input:open-inquiries:3"
+        ],
+        "attributes": {
+          "question": "How far can the senior-builder-plus-AI model scale before craft degrades or another model is needed?"
+        },
+        "relates_to_refs": [
+          "ent-019",
+          "ent-002"
+        ]
+      },
+      {
+        "proposal_id": "ent-029",
+        "page_type": "inquiry",
+        "slug": "agentic-architecture-maturity",
+        "title": "Agentic Architecture Maturity",
+        "summary": "Which agentic patterns (LangGraph vs. OpenAI Agent Kit vs. Anthropic Agent SDK) are durable vs. transient as the tooling shifts? An active technical inquiry across all AI product work.",
+        "domains": [
+          "work",
+          "craft"
+        ],
+        "aliases": [],
+        "evidence_refs": [
+          "input:inquiry:2"
+        ],
+        "attributes": {
+          "question": "Which agentic patterns (LangGraph vs. OpenAI Agent Kit vs. Anthropic Agent SDK) are durable vs. transient as the tooling shifts?",
+          "frameworks_in_scope": [
+            "LangGraph",
+            "OpenAI Agent Kit",
+            "Anthropic Agent SDK"
+          ],
+          "applied_in": [
+            "Example Forecast Lab",
+            "Example Care Journal"
+          ]
+        },
+        "relates_to_refs": [
+          "ent-001",
+          "ent-004"
+        ]
+      }
+    ],
+    "edge_proposals": [
+      {
+        "source_ref": "owner",
+        "target_ref": "ent-001",
+        "relation_type": "founded_and_operates",
+        "rationale": "the owner is the sole technical founder and design engineer of Example Forecast Lab, having built every layer from zero.",
+        "evidence_refs": [
+          "input:project:0",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "owner",
+        "target_ref": "ent-002",
+        "relation_type": "founded_and_operates",
+        "rationale": "the owner is the Principal and Founder of Example Studio since 2021.",
+        "evidence_refs": [
+          "input:project:1",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "owner",
+        "target_ref": "ent-009",
+        "relation_type": "held_role_at",
+        "rationale": "the owner was Director of Product Design at Example HR from 2017–2024, joining as employee #2.",
+        "evidence_refs": [
+          "input:project:8",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "owner",
+        "target_ref": "ent-010",
+        "relation_type": "co_founded",
+        "rationale": "the owner co-founded Example Care and served as designer and engineer from 2014–2016.",
+        "evidence_refs": [
+          "input:project:9",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "owner",
+        "target_ref": "ent-011",
+        "relation_type": "held_role_at",
+        "rationale": "the owner was Head of Design at Example Arts Festival in 2012–2013.",
+        "evidence_refs": [
+          "input:project:10",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "owner",
+        "target_ref": "ent-012",
+        "relation_type": "co_founded",
+        "rationale": "the owner co-founded Example Audio and led strategy, branding, UI/UX, and code.",
+        "evidence_refs": [
+          "input:project:11",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "owner",
+        "target_ref": "ent-013",
+        "relation_type": "worked_on",
+        "rationale": "the owner built environmental testing dashboards for Example Labs.",
+        "evidence_refs": [
+          "input:project:12",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "owner",
+        "target_ref": "ent-014",
+        "relation_type": "worked_on",
+        "rationale": "the owner worked on Example Events, a music event discovery platform, in 2013.",
+        "evidence_refs": [
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "owner",
+        "target_ref": "ent-015",
+        "relation_type": "held_role_at",
+        "rationale": "the owner led the Data team at Example Fitness.",
+        "evidence_refs": [
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-002",
+        "target_ref": "ent-003",
+        "relation_type": "delivered_engagement",
+        "rationale": "Example Data Studio was a Example Studio client engagement.",
+        "evidence_refs": [
+          "input:project:2",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-002",
+        "target_ref": "ent-004",
+        "relation_type": "delivered_engagement",
+        "rationale": "Example Care Journal was built by the owner as sole designer-engineer under Example Studio.",
+        "evidence_refs": [
+          "input:project:3",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-002",
+        "target_ref": "ent-005",
+        "relation_type": "delivered_engagement",
+        "rationale": "Example Market was a co-founder / Example Studio engagement.",
+        "evidence_refs": [
+          "input:project:4",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-002",
+        "target_ref": "ent-006",
+        "relation_type": "delivered_engagement",
+        "rationale": "Example Wellness was a Example Studio engagement.",
+        "evidence_refs": [
+          "input:project:5",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-002",
+        "target_ref": "ent-007",
+        "relation_type": "delivered_engagement",
+        "rationale": "Example Logistics was a Example Studio engagement.",
+        "evidence_refs": [
+          "input:project:6",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-002",
+        "target_ref": "ent-008",
+        "relation_type": "delivered_engagement",
+        "rationale": "Example Golf was a Example Studio engagement.",
+        "evidence_refs": [
+          "input:project:7",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-019",
+        "target_ref": "ent-002",
+        "relation_type": "defines_operating_model_of",
+        "rationale": "The senior-builder-plus-AI model is Example Studio's explicit operating model.",
+        "evidence_refs": [
+          "input:concept:3",
+          "input:project:1",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-016",
+        "target_ref": "ent-019",
+        "relation_type": "enables",
+        "rationale": "Design-engineering compression is the foundational capability that makes the senior-builder-plus-AI studio model viable.",
+        "evidence_refs": [
+          "input:concept:0",
+          "input:concept:3",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-001",
+        "target_ref": "ent-017",
+        "relation_type": "implements",
+        "rationale": "Example Forecast Lab's prediction engine implements the three-window temporal validation methodology.",
+        "evidence_refs": [
+          "input:project:0",
+          "input:concept:1",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-003",
+        "target_ref": "ent-018",
+        "relation_type": "demonstrated",
+        "rationale": "The Example Data Studio engagement is the primary concrete demonstration of AI-assisted velocity coaching (50→300+ commits/week).",
+        "evidence_refs": [
+          "input:project:2",
+          "input:concept:2",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-003",
+        "target_ref": "ent-020",
+        "relation_type": "implemented",
+        "rationale": "The Example Data Studio engagement produced a 66-component design system using semantic tokens and engineering-grade structure.",
+        "evidence_refs": [
+          "input:project:2",
+          "input:concept:4",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-007",
+        "target_ref": "ent-020",
+        "relation_type": "implemented",
+        "rationale": "Example Logistics engagement rebuilt the design system with semantic tokens and 1:1 Figma-to-code mapping.",
+        "evidence_refs": [
+          "input:project:6",
+          "input:concept:4",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-004",
+        "target_ref": "ent-021",
+        "relation_type": "implements",
+        "rationale": "Example Care Journal implements the conversational AI clinical arc framework.",
+        "evidence_refs": [
+          "input:project:3",
+          "input:playbook:2",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-022",
+        "target_ref": "ent-001",
+        "relation_type": "applied_in",
+        "rationale": "Example Forecast Lab is the primary live demonstration of the zero-to-one AI product build playbook.",
+        "evidence_refs": [
+          "input:playbook:0",
+          "input:project:0",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-022",
+        "target_ref": "ent-004",
+        "relation_type": "applied_in",
+        "rationale": "Example Care Journal is a strong secondary demonstration of the zero-to-one AI product build playbook (sole designer-engineer, 60,000 waitlist).",
+        "evidence_refs": [
+          "input:playbook:0",
+          "input:project:3",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-023",
+        "target_ref": "ent-003",
+        "relation_type": "applied_in",
+        "rationale": "Example Data Studio is the primary demonstration of the embedded design-engineering partnership playbook.",
+        "evidence_refs": [
+          "input:playbook:1",
+          "input:project:2",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-023",
+        "target_ref": "ent-007",
+        "relation_type": "applied_in",
+        "rationale": "Example Logistics is a secondary demonstration of the embedded design-engineering partnership playbook (onboarding pipeline compression).",
+        "evidence_refs": [
+          "input:playbook:1",
+          "input:project:6",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-024",
+        "target_ref": "ent-002",
+        "relation_type": "grounds_philosophy_of",
+        "rationale": "Software as an architectural problem is the foundational philosophical stance of Example Studio.",
+        "evidence_refs": [
+          "input:stance:0",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-025",
+        "target_ref": "ent-016",
+        "relation_type": "reinforces",
+        "rationale": "The stance that brand, architecture, and interface are one discipline directly reinforces the design-engineering compression concept.",
+        "evidence_refs": [
+          "input:stance:1",
+          "input:values:1",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-026",
+        "target_ref": "ent-019",
+        "relation_type": "reinforces",
+        "rationale": "The small-studio-by-conviction stance is the philosophical grounding for the senior-builder-plus-AI operating model.",
+        "evidence_refs": [
+          "input:stance:2",
+          "input:values:4",
+          "upload:0001:example-owner-canonical-bio.md"
+        ]
+      },
+      {
+        "source_ref": "ent-027",
+        "target_ref": "ent-001",
+        "relation_type": "concerns",
+        "rationale": "The prediction-engine IP path inquiry is about the long-term future of IP currently housed in Example Forecast Lab.",
+        "evidence_refs": [
+          "input:inquiry:0",
+          "input:open-inquiries:2"
+        ]
+      },
+      {
+        "source_ref": "ent-027",
+        "target_ref": "ent-017",
+        "relation_type": "concerns",
+        "rationale": "The inquiry specifically calls out the factor-discovery + temporal-validation methodology as the IP asset in question.",
+        "evidence_refs": [
+          "input:inquiry:0",
+          "input:open-inquiries:2"
+        ]
+      },
+      {
+        "source_ref": "ent-028",
+        "target_ref": "ent-019",
+        "relation_type": "concerns",
+        "rationale": "The studio scale ceiling inquiry directly questions the limits of the senior-builder-plus-AI model.",
+        "evidence_refs": [
+          "input:inquiry:1",
+          "input:open-inquiries:3"
+        ]
+      },
+      {
+        "source_ref": "ent-029",
+        "target_ref": "ent-001",
+        "relation_type": "relevant_to",
+        "rationale": "Example Forecast Lab uses LangGraph and multi-model routing, making agentic architecture maturity directly relevant.",
+        "evidence_refs": [
+          "input:inquiry:2",
+          "input:project:0"
+        ]
+      },
+      {
+        "source_ref": "ent-029",
+        "target_ref": "ent-004",
+        "relation_type": "relevant_to",
+        "rationale": "Example Care Journal uses OpenAI Agent Kit, making agentic architecture maturity directly relevant.",
+        "evidence_refs": [
+          "input:inquiry:2",
+          "input:project:3"
+        ]
+      }
+    ],
+    "notes": [
+      "All 29 entities from the semantic artifact are represented with stable proposal_ids. No new entity IDs were introduced.",
+      "page_type assignments: ent-001 through ent-015 → project; ent-016 through ent-021 → concept; ent-022 through ent-023 → playbook; ent-024 through ent-026 → stance; ent-027 through ent-029 → inquiry. No person nodes were created — the synthesis artifact found no named individuals beyond the owner.",
+      "The owner node (Example Owner) is not included in node_proposals as it is the existing graph owner identity, not a candidate node. All owner-sourced edges use 'owner' as source_ref per rules.",
+      "Two additional worked_on / held_role_at edges from owner to ent-013, ent-014, ent-015 were added beyond the semantic artifact's explicit relationship list, grounded in the upload evidence. These are minor background projects with clear ownership signal.",
+      "The open_inquiries slugs (how-should-example-forecast-lab-evolve-beyond-current-subscriber-base-and-trading-stack and where-is-the-next-frontier-for-example-studio-engagements) were intentionally not entityized per the synthesis note: they are less crystallized and the first is captured structurally via ent-027/ent-028. They are preserved only in the owner attributes of the semantic artifact.",
+      "The Example Research Shell tool is deliberately kept as an attribute of ent-001 rather than a separate project node, consistent with the synthesis artifact's treatment.",
+      "ent-020 (Semantic Design Tokens) relates_to_refs includes both ent-003 and ent-007 as the two primary concrete demonstrations. Example HR/Example Design System is noted in attributes.applied_in but the Example HR engagement predates the explicit concept formalization.",
+      "Career break (Oct 2021 – Jul 2022) is preserved in owner attributes within the positioning block of the semantic artifact; it is not a separate node but is cross-referenced in life_priorities.",
+      "All evidence_refs on both nodes and edges are passed through exactly as they appear in the semantic artifact. No evidence_refs were synthesized or inferred beyond what the artifact provided."
+    ]
+  },
+  "_llm": {
+    "task_class": "onboarding_synthesis",
+    "provider": "anthropic",
+    "model": "anthropic/claude-sonnet-4.6",
+    "transport": "ai_gateway",
+    "api_family": "responses",
+    "input_mode": "file",
+    "prompt_version": "onboarding.synthesis.graph.v1",
+    "request_fingerprint": {
+      "kind": "text-prompt"
+    },
+    "temperature": null,
+    "max_tokens": null,
+    "timeout_seconds": 300,
+    "reasoning_effort": null
+  }
+}

@@ -1,0 +1,35 @@
+[
+  {
+    "asin": "B07X1F2RST",
+    "title": "Designing Data-Intensive Applications",
+    "authors": [{"name": "Martin Kleppmann", "asin": "B00JJ8QABS"}],
+    "narrators": [{"name": "B.J. Harrison"}],
+    "runtime_length_min": 1148,
+    "purchase_date": "2024-08-15T03:14:00Z",
+    "is_finished": true,
+    "rating": {"overall_rating": 5.0},
+    "publisher_summary": "Data is at the center of many challenges in system design today.",
+    "category_ladders": [{"ladder": [{"name": "Computers & Technology"}, {"name": "Programming"}]}]
+  },
+  {
+    "asin": "B0123ABCDE",
+    "title": "Sapiens",
+    "authors": [{"name": "Yuval Noah Harari"}],
+    "narrators": [{"name": "Derek Perkins"}],
+    "runtime_length_min": 928,
+    "purchase_date": "2024-02-01T12:00:00Z",
+    "is_finished": true,
+    "rating": {"overall_rating": 4.0},
+    "publisher_summary": "A brief history of humankind."
+  },
+  {
+    "asin": "B099INCOMP",
+    "title": "Some Book In Progress",
+    "authors": [{"name": "Someone"}],
+    "narrators": [{"name": "Someone Else"}],
+    "runtime_length_min": 600,
+    "purchase_date": "2026-03-01T00:00:00Z",
+    "is_finished": false,
+    "rating": null
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "today": "2026-04-07",
+  "query_prompt": "trust",
+  "fixtures": {
+    "onboarding": "tests/fixtures/synthetic/onboarding-seed.json",
+    "substack_export": "tests/fixtures/substack/substack-saved-smoketest.json",
+    "articles_drop": "tests/fixtures/articles/drop-smoketest.jsonl",
+    "youtube_export": "tests/fixtures/youtube-takeout-sample.json",
+    "books_export": "tests/fixtures/goodreads-sample.csv"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "applied_paragraph": "the owner builds systems (Example Health App, Brain wiki) where measurement discipline matters. The benchmark-as-hypothesis framing maps directly onto how to evaluate whether new pipeline stages are working — don't trust unit test coverage alone, run the pipeline in conditions that match production.",
+  "applied_bullets": [
+    {
+      "claim": "Synthetic tests can hide emergent production failure modes",
+      "why_it_matters": "The Brain wiki pipeline has caching and idempotency logic that only breaks under real multi-run conditions",
+      "action": "Add integration smoketests that exercise the full pipeline against fixture data"
+    },
+    {
+      "claim": "Tail latency matters more than mean throughput at scale",
+      "why_it_matters": "Gemini API calls in the pipeline are not uniformly fast — worst-case latency determines perceived reliability",
+      "action": "Log and monitor p95/p99 Gemini call latency, not just averages"
+    },
+    {
+      "claim": "Instrumentation perturbs what you measure",
+      "why_it_matters": "Profiling the enrichment pipeline changes its memory and timing behavior",
+      "action": "Profile in staging, not in production runs"
+    }
+  ],
+  "socratic_questions": [
+    "How would you know if the Brain wiki pipeline's caching logic is broken in a way that only surfaces after many sequential runs?",
+    "What is the production equivalent of 'shadow traffic' for a personal knowledge base?",
+    "Are the integration tests you're writing right now benchmarks in the misleading sense — isolated from real ingest conditions?"
+  ],
+  "thread_links": []
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "tldr": "Benchmarks measure what is easy to measure, not what matters — and the gap kills production systems.",
+  "core_argument": "Synthetic benchmarks are systematically misleading because they cannot capture the emergent behavior of real production systems under realistic load, contention, and hardware interactions.",
+  "argument_graph": {
+    "premises": [
+      "Benchmarks measure isolated, warm-cache, single-workload scenarios.",
+      "Production systems face mixed workloads, cold starts, and cross-NUMA contention.",
+      "Instrumentation perturbs the system being measured (the Heisenbug analogue)."
+    ],
+    "inferences": [
+      "A benchmark that misleads once undermines trust in all future measurements.",
+      "Mean throughput hides tail latency, which is what matters at scale."
+    ],
+    "conclusion": "Treat every benchmark as a hypothesis; your production system is the experiment."
+  },
+  "key_claims": [
+    {
+      "claim": "Benchmarks measure what is easy to measure, not what matters.",
+      "evidence_quote": "benchmarks measure what is easy to measure, not what matters",
+      "evidence_context": "Opening framing — sets up the core critique.",
+      "quote_unverified": false
+    },
+    {
+      "claim": "A kernel patch showed 40% throughput improvement in synthetic tests but doubled p99 latency in production.",
+      "evidence_quote": "Their team ran a synthetic benchmark that showed a 40% throughput improvement after a kernel patch",
+      "evidence_context": "Case study from a major cloud provider in 2019.",
+      "quote_unverified": false
+    },
+    {
+      "claim": "Trust is hard to build and easy to destroy — the same applies to benchmarks.",
+      "evidence_quote": "Trust is hard to build and easy to destroy",
+      "evidence_context": "Analogy from interpersonal trust to measurement credibility.",
+      "quote_unverified": false
+    }
+  ],
+  "memorable_examples": [
+    {
+      "title": "Cloud provider kernel patch disaster",
+      "story": "A synthetic benchmark showed 40% throughput gain. Production p99 doubled because of cross-NUMA memory access patterns invisible to the isolated test.",
+      "lesson": "Workload isolation in benchmarks conceals hardware interactions that dominate in production."
+    }
+  ],
+  "notable_quotes": [
+    "The best way to predict the future is to invent it. — Alan Kay",
+    "Measure more, trust less. Every benchmark is a hypothesis. Your production system is the experiment."
+  ],
+  "steelman": "Benchmarks ARE useful as regression detectors within a controlled, reproducible environment — the problem is treating their outputs as production truth rather than directional signals.",
+  "strongest_rebuttal": "Without any benchmarking discipline, engineering teams fly blind. A misleading benchmark is better than no benchmark at all.",
+  "would_change_mind_if": "Evidence that teams using synthetic benchmarks exclusively ship fewer production regressions than teams using production shadow traffic.",
+  "entities": {
+    "people": ["Alan Kay", "Jeff Dean"],
+    "companies": [],
+    "tools": [],
+    "concepts": ["tail latency", "NUMA memory access"]
+  },
+  "in_conversation_with": [
+    "Jeff Dean and Luiz Barroso — 'The Tail at Scale' (CACM 2013)"
+  ],
+  "relates_to_prior": [],
+  "topics": ["engineering", "performance", "measurement", "systems"],
+  "article": "Benchmarks are seductive. The gap between measurement and reality kills production systems."
+}

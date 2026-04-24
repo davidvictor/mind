@@ -1,0 +1,76 @@
+{
+  "schema_version": 2,
+  "tldr": "Tail latency is a product experience problem disguised as infrastructure — and fixing it requires rethinking what needs to happen synchronously.",
+  "core_argument": "P99+ latency is not an ops concern but a product experience concern owned by feature teams; the math of fan-out means tail latency affects nearly every user at scale.",
+  "argument_graph": {
+    "premises": [
+      "Users experience tail latency as 'the product feels slow', not as 'my backend was slow'.",
+      "At large fan-out, a 1% slow tail causes nearly every user request to hit at least one slow backend.",
+      "Synthetic load tests cannot surface the tails that emerge from real traffic distributions."
+    ],
+    "inferences": [
+      "Feature teams, not infrastructure teams, must own latency as a product metric.",
+      "Fan-out reduction is a product decision that improves tail latency more reliably than hedging."
+    ],
+    "conclusion": "Track p50, p95, p99 — not mean — and treat tail latency as a product problem."
+  },
+  "key_claims": [
+    {
+      "claim": "Tail latency is where the infrastructure problem becomes the user problem.",
+      "evidence_quote": "Tail latency is where the infrastructure problem becomes the user's problem",
+      "evidence_context": "Core reframing — bridges infra and product perspectives.",
+      "quote_unverified": false
+    },
+    {
+      "claim": "At 100-backend fan-out with 1% slow tail, only 37% of user requests see all-fast backends.",
+      "evidence_quote": "if each of 100 backends has a 1% chance of being slow, the probability that all of them are fast is 0.99^100 approximately 37%",
+      "evidence_context": "Mathematical demonstration of compound tail probability.",
+      "quote_unverified": false
+    },
+    {
+      "claim": "Mean throughput metrics systematically hide tail behavior.",
+      "evidence_quote": "mean throughput is systematically misleading about tail performance",
+      "evidence_context": "Cross-reference to prior benchmark post — this quote is paraphrased, not verbatim.",
+      "quote_unverified": false
+    },
+    {
+      "claim": "Only production traffic reveals the true shape of the latency distribution.",
+      "evidence_quote": "Only production traffic with representative user load reveals the true shape of the latency distribution",
+      "evidence_context": "Closes the argument — ties back to measurement discipline.",
+      "quote_unverified": false
+    }
+  ],
+  "memorable_examples": [
+    {
+      "title": "Google 2013 fan-out math",
+      "story": "At 100 backends each with a 1% slow tail, the probability all are fast is only 37%. This means nearly every user request encounters at least one slow backend.",
+      "lesson": "Fan-out depth multiplies tail latency problems — reduction is a product decision."
+    }
+  ],
+  "notable_quotes": [
+    "Tail latency is where the infrastructure problem becomes the user's problem.",
+    "If your monitoring dashboard shows only the mean, you are flying blind."
+  ],
+  "steelman": "Infrastructure teams ARE the right owners for latency because feature teams lack the tooling and expertise to diagnose distributed system tails.",
+  "strongest_rebuttal": "Product ownership of latency without infrastructure support leads to premature optimization and architectural missteps by engineers without systems expertise.",
+  "would_change_mind_if": "Data showing that infra-owned latency programs outperform product-owned ones in real-world tail reduction.",
+  "entities": {
+    "people": ["Jeff Dean"],
+    "companies": ["Google"],
+    "tools": [],
+    "concepts": ["fan-out", "hedging", "thundering herd"]
+  },
+  "in_conversation_with": [
+    "Jeff Dean and Luiz Barroso — 'The Tail at Scale' (CACM 2013)"
+  ],
+  "relates_to_prior": [
+    {
+      "post_id": "deep-001",
+      "post_title": "Why Benchmarks Lie",
+      "relation": "extends",
+      "note": "Applies the benchmark critique from the prior post to the specific domain of latency measurement."
+    }
+  ],
+  "topics": ["engineering", "performance", "product", "systems", "latency"],
+  "article": "Tail latency is a product problem that lives in the infrastructure layer."
+}

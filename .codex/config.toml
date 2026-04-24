@@ -1,0 +1,3 @@
+[mcp_servers.brain]
+command = ".venv/bin/python"
+args = ["-m", "mind.mcp.stdio"]

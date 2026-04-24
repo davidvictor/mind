@@ -1,0 +1,99 @@
+paths:
+  local_data_root: .
+  memory_root: memory
+  raw_root: raw
+  dropbox_root: dropbox
+  state_root:
+
+vault:
+  wiki_dir: memory
+  raw_dir: raw
+  dropbox_dir: dropbox
+  owner_profile: me/profile.md
+
+llm:
+  routes:
+    default:
+      model: anthropic/claude-sonnet-4.6
+    classification:
+      model: google/gemini-3.1-flash-lite-preview
+    dream_decision:
+      model: anthropic/claude-sonnet-4.6
+      timeout_seconds: 480
+
+state:
+  runtime_db:
+  graph_db:
+  sources_db:
+
+retrieval:
+  backend: sqlite
+  vector_db:
+
+user:
+  name: Example User
+  role: local-first knowledge worker
+  business_interests:
+    - personal knowledge systems
+    - local-first software
+  personal_interests:
+    - reading
+    - reflection
+  exclude_always: []
+  classification_rules: []
+
+ingestors:
+  enabled:
+    - links
+    - filesystem
+
+dream:
+  enabled: false
+  working_set_cap: 300
+  merge_window_days: 14
+  cooccurrence_threshold: 5
+  tail_rescan_enabled: true
+  snippet_max_chars: 160
+  log_fold_threshold: 50
+  autorun_after_ingest: true
+  autorun_min_sources: 1
+  autorun_after_bulk: true
+  rem_hotset_cap: 120
+  rem_cluster_limit: 8
+  rem_prune_brake_pct: 15
+  nudge_auto_archive_days: 30
+  probationary_stale_warn_days: 90
+  weave:
+    enabled: true
+    run_after_rem: true
+    candidate_cap: 400
+    min_cluster_size: 3
+    cluster_limit: 12
+    top_neighbors_per_atom: 5
+    min_edge_weight: 3
+    hub_link_min_weight: 4
+    hub_link_member_limit: 3
+    report_bridge_limit: 12
+    report_merge_limit: 12
+    auto_apply_mode: safe
+
+anti_sales:
+  enabled: true
+  allow_brands: []
+
+dream_promotion:
+  concept:
+    min_distinct_sources: 3
+    min_days_observed: 0
+  playbook:
+    min_distinct_sources: 2
+    min_days_observed: 0
+  stance:
+    min_distinct_sources: 5
+    min_days_observed: 14
+  inquiry:
+    min_distinct_sources: 1
+    min_days_observed: 0
+
+skills:
+  auto_activate_skills: false

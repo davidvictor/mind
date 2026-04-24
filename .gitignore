@@ -1,0 +1,52 @@
+.DS_Store
+.trash/
+*.swp
+Untitled*.canvas
+Untitled*.base
+
+# Private local Brain data. These paths are never public artifacts.
+/local_data/
+/memory/
+/raw/
+/dropbox/
+/.obsidian/
+/config.yaml
+/2026-*.md
+
+# Local planning/history archives. Keep these machine-local for public release.
+/docs/archive/
+/docs/plans/
+/docs/spikes/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+*.sqlite3
+*.sqlite3-*
+*.db
+.logs/
+local_data/simulations/
+
+# Secrets
+.env
+.env.*
+!.env.example
+.private-data-markers
+.claude/settings.local.json
+.claude/worktrees/
+**/.omx/
+**/.omc/
+
+# Generated skills can be private Dream output unless explicitly promoted.
+/skills/*-skill/
+!/skills/skill-creator/
+
+# Build/package artifacts
+dist/
+build/
+*.egg-info/
+
+.worktrees/

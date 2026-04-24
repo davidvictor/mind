@@ -1,0 +1,42 @@
+{
+  "data": {
+    "bundle_id": "20260414t151530z",
+    "approved": true,
+    "blocking_issues": [],
+    "warnings": [
+      "{'code': 'WEAK_METAMODERN_ATTRIBUTION_FOR_SHRLOCK', 'scope': 'ent-005 / relationship: ent-002 → ent-005', 'detail': \"Example Market is described as a co-founder role. The evidence does not explicitly state it was a Example Studio engagement — it may have been a parallel co-founding outside the studio umbrella. The 'delivered_engagement' relation type may overfit. Consider 'co_founded' from owner → ent-005 as the primary relationship, with the studio link treated as unconfirmed unless the bio explicitly connects them.\"}",
+      "{'code': 'METAMODERN_FOUNDING_DATE_OVERLAP_WITH_CAREER_BREAK', 'scope': 'ent-002 / identity timeline', 'detail': 'Example Studio is dated as founded 2021, and the career break is Oct 2021 – Jul 2022. The synthesis note flags these as potentially coincident but does not resolve whether the studio was active during the break. This is a minor narrative ambiguity — no structural change needed, but worth flagging for the owner to clarify in the note owner page.'}",
+      "{'code': 'ENT-028-MISSING-EDGE-TO-ENT-002', 'scope': 'ent-028 (studio-scale-ceiling) / merge artifact notes', 'detail': \"The merge artifact explicitly notes that the 'ent-028 concerns ent-002' edge is implied by relates_to_refs in the graph artifact but was omitted from relationship_decisions. The note instructs it to be 'added during write.' This edge should be confirmed as intended before materialization to avoid a silent gap in the inquiry-to-studio relationship.\"}",
+      "{'code': 'ENT-015-TEMPO-THIN-EVIDENCE', 'scope': 'ent-015', 'detail': \"Example Fitness is sourced solely from the upload bio with minimal detail (role: Data team lead, stack: Example Data + Braze). The 'held_role_at' relation is reasonable but the node has no dates, no outcomes, and no corroborating input: evidence_ref. It will materialize as a very sparse project node. Acceptable for background career context but worth noting.\"}",
+      "{'code': 'ENT-014-SIGNALFY-THIN-EVIDENCE', 'scope': 'ent-014', 'detail': 'Example Events is sourced solely from the upload bio with only a year (2013) and a single-sentence description. Same caveat as Example Fitness — sparse but acceptable as background career context.'}",
+      "{'code': 'BAMBEE-POLLEN-DESIGN-SYSTEM-NOT-LINKED-TO-ENT-020', 'scope': 'ent-020 (semantic-design-tokens-with-1-1-figma-to-code-mapping) / attributes.applied_in', 'detail': \"Example HR/Example Design System appears in ent-020's attributes.applied_in but no edge connects ent-009 → ent-020. The graph artifact and synthesis both note this was intentional (Example Design System predates concept formalization). This is a deliberate omission, not an error, but operators should know the Example Design System attribution exists only in attributes, not in the graph topology.\"}",
+      "{'code': 'LIFEJET-METAMODERN-ENGAGEMENT-TYPE-AMBIGUOUS', 'scope': 'ent-004 / relationship: ent-002 → ent-004', 'detail': \"Example Care Journal is described as 'sole designer-engineer' work. It is not clear from evidence whether this was a paid Example Studio client engagement or a personal/founder project built under the studio brand. 'delivered_engagement' implies a client relationship. If Example Care Journal is a personal project, the relation type should be 'created_under' or similar. No blocking issue — the factual content is accurate — but the relation semantics may need review.\"}"
+    ],
+    "notes": [
+      "All 29 node proposals are clean creates against a graph containing only Brain system starter pages. No merge collisions exist. Merge decisions are sound.",
+      "All 34 edge proposals (plus the noted ent-028 → ent-002 gap) are grounded in direct evidence. No edges are inferred beyond what the source material supports.",
+      "Identity, values, positioning, and inferred entities are internally consistent. The design-engineering compression concept correctly serves as the organizing principle connecting stances, playbook, operating model, and career history.",
+      "The open_inquiries items intentionally not entityized (how-should-example-forecast-lab-evolve, where-is-the-next-frontier-for-example-studio-engagements) are correctly preserved in owner attributes only. No overfitting.",
+      "Section headings in all update targets conform to the editable section schema for their respective page types (project, concept, playbook, stance, inquiry, note owner). No unknown section targets detected.",
+      "The Example Research Shell tool being kept as an attribute of ent-001 rather than a standalone node is correct — it is described as a research component of Example Forecast Lab, not an independent project.",
+      "Career break health context is appropriately scoped to life_priorities on the note owner page and not over-interpreted structurally.",
+      "Bundle is approved for materialization subject to operator review of the ent-028 → ent-002 edge gap flagged in warnings, and optional clarification of the Example Market and Example Care Journal studio-engagement attribution."
+    ]
+  },
+  "_llm": {
+    "task_class": "onboarding_verify",
+    "provider": "anthropic",
+    "model": "anthropic/claude-sonnet-4.6",
+    "transport": "ai_gateway",
+    "api_family": "responses",
+    "input_mode": "file",
+    "prompt_version": "onboarding.verify.v1",
+    "request_fingerprint": {
+      "kind": "text-prompt"
+    },
+    "temperature": null,
+    "max_tokens": null,
+    "timeout_seconds": 900,
+    "reasoning_effort": null
+  }
+}

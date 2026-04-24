@@ -1,0 +1,39 @@
+{
+  "annotations": [
+    {
+      "type": "audible.bookmark",
+      "asin": "B07X1F2RST",
+      "creationTime": "2024-09-12T14:32:00Z",
+      "startPosition": "1234567",
+      "endPosition": "1289000",
+      "annotationId": "abc-123",
+      "note": {"text": "key insight about replication"},
+      "metadata": {
+        "chapterTitle": "Replication"
+      }
+    },
+    {
+      "type": "audible.clip",
+      "asin": "B07X1F2RST",
+      "creationTime": "2024-10-01T09:15:00Z",
+      "startPosition": "5678000",
+      "endPosition": "5712000",
+      "annotationId": "def-456",
+      "note": null,
+      "metadata": {
+        "chapterTitle": "Consistency and Consensus",
+        "title": "Linearizability"
+      }
+    },
+    {
+      "type": "audible.bookmark",
+      "asin": "B07X1F2RST",
+      "creationTime": "2024-10-15T11:00:00Z",
+      "startPosition": "9000000",
+      "endPosition": "9000000",
+      "annotationId": "ghi-789",
+      "note": {"text": ""},
+      "metadata": {}
+    }
+  ]
+}
