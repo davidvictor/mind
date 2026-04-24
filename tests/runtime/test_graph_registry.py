@@ -209,7 +209,7 @@ def test_graph_registry_record_document_dedupes_document_targets(tmp_path: Path)
         body="Hello world",
         resolutions=[],
         candidates=[],
-        document_targets=["the-pick-ai", "the-pick-ai"],
+        document_targets=["the-pick-ai", "the-pick-ai", {"node_id": "the-pick-ai", "relation_kind": "supports"}],
     )
 
     with registry.connect() as conn:
@@ -217,7 +217,10 @@ def test_graph_registry_record_document_dedupes_document_targets(tmp_path: Path)
             "SELECT doc_id, node_id, relation_kind FROM document_targets WHERE doc_id = ?",
             ("doc:test",),
         ).fetchall()
-    assert len(rows) == 1
+    assert {(row["node_id"], row["relation_kind"]) for row in rows} == {
+        ("the-pick-ai", "resolved"),
+        ("the-pick-ai", "supports"),
+    }
 
 
 def test_graph_registry_indexes_source_frontmatter_wikilinks_as_edges(tmp_path: Path):

@@ -6,7 +6,14 @@ from pathlib import Path
 import pytest
 
 from mind.services.llm_cache import LLMCacheIdentity
-from scripts.atoms.pass_d import PASS_D_TASK_CLASS, _parse_pass_d_result, pass_d_cache_path, run_pass_d, stage_outcomes_from_payload
+from scripts.atoms.pass_d import (
+    PASS_D_TASK_CLASS,
+    _parse_pass_d_result,
+    pass_d_cache_identities,
+    pass_d_cache_path,
+    run_pass_d,
+    stage_outcomes_from_payload,
+)
 from scripts.atoms.prompts import PASS_D_PROMPT_VERSION, build_pass_d_prompt
 from scripts.atoms.types import Atom
 
@@ -55,6 +62,8 @@ def test_run_pass_d_parses_and_caches(monkeypatch, tmp_path: Path) -> None:
                 "snippet": "supports the concept",
                 "polarity": "for",
                 "confidence": "high",
+                "evidence_strength": "empirical",
+                "relation_kind": "example_of",
             }
         ],
         "q2_candidates": [
@@ -97,6 +106,8 @@ def test_run_pass_d_parses_and_caches(monkeypatch, tmp_path: Path) -> None:
     )
 
     assert result.q1_matches[0].atom_type == "concept"
+    assert result.q1_matches[0].evidence_strength == "empirical"
+    assert result.q1_matches[0].relation_kind == "example_of"
     assert result.q2_candidates[0].type == "inquiry"
     cache_path = tmp_path / "raw" / "transcripts" / "article" / "source-1.pass_d.json"
     assert cache_path.exists()
@@ -217,6 +228,56 @@ def test_run_pass_d_reuses_legacy_dream_cache_identity(monkeypatch, tmp_path: Pa
     assert result.q2_candidates == []
 
 
+def test_pass_d_cache_identities_mirror_canonical_routes_to_legacy_task_class() -> None:
+    primary = LLMCacheIdentity(
+        task_class=PASS_D_TASK_CLASS,
+        provider="gemini",
+        model="google/gemini-3.1-flash-lite-preview",
+        transport="ai_gateway",
+        api_family="responses",
+        input_mode="text",
+        prompt_version=PASS_D_PROMPT_VERSION,
+        request_fingerprint={"kind": "text-prompt"},
+        timeout_seconds=300,
+    )
+    backup = LLMCacheIdentity(
+        task_class=PASS_D_TASK_CLASS,
+        provider="anthropic",
+        model="anthropic/claude-sonnet-4.6",
+        transport="ai_gateway",
+        api_family="responses",
+        input_mode="text",
+        prompt_version=PASS_D_PROMPT_VERSION,
+        request_fingerprint={"kind": "text-prompt"},
+        timeout_seconds=300,
+    )
+
+    class FakeService:
+        def cache_identities(self, *, task_class: str, prompt_version: str):
+            if task_class == PASS_D_TASK_CLASS:
+                return [primary, backup]
+            if task_class == "dream":
+                return [
+                    LLMCacheIdentity(
+                        task_class="dream",
+                        provider="gemini",
+                        model="google/gemini-3.1-flash-lite-preview",
+                        transport="ai_gateway",
+                        api_family="responses",
+                        input_mode="text",
+                        prompt_version=prompt_version,
+                        request_fingerprint={"kind": "text-prompt"},
+                        timeout_seconds=480,
+                    )
+                ]
+            return []
+
+    identities = [identity.to_dict() for identity in pass_d_cache_identities(FakeService())]
+
+    assert backup.to_dict() in identities
+    assert {**backup.to_dict(), "task_class": "dream"} in identities
+
+
 def test_run_pass_d_rejects_invalid_atom_type(monkeypatch, tmp_path: Path) -> None:
     class FakeService:
         def generate_json_prompt(self, prompt: str) -> dict:
@@ -286,6 +347,8 @@ def test_parse_pass_d_recovers_known_drift_and_records_warnings() -> None:
     assert result.q1_matches[0].atom_type == "concept"
     assert result.q1_matches[0].polarity == "neutral"
     assert result.q1_matches[0].confidence == "low"
+    assert result.q1_matches[0].evidence_strength == "anecdotal"
+    assert result.q1_matches[0].relation_kind == "adjacent_to"
     assert result.q2_candidates[0].type == "stance"
     assert result.q2_candidates[0].polarity == "neutral"
     assert result.q2_candidates[0].domains == ["work"]

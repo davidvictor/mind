@@ -638,6 +638,12 @@ def run_pass_d_for_youtube(
             recorded_on=today,
             source_link=f"[[{source_page_id}]]",
             repo_root=repo_root,
+            source_id=f"youtube-{record.video_id}",
+            source_kind="youtube",
+            source_date=evidence_date or today,
+            creator_id=str(getattr(record, "channel_id", "") or getattr(record, "channel", "") or ""),
+            topics=[str(item) for item in list((summary or {}).get("topics") or [])],
+            entities=[str(item) for item in list((summary or {}).get("entities") or [])],
         )
     except Exception as exc:
         payload.update(

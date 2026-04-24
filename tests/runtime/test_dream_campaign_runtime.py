@@ -45,10 +45,8 @@ def test_campaign_schedule_uses_calendar_month_rem_and_not_day_modulo() -> None:
     )
 
     rem_days = [day.effective_date for day in schedule if "rem" in day.stages]
-    weave_days = [day.effective_date for day in schedule if "weave" in day.stages]
 
     assert rem_days == ["2026-01-01"]
-    assert weave_days == []
 
 
 def test_campaign_schedule_clamps_month_end_when_stepping_rem_dates() -> None:
@@ -59,10 +57,8 @@ def test_campaign_schedule_clamps_month_end_when_stepping_rem_dates() -> None:
     )
 
     rem_days = [day.effective_date for day in schedule if "rem" in day.stages]
-    weave_days = [day.effective_date for day in schedule if "weave" in day.stages]
 
     assert rem_days == ["2026-01-31", "2026-02-28", "2026-03-28"]
-    assert weave_days == []
 
 
 def test_campaign_dry_run_renders_projected_counts(tmp_path: Path, monkeypatch) -> None:
@@ -81,7 +77,7 @@ def test_campaign_dry_run_renders_projected_counts(tmp_path: Path, monkeypatch) 
     assert "light=35" in result.summary
     assert "deep=5" in result.summary
     assert "rem=2" in result.summary
-    assert "weave=0" in result.summary
+    assert "weave=" not in result.summary
     assert any("2026-01-01: light, deep, rem" in item for item in result.mutations)
 
 
@@ -119,7 +115,7 @@ def test_campaign_yearly_profile_uses_quieter_deep_cadence(tmp_path: Path, monke
     assert "light=35" in result.summary
     assert "deep=3" in result.summary
     assert "rem=2" in result.summary
-    assert "weave=2" in result.summary
+    assert "weave=" not in result.summary
 
 
 def test_campaign_yearly_profile_suppresses_operator_nudges(tmp_path: Path, monkeypatch) -> None:
@@ -176,15 +172,6 @@ def test_campaign_yearly_profile_suppresses_operator_nudges(tmp_path: Path, monk
         encoding="utf-8",
     )
 
-    real_run_stage = campaign_module._run_stage
-
-    def fake_run_stage(*, stage: str, context, progress_callback=None):
-        if stage == "weave":
-            return campaign_module.DreamResult(stage="weave", dry_run=False, summary="weave complete")
-        return real_run_stage(stage=stage, context=context, progress_callback=progress_callback)
-
-    monkeypatch.setattr("mind.dream.campaign._run_stage", fake_run_stage)
-
     result = run_campaign(
         days=1,
         start_date="2026-01-01",
@@ -193,7 +180,8 @@ def test_campaign_yearly_profile_suppresses_operator_nudges(tmp_path: Path, monk
         profile="yearly",
     )
 
-    assert "light=1 deep=1 rem=1 weave=1" in result.summary
+    assert "light=1 deep=1 rem=1" in result.summary
+    assert "weave=" not in result.summary
     nudge_dir = root / "memory" / "inbox" / "nudges"
     assert not any(path.name.startswith("2026-01-01-") for path in nudge_dir.glob("*.md"))
     adapter = RuntimeState.for_repo_root(root).get_adapter_state(CAMPAIGN_ADAPTER)
@@ -205,7 +193,7 @@ def test_campaign_yearly_profile_suppresses_operator_nudges(tmp_path: Path, monk
     assert "cap signals" in report_text
     assert "polarity signals" in report_text
     assert "0 lifecycle updates" in report_text
-    assert "## Weave" in report_text
+    assert "## Weave" not in report_text
     assert "tail-rescan appended evidence" not in report_text
 
 
@@ -226,7 +214,7 @@ def test_campaign_live_35_day_rehearsal_writes_real_reports_and_monthly_outputs(
     adapter = state.get_adapter_state(CAMPAIGN_ADAPTER)
     assert adapter is not None
     assert adapter["status"] == "completed"
-    assert adapter["completed_counts"] == {"light": 35, "deep": 5, "rem": 2, "weave": 0}
+    assert adapter["completed_counts"] == {"light": 35, "deep": 5, "rem": 2}
     assert adapter["config_snapshot"]
     assert adapter["schedule"]
     reports = _daily_reports(root, adapter)
@@ -254,67 +242,6 @@ def test_campaign_live_35_day_rehearsal_writes_real_reports_and_monthly_outputs(
     assert dream_state.last_light == "2026-02-04"
     assert dream_state.last_deep == "2026-01-29"
     assert dream_state.last_rem == "2026-02-01"
-    assert dream_state.last_weave is None
-
-
-def test_campaign_yearly_ignores_legacy_weave_shadow_flag_after_cutover(tmp_path: Path, monkeypatch) -> None:
-    root = _copy_harness(tmp_path)
-    _patch_roots(monkeypatch, root)
-    cfg = root / "config.yaml"
-    cfg.write_text(
-        cfg.read_text(encoding="utf-8")
-        + "\ndream:\n"
-        + "  v2:\n"
-        + "    artifact_root: raw/reports/dream/v2\n"
-        + "    weave_shadow_enabled: true\n",
-        encoding="utf-8",
-    )
-    seen: list[tuple[bool, bool]] = []
-
-    def fake_shadow(*, dry_run: bool, acquire_lock: bool = True):
-        seen.append((dry_run, acquire_lock))
-        return campaign_module.DreamResult(stage="weave-v2-shadow", dry_run=False, summary="shadow complete")
-
-    monkeypatch.setattr("mind.dream.campaign.run_weave_v2_shadow", fake_shadow)
-    real_run_stage = campaign_module._run_stage
-
-    def fake_run_stage(*, stage: str, context, progress_callback=None):
-        if stage == "weave":
-            return campaign_module.DreamResult(stage="weave", dry_run=False, summary="weave complete")
-        return real_run_stage(stage=stage, context=context, progress_callback=progress_callback)
-
-    monkeypatch.setattr("mind.dream.campaign._run_stage", fake_run_stage)
-
-    result = run_campaign(
-        days=1,
-        start_date="2026-01-01",
-        dry_run=False,
-        resume=False,
-        profile="yearly",
-    )
-
-    assert "light=1 deep=1 rem=1 weave=1" in result.summary
-    assert seen == []
-    state = RuntimeState.for_repo_root(root)
-    with state.connect() as conn:
-        events = [
-            (str(row["event_type"]), str(row["message"]))
-            for row in conn.execute(
-                """
-                SELECT event_type, message
-                FROM run_events
-                WHERE run_id = (SELECT max(id) FROM runs WHERE kind = 'dream.campaign')
-                ORDER BY id
-                """
-            ).fetchall()
-        ]
-    assert ("shadow-stage-completed", "2026-01-01:weave-v2-shadow") not in events
-    adapter = state.get_adapter_state(CAMPAIGN_ADAPTER)
-    assert adapter is not None
-    assert adapter["last_completed_stage"] == "weave"
-    daily_report = root / str(adapter["plan_path"])
-    report_text = (daily_report.parent / "daily" / "2026-01-01.md").read_text(encoding="utf-8")
-    assert "## Weave-V2-Shadow" not in report_text
 
 
 def test_campaign_base_exception_marks_runtime_and_adapter_interrupted(tmp_path: Path, monkeypatch) -> None:
@@ -446,7 +373,7 @@ def test_campaign_live_95_day_rehearsal_resumes_against_persisted_schedule(tmp_p
     interrupted = state.get_adapter_state(CAMPAIGN_ADAPTER)
     assert interrupted is not None
     assert interrupted["status"] == "interrupted"
-    assert interrupted["completed_counts"] == {"light": 32, "deep": 5, "rem": 2, "weave": 0}
+    assert interrupted["completed_counts"] == {"light": 32, "deep": 5, "rem": 2}
     persisted_schedule = interrupted["schedule"]
 
     monkeypatch.setattr("mind.dream.campaign._run_stage", real_run_stage)
@@ -463,7 +390,7 @@ def test_campaign_live_95_day_rehearsal_resumes_against_persisted_schedule(tmp_p
     completed = state.get_adapter_state(CAMPAIGN_ADAPTER)
     assert completed is not None
     assert completed["status"] == "completed"
-    assert completed["completed_counts"] == {"light": 95, "deep": 14, "rem": 4, "weave": 0}
+    assert completed["completed_counts"] == {"light": 95, "deep": 14, "rem": 4}
     assert completed["schedule"] == persisted_schedule
     assert len(_daily_reports(root, completed)) == 95
     assert _rem_pages(root) == ["2026-01.md", "2026-02.md", "2026-03.md", "2026-04.md"]
@@ -471,7 +398,6 @@ def test_campaign_live_95_day_rehearsal_resumes_against_persisted_schedule(tmp_p
     assert dream_state.last_light == "2026-04-05"
     assert dream_state.last_deep == "2026-04-02"
     assert dream_state.last_rem == "2026-04-01"
-    assert dream_state.last_weave is None
 
 
 def test_campaign_resume_restarts_light_from_checkpointed_source_index(tmp_path: Path, monkeypatch) -> None:
@@ -526,55 +452,8 @@ def test_campaign_resume_restarts_light_from_checkpointed_source_index(tmp_path:
         profile="yearly",
     )
 
-    assert "light=1 deep=1 rem=1 weave=1" in result.summary
+    assert "light=1 deep=1 rem=1" in result.summary
+    assert "weave=" not in result.summary
     assert call_log[0] == ("light", 2)
     assert ("deep", 0) in call_log
     assert ("rem", 0) in call_log
-    assert ("weave", 0) in call_log
-
-
-def test_campaign_resume_restarts_weave_from_day_stage_boundary(tmp_path: Path, monkeypatch) -> None:
-    root = _copy_harness(tmp_path)
-    _patch_roots(monkeypatch, root)
-    call_log: list[str] = []
-    interrupted = False
-
-    class ForcedInterrupt(RuntimeError):
-        pass
-
-    def fake_run_stage(*, stage: str, context, progress_callback=None):
-        nonlocal interrupted
-        call_log.append(stage)
-        if stage == "weave" and not interrupted:
-            interrupted = True
-            raise ForcedInterrupt("interrupt during weave")
-        return campaign_module.DreamResult(stage=stage, dry_run=False, summary=f"{stage} complete")
-
-    monkeypatch.setattr("mind.dream.campaign._run_stage", fake_run_stage)
-
-    with pytest.raises(ForcedInterrupt):
-        run_campaign(
-            days=1,
-            start_date="2026-01-01",
-            dry_run=False,
-            resume=False,
-            profile="yearly",
-        )
-
-    state = RuntimeState.for_repo_root(root)
-    adapter = state.get_adapter_state(CAMPAIGN_ADAPTER)
-    assert adapter is not None
-    assert adapter["status"] == "interrupted"
-    assert adapter["inflight_stage"] == "weave"
-    assert adapter["completed_counts"] == {"light": 1, "deep": 1, "rem": 1, "weave": 0}
-
-    result = run_campaign(
-        days=1,
-        start_date="2026-01-01",
-        dry_run=False,
-        resume=True,
-        profile="yearly",
-    )
-
-    assert "light=1 deep=1 rem=1 weave=1" in result.summary
-    assert call_log == ["light", "deep", "rem", "weave", "weave"]

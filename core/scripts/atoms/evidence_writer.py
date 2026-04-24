@@ -15,11 +15,14 @@ Historical design notes are kept outside the public release tree.
 """
 from __future__ import annotations
 
+import hashlib
+import json
 from pathlib import Path
 import re
 
+from mind.services.ingest_contract import EvidenceEdge
 from scripts.atoms.canonical import canonicalize_atom_page
-from scripts.atoms.types import AtomType, Polarity
+from scripts.atoms.types import AtomType, Confidence, EvidenceStrength, Polarity, RelationKind
 from scripts.common.contract import atom_collection_dir, canonicalize_page_type
 from scripts.common.frontmatter import split_frontmatter as _split_frontmatter
 from scripts.common.slugify import normalize_identifier
@@ -94,6 +97,38 @@ def _evidence_source_exists(body: str, *, source_link: str) -> bool:
     return any(marker in line for line in evidence.splitlines())
 
 
+def _source_id_from_link(source_link: str) -> str:
+    match = re.search(r"\[\[([^\]|#]+)", source_link)
+    if match:
+        return normalize_identifier(match.group(1))
+    return normalize_identifier(source_link) or "unknown-source"
+
+
+def _edge_hash(payload: dict[str, object]) -> str:
+    material = json.dumps(payload, sort_keys=True, ensure_ascii=True, separators=(",", ":"))
+    return hashlib.sha256(material.encode("utf-8")).hexdigest()[:24]
+
+
+def _append_evidence_edge(
+    *,
+    repo_root: Path,
+    edge: EvidenceEdge,
+) -> None:
+    source_kind = normalize_identifier(edge.source_kind or "unknown")
+    source_id = normalize_identifier(edge.source_id or "unknown-source")
+    target = Vault.load(repo_root).raw / "evidence-edges" / source_kind / f"{source_id}.jsonl"
+    payload = edge.to_dict()
+    payload_without_id = {key: value for key, value in payload.items() if key != "edge_id"}
+    payload["edge_id"] = edge.edge_id or _edge_hash(payload_without_id)
+    if target.exists():
+        marker = f'"edge_id": "{payload["edge_id"]}"'
+        if marker in target.read_text(encoding="utf-8"):
+            return
+    target.parent.mkdir(parents=True, exist_ok=True)
+    with target.open("a", encoding="utf-8") as handle:
+        handle.write(json.dumps(payload, sort_keys=True, ensure_ascii=True) + "\n")
+
+
 def append_evidence(
     *,
     atom_id: str,
@@ -104,6 +139,19 @@ def append_evidence(
     source_link: str,
     snippet: str,
     polarity: Polarity,
+    confidence: Confidence = "medium",
+    evidence_strength: EvidenceStrength = "anecdotal",
+    relation_kind: RelationKind | None = None,
+    source_id: str | None = None,
+    source_kind: str = "unknown",
+    source_date: str | None = None,
+    creator_id: str = "",
+    quote_verified: bool = False,
+    source_section: str = "",
+    source_span: str = "",
+    topics: list[str] | None = None,
+    entities: list[str] | None = None,
+    discovered_via: str = "",
     repo_root: Path,
 ) -> bool:
     """Append an entry to the atom's ## Evidence log section.
@@ -151,6 +199,29 @@ def append_evidence(
         body += f"\n## Evidence log\n\n{entry}\n"
     rendered = canonicalize_atom_page(frontmatter=fm, body=body)
     write_page(path, frontmatter=rendered.frontmatter, body=rendered.body, force=True)
+    edge_relation_kind = relation_kind or ("contradicts" if polarity == "against" else "supports" if polarity == "for" else "adjacent_to")
+    _append_evidence_edge(
+        repo_root=repo_root,
+        edge=EvidenceEdge(
+            source_id=source_id or _source_id_from_link(source_link),
+            source_kind=source_kind,
+            source_date=source_date or date,
+            creator_id=creator_id,
+            atom_id=normalize_identifier(atom_id),
+            atom_type=canonical,
+            polarity=polarity,
+            confidence=confidence,
+            evidence_strength=evidence_strength,
+            relation_kind=edge_relation_kind,
+            snippet=snippet.strip()[:500],
+            quote_verified=quote_verified,
+            source_section=source_section,
+            source_span=source_span,
+            topics=list(topics or []),
+            entities=list(entities or []),
+            discovered_via=discovered_via,
+        ),
+    )
     if polarity == "against":
         _write_nudge(
             repo_root,

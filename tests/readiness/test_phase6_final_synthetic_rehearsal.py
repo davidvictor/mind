@@ -27,7 +27,6 @@ def _enable_dream(root: Path) -> None:
     cfg = root / "config.yaml"
     text = cfg.read_text(encoding="utf-8")
     text = text.replace("enabled: false", "enabled: true", 1)
-    text = text.replace("run_after_rem: true", "run_after_rem: false")
     cfg.write_text(text, encoding="utf-8")
 
 

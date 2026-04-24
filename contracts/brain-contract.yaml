@@ -25,7 +25,7 @@ page_types:
     optional_fields: [sources, aliases]
   concept:
     required_fields: [id, type, title]
-    optional_fields: [sources, lifecycle_state, last_evidence_date, evidence_count, weave_cluster_refs, last_weaved_at]
+    optional_fields: [sources, lifecycle_state, last_evidence_date, evidence_count]
   decision:
     required_fields: [id, type, title]
     optional_fields: []
@@ -76,13 +76,13 @@ page_types:
     optional_fields: []
   playbook:
     required_fields: [id, type, title]
-    optional_fields: [derived_from, lifecycle_state, last_evidence_date, evidence_count, weave_cluster_refs, last_weaved_at]
+    optional_fields: [derived_from, lifecycle_state, last_evidence_date, evidence_count]
   stance:
     required_fields: [id, type, title]
-    optional_fields: [position, confidence, lifecycle_state, last_evidence_date, weave_cluster_refs, last_weaved_at]
+    optional_fields: [position, confidence, lifecycle_state, last_evidence_date]
   inquiry:
     required_fields: [id, type, title]
-    optional_fields: [question, origin, status, resolution, last_evidence_date, weave_cluster_refs, last_weaved_at]
+    optional_fields: [question, origin, status, resolution, last_evidence_date]
   skill:
     required_fields: [id, type, title]
     optional_fields: [name, description, trigger_patterns, tools_required, last_used]

@@ -9,6 +9,7 @@ from mind.services.identifier_repair import run_identifier_repair
 from mind.services.repair_graph import run_graph_repair
 from mind.services.reingest import run_personalization_link_repair
 from mind.services.vault_housekeeping import run_vault_housekeeping
+from mind.services.weave_cleanup import run_weave_cleanup
 
 from .common import project_root
 
@@ -78,6 +79,15 @@ def cmd_repair_personalization_links(args: argparse.Namespace) -> int:
         today=args.today,
         limit=args.limit,
         source_ids=tuple(args.source_ids or ()),
+        apply=bool(args.apply),
+    )
+    print(report.render())
+    return 0
+
+
+def cmd_repair_weave_cleanup(args: argparse.Namespace) -> int:
+    report = run_weave_cleanup(
+        project_root(),
         apply=bool(args.apply),
     )
     print(report.render())

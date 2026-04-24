@@ -65,7 +65,7 @@ def test_simulate_year_runs_campaign_inside_isolated_roots(tmp_path: Path, monke
             adapter=CAMPAIGN_ADAPTER,
             state={
                 "status": "completed",
-                "completed_counts": {"light": 1, "deep": 1, "rem": 1, "weave": 0},
+                "completed_counts": {"light": 1, "deep": 1, "rem": 1},
                 "schedule": [{"day_index": 0, "effective_date": "2026-01-01", "stages": ["light", "deep", "rem"]}],
             },
         )
@@ -93,6 +93,5 @@ def test_simulate_year_runs_campaign_inside_isolated_roots(tmp_path: Path, monke
     assert result.report_markdown_path.exists()
 
     overlay = yaml.safe_load(result.config_path.read_text(encoding="utf-8"))
-    assert overlay["dream"]["weave"]["enabled"] is False
-    assert overlay["dream"]["weave"]["run_after_rem"] is False
+    assert "dream" not in overlay or "weave" not in overlay.get("dream", {})
     assert {key: os.environ.get(key) for key in original_env} == original_env

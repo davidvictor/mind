@@ -16,6 +16,16 @@ AtomType = Literal["concept", "playbook", "stance", "inquiry"]
 LifecycleState = Literal["probationary", "active", "declining", "dormant"]
 Polarity = Literal["for", "against", "neutral"]
 Confidence = Literal["low", "medium", "high"]
+EvidenceStrength = Literal["anecdotal", "empirical", "theoretical", "experiential"]
+RelationKind = Literal[
+    "supports",
+    "contradicts",
+    "example_of",
+    "applies_to",
+    "depends_on",
+    "extends",
+    "adjacent_to",
+]
 
 
 @dataclass(frozen=True)
@@ -45,6 +55,8 @@ class Q1Match:
     snippet: str
     polarity: Polarity
     confidence: Confidence
+    evidence_strength: EvidenceStrength = "anecdotal"
+    relation_kind: RelationKind = "supports"
 
 
 @dataclass(frozen=True)

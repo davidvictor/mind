@@ -98,26 +98,10 @@ class DreamConfig(BaseModel):
     rem_prune_brake_pct: int = 15
     nudge_auto_archive_days: int = 30
     probationary_stale_warn_days: int = 90
-    weave: "DreamWeaveConfig" = Field(default_factory=lambda: DreamWeaveConfig())
     active_synthesis: "DreamActiveSynthesisConfig" = Field(default_factory=lambda: DreamActiveSynthesisConfig())
     external_grounding: "DreamExternalGroundingConfig" = Field(default_factory=lambda: DreamExternalGroundingConfig())
     campaign: "DreamCampaignConfig" = Field(default_factory=lambda: DreamCampaignConfig())
     v2: "DreamV2Config" = Field(default_factory=lambda: DreamV2Config())
-
-
-class DreamWeaveConfig(BaseModel):
-    enabled: bool = True
-    run_after_rem: bool = True
-    candidate_cap: int = 400
-    min_cluster_size: int = 3
-    cluster_limit: int = 12
-    top_neighbors_per_atom: int = 5
-    min_edge_weight: int = 3
-    hub_link_min_weight: int = 4
-    hub_link_member_limit: int = 3
-    report_bridge_limit: int = 12
-    report_merge_limit: int = 12
-    auto_apply_mode: Literal["safe"] = "safe"
 
 
 class DreamActiveSynthesisThresholds(BaseModel):
@@ -213,9 +197,6 @@ class DreamCampaignConfig(BaseModel):
 
 class DreamV2Config(BaseModel):
     artifact_root: str = "raw/reports/dream/v2"
-    weave_shadow_enabled: bool = False
-    weave_window_size: int = 24
-    weave_max_local_clusters: int = 3
 
 
 class AntiSalesConfig(BaseModel):

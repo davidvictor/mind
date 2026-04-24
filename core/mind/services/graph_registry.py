@@ -179,6 +179,28 @@ def _coerce_list(value: Any) -> list[str]:
     return []
 
 
+def _normalize_document_targets(targets: list[str | tuple[str, str] | dict[str, Any]]) -> list[tuple[str, str]]:
+    normalized: set[tuple[str, str]] = set()
+    for target in targets:
+        node_id = ""
+        relation_kind = "resolved"
+        if isinstance(target, dict):
+            node_id = str(target.get("node_id") or target.get("atom_id") or target.get("target_id") or "").strip()
+            relation_kind = str(target.get("relation_kind") or relation_kind).strip() or relation_kind
+        elif isinstance(target, tuple):
+            if not target:
+                continue
+            node_id = str(target[0] or "").strip()
+            if len(target) > 1:
+                relation_kind = str(target[1] or relation_kind).strip() or relation_kind
+        else:
+            node_id = str(target or "").strip()
+        if not node_id:
+            continue
+        normalized.add((node_id, relation_kind))
+    return sorted(normalized)
+
+
 def _extract_wikilinks(text: str) -> list[str]:
     import re
 
@@ -1361,7 +1383,7 @@ class GraphRegistry:
         body: str,
         resolutions: list[dict[str, Any]],
         candidates: list[dict[str, Any]],
-        document_targets: list[str] | None = None,
+        document_targets: list[str | tuple[str, str] | dict[str, Any]] | None = None,
     ) -> None:
         updated_at = _utc_now_string()
         sha256 = _hash_text(body)
@@ -1410,13 +1432,13 @@ class GraphRegistry:
                     """,
                     (chunk_id, chunk),
                 )
-            for node_id in sorted(set(document_targets or [])):
+            for node_id, relation_kind in _normalize_document_targets(document_targets or []):
                 conn.execute(
                     """
                     INSERT INTO document_targets(doc_id, node_id, relation_kind)
                     VALUES (?, ?, ?)
                     """,
-                    (doc_id, node_id, "resolved"),
+                    (doc_id, node_id, relation_kind),
                 )
             for item in resolutions:
                 conn.execute(

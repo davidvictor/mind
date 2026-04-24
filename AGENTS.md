@@ -206,7 +206,6 @@ Current key operator surfaces include:
 - `mind dream light`
 - `mind dream deep`
 - `mind dream rem`
-- `mind dream weave`
 - `mind digest`
 - `mind state`
 - `mind state health`
@@ -345,7 +344,6 @@ Direct Dream commands are imperative:
 .venv/bin/python -m mind dream light
 .venv/bin/python -m mind dream deep
 .venv/bin/python -m mind dream rem
-.venv/bin/python -m mind dream weave
 ```
 
 If a human or agent calls them directly, they run.
@@ -604,7 +602,7 @@ If you remember only a few things, remember these:
 1. `config.example.yaml` is the public template; private config lives in `local_data/config.yaml` or `BRAIN_CONFIG_PATH`.
 2. The CLI is the execution engine.
 3. `mind orchestrate daily` owns unattended daily behavior.
-4. Direct Dream commands run when called, and live REM may hand off directly to Weave.
+4. Direct Dream commands run when called: Light, Deep, and REM are the canonical stages.
 5. The worker is queue-only.
 6. Use `Vault`/config for private roots; never hard-code or commit `dropbox/`, `raw/`, `memory/`, or `local_data/`.
 7. Current docs are small; old docs are archived.

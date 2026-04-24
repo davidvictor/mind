@@ -16,7 +16,6 @@ class DreamState:
     last_light: str | None
     last_deep: str | None
     last_rem: str | None
-    last_weave: str | None
     light_passes_since_deep: int
     deep_passes_since_rem: int
     last_lock_holder: str | None

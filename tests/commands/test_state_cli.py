@@ -29,7 +29,7 @@ def test_mind_state_summary(tmp_path: Path, capsys):
     assert "Runtime DB:" in out
     assert "Schema version: 1" in out
     assert "light=2026-04-08T12:00:00Z" in out
-    assert "weave=-" in out
+    assert "weave=" not in out
 
 
 def test_mind_state_subcommands_render_records(tmp_path: Path, capsys):

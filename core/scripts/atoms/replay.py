@@ -23,6 +23,13 @@ def apply_pass_d_result(
     recorded_on: str | None,
     source_link: str,
     repo_root: Path,
+    source_id: str | None = None,
+    source_kind: str = "unknown",
+    source_date: str | None = None,
+    creator_id: str = "",
+    topics: list[str] | None = None,
+    entities: list[str] | None = None,
+    discovered_via: str = "",
 ) -> PassDDispatchSummary:
     evidence_updates = 0
     probationary_updates = 0
@@ -38,6 +45,16 @@ def apply_pass_d_result(
                 source_link=source_link,
                 snippet=match.snippet,
                 polarity=match.polarity,
+                confidence=match.confidence,
+                evidence_strength=match.evidence_strength,
+                relation_kind=match.relation_kind,
+                source_id=source_id,
+                source_kind=source_kind,
+                source_date=source_date or evidence_date,
+                creator_id=creator_id,
+                topics=topics,
+                entities=entities,
+                discovered_via=discovered_via,
                 repo_root=repo_root,
             )
         except FileNotFoundError:

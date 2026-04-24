@@ -14,7 +14,6 @@ from mind.commands.ingest import (
 )
 from mind.dream.common import DreamBlockedError, DreamPreconditionError
 from mind.dream.v2.runtime import run_dream_v2_stage
-from mind.dream.v2.weave_stage import run_weave_v2_shadow
 from mind.runtime_state import RuntimeState, RuntimeStateLockBusy
 from mind.services.dropbox import dropbox_phase_message, dropbox_phase_status, dropbox_queue_status, sweep_dropbox
 from mind.services.provider_ops import PullResult, run_audible_pull, run_substack_pull, run_youtube_pull
@@ -34,10 +33,6 @@ def run_deep(*, dry_run: bool = False, acquire_lock: bool = True):
 
 def run_rem(*, dry_run: bool = False, acquire_lock: bool = True):
     return run_dream_v2_stage(stage="rem", dry_run=dry_run, acquire_lock=acquire_lock)
-
-
-def run_weave(*, dry_run: bool = False, acquire_lock: bool = True):
-    return run_dream_v2_stage(stage="weave", dry_run=dry_run, acquire_lock=acquire_lock)
 
 
 @dataclass(frozen=True)
@@ -331,10 +326,9 @@ def run_daily_orchestrator(repo_root: Path, *, phase_callback: Callable[[str], N
 
         dream_state = state.get_dream_state()
         if not vault.config.dream.enabled:
-            for stage_name in ("light", "deep", "rem", "weave"):
+            for stage_name in ("light", "deep", "rem"):
                 _record_phase(state, run_id, stage=f"dream:{stage_name}", status="skipped", message="dream disabled in config", phases=phases, phase_callback=phase_callback)
         else:
-            rem_status = "skipped"
             for stage_name, last_run, minimum_age, runner in (
                 ("light", dream_state.last_light, timedelta(days=1), run_light),
                 ("deep", dream_state.last_deep, timedelta(days=7), run_deep),
@@ -350,8 +344,6 @@ def run_daily_orchestrator(repo_root: Path, *, phase_callback: Callable[[str], N
                         phases=phases,
                         phase_callback=phase_callback,
                     )
-                    if stage_name == "rem":
-                        rem_status = "skipped"
                     continue
                 try:
                     result = runner(dry_run=False, acquire_lock=False)
@@ -367,57 +359,12 @@ def run_daily_orchestrator(repo_root: Path, *, phase_callback: Callable[[str], N
                         phases=phases,
                         phase_callback=phase_callback,
                     )
-                    if stage_name == "rem":
-                        rem_status = result.status
                 except DreamBlockedError as exc:
                     _record_phase(state, run_id, stage=f"dream:{stage_name}", status="blocked", message=str(exc), phases=phases, phase_callback=phase_callback)
-                    if stage_name == "rem":
-                        rem_status = "blocked"
                 except DreamPreconditionError as exc:
                     _record_phase(state, run_id, stage=f"dream:{stage_name}", status="blocked", message=str(exc), phases=phases, phase_callback=phase_callback)
-                    if stage_name == "rem":
-                        rem_status = "blocked"
                 except Exception as exc:
                     _record_phase(state, run_id, stage=f"dream:{stage_name}", status="failed", message=str(exc), phases=phases, phase_callback=phase_callback)
-                    if stage_name == "rem":
-                        rem_status = "failed"
-
-            weave_cfg = vault.config.dream.weave
-            if not weave_cfg.enabled:
-                _record_phase(state, run_id, stage="dream:weave", status="skipped", message="disabled in config", phases=phases, phase_callback=phase_callback)
-            elif not weave_cfg.run_after_rem:
-                _record_phase(state, run_id, stage="dream:weave", status="skipped", message="run_after_rem disabled in config", phases=phases, phase_callback=phase_callback)
-            elif rem_status != "completed":
-                _record_phase(
-                    state,
-                    run_id,
-                    stage="dream:weave",
-                    status="skipped",
-                    message=f"REM did not complete ({rem_status})",
-                    phases=phases,
-                    phase_callback=phase_callback,
-                )
-            else:
-                try:
-                    result = run_weave(dry_run=False, acquire_lock=False)
-                    message = result.summary
-                    if result.warnings:
-                        message = f"{message} warnings={' | '.join(result.warnings[:3])}"
-                    _record_phase(
-                        state,
-                        run_id,
-                        stage="dream:weave",
-                        status=result.status,
-                        message=message,
-                        phases=phases,
-                        phase_callback=phase_callback,
-                    )
-                except DreamBlockedError as exc:
-                    _record_phase(state, run_id, stage="dream:weave", status="blocked", message=str(exc), phases=phases, phase_callback=phase_callback)
-                except DreamPreconditionError as exc:
-                    _record_phase(state, run_id, stage="dream:weave", status="blocked", message=str(exc), phases=phases, phase_callback=phase_callback)
-                except Exception as exc:
-                    _record_phase(state, run_id, stage="dream:weave", status="failed", message=str(exc), phases=phases, phase_callback=phase_callback)
 
         overall_status = "completed"
         if any(phase.status == "failed" for phase in phases):

@@ -887,6 +887,12 @@ def run_pass_d_for_substack(
             recorded_on=today,
             source_link=f"[[{source_page_id}]]",
             repo_root=repo_root,
+            source_id=f"substack-{record.id}",
+            source_kind="substack",
+            source_date=evidence_date or today,
+            creator_id=str(getattr(record, "publication", "") or getattr(record, "author", "") or ""),
+            topics=[str(item) for item in list((summary or {}).get("topics") or [])],
+            entities=[str(item) for item in list((summary or {}).get("entities") or [])],
         )
     except Exception as exc:
         payload.update(

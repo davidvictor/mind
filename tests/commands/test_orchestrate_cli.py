@@ -186,18 +186,13 @@ def test_orchestrate_daily_runs_phases_and_records_run(tmp_path: Path, monkeypat
         "mind.services.orchestrator.run_rem",
         lambda dry_run=False, acquire_lock=False: DreamResult(stage="rem", dry_run=False, summary="REM done"),
     )
-    monkeypatch.setattr(
-        "mind.services.orchestrator.run_weave",
-        lambda dry_run=False, acquire_lock=False: DreamResult(stage="weave", dry_run=False, summary="Weave done"),
-    )
-
     assert main(["orchestrate", "daily"]) == 0
     out = capsys.readouterr().out
     assert "Orchestrator status: completed" in out
     assert "dropbox:sweep: skipped" in out
     assert "provider:youtube: completed" in out
     assert "dream:light: completed" in out
-    assert "dream:weave: completed" in out
+    assert "dream:weave" not in out
     assert calls[0] == "dropbox:sweep"
 
     state = RuntimeState.for_repo_root(tmp_path)
@@ -278,11 +273,6 @@ def test_orchestrate_daily_surfaces_dream_quality_warnings(tmp_path: Path, monke
         "mind.services.orchestrator.run_rem",
         lambda dry_run=False, acquire_lock=False: DreamResult(stage="rem", dry_run=False, summary="REM done"),
     )
-    monkeypatch.setattr(
-        "mind.services.orchestrator.run_weave",
-        lambda dry_run=False, acquire_lock=False: DreamResult(stage="weave", dry_run=False, summary="Weave done"),
-    )
-
     assert main(["orchestrate", "daily"]) == 1
     out = capsys.readouterr().out
     assert "quote_coverage_low" in out
@@ -295,7 +285,7 @@ def test_orchestrate_daily_surfaces_dream_quality_warnings(tmp_path: Path, monke
     assert "quote_coverage_low" in (light_event.message or "")
 
 
-def test_orchestrate_daily_ignores_legacy_weave_shadow_flag_after_cutover(tmp_path: Path, monkeypatch, capsys):
+def test_orchestrate_daily_ignores_legacy_weave_config_after_cutover(tmp_path: Path, monkeypatch, capsys):
     _write_config(tmp_path)
     _patch_roots(monkeypatch, tmp_path)
     cfg = tmp_path / "config.yaml"
@@ -342,18 +332,10 @@ def test_orchestrate_daily_ignores_legacy_weave_shadow_flag_after_cutover(tmp_pa
     monkeypatch.setattr("mind.services.orchestrator.run_light", lambda dry_run=False, acquire_lock=False: DreamResult(stage="light", dry_run=False, summary="Light done"))
     monkeypatch.setattr("mind.services.orchestrator.run_deep", lambda dry_run=False, acquire_lock=False: DreamResult(stage="deep", dry_run=False, summary="Deep done"))
     monkeypatch.setattr("mind.services.orchestrator.run_rem", lambda dry_run=False, acquire_lock=False: DreamResult(stage="rem", dry_run=False, summary="REM done"))
-    monkeypatch.setattr("mind.services.orchestrator.run_weave", lambda dry_run=False, acquire_lock=False: DreamResult(stage="weave", dry_run=False, summary="Weave done"))
-    seen_shadow: list[tuple[bool, bool]] = []
-    monkeypatch.setattr(
-        "mind.services.orchestrator.run_weave_v2_shadow",
-        lambda dry_run=False, acquire_lock=False: seen_shadow.append((dry_run, acquire_lock))
-        or DreamResult(stage="weave-v2-shadow", dry_run=False, summary="Weave v2 shadow done"),
-    )
 
     assert main(["orchestrate", "daily"]) == 1
     out = capsys.readouterr().out
-    assert "dream:weave-v2-shadow: completed" not in out
-    assert seen_shadow == []
+    assert "dream:weave" not in out
 
 
 def test_orchestrate_daily_marks_dropbox_review_as_failed_and_degraded_queue(tmp_path: Path, monkeypatch, capsys):
@@ -403,11 +385,6 @@ def test_orchestrate_daily_marks_dropbox_review_as_failed_and_degraded_queue(tmp
         "mind.services.orchestrator.run_rem",
         lambda dry_run=False, acquire_lock=False: DreamResult(stage="rem", dry_run=False, summary="REM done"),
     )
-    monkeypatch.setattr(
-        "mind.services.orchestrator.run_weave",
-        lambda dry_run=False, acquire_lock=False: DreamResult(stage="weave", dry_run=False, summary="Weave done"),
-    )
-
     assert main(["orchestrate", "daily"]) == 1
     out = capsys.readouterr().out
     assert "dropbox:sweep: failed" in out

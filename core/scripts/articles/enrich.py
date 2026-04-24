@@ -397,6 +397,11 @@ def run_pass_d_for_article(
             recorded_on=today,
             source_link=f"[[{__import__('scripts.articles.write_pages', fromlist=['canonical_page_id']).canonical_page_id(repo_root, entry)}]]",
             repo_root=repo_root,
+            source_id=f"article-{slug}",
+            source_kind="article",
+            source_date=evidence_date or today,
+            topics=[str(item) for item in list((summary or {}).get("topics") or [])],
+            entities=[str(item) for item in list((summary or {}).get("entities") or [])],
         )
     except Exception as exc:
         payload.update(

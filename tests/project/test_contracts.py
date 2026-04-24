@@ -41,6 +41,7 @@ LEGACY_TEXT = (
     "intentionally prompt-native",
     "prompt-native holdouts",
     "weave_mode",
+    "mind dream weave",
     "Phase 8+",
 )
 
@@ -79,8 +80,8 @@ def test_readme_mentions_current_operator_surface() -> None:
     text = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
     for snippet in (
         "Brain is a local-first knowledge engine",
-        "Why We Built This",
-        "Graph-Based Ingestion",
+        "Why Dreaming Matters",
+        "What A Brain Is",
         "Dreaming: Light, Deep, REM",
         "python3.11 -m venv .venv",
         ".venv/bin/python -m mind onboard import --from-json",
@@ -90,7 +91,6 @@ def test_readme_mentions_current_operator_surface() -> None:
         ".venv/bin/python -m mind dream light",
         ".venv/bin/python -m mind dream deep",
         ".venv/bin/python -m mind dream rem",
-        ".venv/bin/python -m mind dream weave",
         ".venv/bin/python -m mind dream simulate-year",
         ".venv/bin/python -m mind digest",
         ".venv/bin/python -m mind state",

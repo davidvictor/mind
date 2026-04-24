@@ -52,6 +52,56 @@ _LIFECYCLE_STAGE_ALIASES: dict[str, LifecycleStage] = {
 
 
 @dataclass(frozen=True)
+class EvidenceEdge:
+    """Machine-readable edge from one source to one atom.
+
+    Markdown evidence logs are optimized for people. This shape is the shared
+    ingestion substrate future graph, retrieval, and insight code should read.
+    """
+
+    source_id: str
+    source_kind: str
+    source_date: str
+    creator_id: str = ""
+    atom_id: str = ""
+    atom_type: str = ""
+    polarity: str = "neutral"
+    confidence: str = "medium"
+    evidence_strength: str = "anecdotal"
+    relation_kind: str = "supports"
+    snippet: str = ""
+    quote_verified: bool = False
+    source_section: str = ""
+    source_span: str = ""
+    topics: list[str] = field(default_factory=list)
+    entities: list[str] = field(default_factory=list)
+    discovered_via: str = ""
+    edge_id: str = ""
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "edge_id": self.edge_id,
+            "source_id": self.source_id,
+            "source_kind": self.source_kind,
+            "source_date": self.source_date,
+            "creator_id": self.creator_id,
+            "atom_id": self.atom_id,
+            "atom_type": self.atom_type,
+            "polarity": self.polarity,
+            "confidence": self.confidence,
+            "evidence_strength": self.evidence_strength,
+            "relation_kind": self.relation_kind,
+            "snippet": self.snippet,
+            "quote_verified": self.quote_verified,
+            "source_section": self.source_section,
+            "source_span": self.source_span,
+            "topics": list(self.topics),
+            "entities": list(self.entities),
+            "discovered_via": self.discovered_via,
+        }
+
+
+@dataclass(frozen=True)
 class NormalizedSource:
     """Stable orchestration boundary for ingestion phases."""
 

@@ -106,7 +106,7 @@ def test_light_does_not_create_probationary_inquiries_from_summary_questions(tmp
     assert "[[summary-phase5-boundary]]" in stance
 
 
-def test_light_dry_run_reports_bounded_audits_and_deferred_weave(tmp_path: Path, monkeypatch, capsys) -> None:
+def test_light_dry_run_reports_bounded_audits_and_deferred_relation_work(tmp_path: Path, monkeypatch, capsys) -> None:
     root = _copy_harness(tmp_path)
     _patch_roots(monkeypatch, root)
     cfg = root / "config.yaml"
@@ -143,7 +143,7 @@ def test_light_dry_run_reports_bounded_audits_and_deferred_weave(tmp_path: Path,
     assert "would tail-rescan append evidence" in out
     assert "would write co-occurrence nudge for local-first-systems and user-owned-ai (count=3)" in out
     assert "would write polarity-audit nudge" in out
-    # weave warning was removed during naming cleanup
+    # relation-warning wording was removed during naming cleanup
 
 
 def test_light_detects_recent_probationary_duplicates(tmp_path: Path, monkeypatch, capsys) -> None:

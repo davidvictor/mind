@@ -7,7 +7,7 @@ from scripts.chrome.contracts import canonicalize_url, discovery_key_for_url
 
 
 @dataclass(frozen=True)
-class EvidenceEdge:
+class DiscoveryEventEdge:
     edge_type: str
     event_id: str
     occurred_at: str
@@ -53,7 +53,7 @@ class WebCandidate:
     url: str
     title: str
     domain: str
-    evidence_edges: list[EvidenceEdge]
+    evidence_edges: list[DiscoveryEventEdge]
     triage: TriageResult
     crawl: dict[str, str] = field(default_factory=dict)
 
@@ -77,7 +77,7 @@ class WebCandidate:
             url=str(data["url"]),
             title=str(data.get("title") or ""),
             domain=str(data.get("domain") or ""),
-            evidence_edges=[EvidenceEdge(**edge) for edge in list(data.get("evidence_edges") or [])],
+            evidence_edges=[DiscoveryEventEdge(**edge) for edge in list(data.get("evidence_edges") or [])],
             triage=TriageResult(**dict(data.get("triage") or {})),
             crawl=dict(data.get("crawl") or {}),
         )

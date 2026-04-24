@@ -292,7 +292,7 @@ def test_source_identifiers_strip_book_summary_suffix_from_source_path(tmp_path:
     assert identifiers["pass_d_source_id"] == "book-andrew-ross-sorkin-1929"
 
 
-def test_evaluate_and_persist_quality_prefers_receipt_entity_and_fanout_metrics(tmp_path: Path, monkeypatch) -> None:
+def test_evaluate_and_persist_quality_derives_missing_receipt_entities_from_raw_source(tmp_path: Path, monkeypatch) -> None:
     root = _copy_harness(tmp_path)
     _patch_roots(monkeypatch, root)
     identity = LLMCacheIdentity(
@@ -341,10 +341,63 @@ def test_evaluate_and_persist_quality_prefers_receipt_entity_and_fanout_metrics(
     snapshot = evaluate_and_persist_quality(persist=False, report_key="receipt-metrics")
     youtube = snapshot["lanes"]["youtube"]
 
-    assert youtube["metrics"]["entity_log_yield"] == 0.0
+    assert youtube["metrics"]["entity_log_yield"] == 1.0
     assert youtube["metrics"]["fanout_yield"] == 0.0
-    assert "entity_yield_low" in youtube["reasons"]
+    assert "entity_yield_low" not in youtube["reasons"]
     assert "fanout_yield_low" in youtube["reasons"]
+
+
+def test_evaluate_and_persist_quality_does_not_penalize_missing_fanout_counts(tmp_path: Path, monkeypatch) -> None:
+    root = _copy_harness(tmp_path)
+    _patch_roots(monkeypatch, root)
+    identity = LLMCacheIdentity(
+        task_class=PASS_D_TASK_CLASS,
+        provider="anthropic",
+        model="anthropic/claude-sonnet-4.6",
+        transport="ai_gateway",
+        api_family="responses",
+        input_mode="text",
+        prompt_version="pass-d.v1",
+    )
+    monkeypatch.setattr(
+        "mind.dream.quality._acceptable_dream_identities",
+        lambda: [identity.to_dict()],
+    )
+    for index in range(10):
+        video_id = f"legacy-receipt-{index:02d}"
+        _write_youtube_summary(root, video_id)
+        _write_youtube_quality_artifacts(root, video_id, pass_d_identity=identity)
+        _write_quality_receipt(
+            root,
+            lane="youtube",
+            source_id=f"youtube-{video_id}",
+            payload={
+                "source_id": f"youtube-{video_id}",
+                "source_kind": "youtube",
+                "source_date": "2026-04-10",
+                "route_identity": identity.to_dict(),
+                "source_grounded": True,
+                "pass_d_status": "ok",
+                "quote_claim_count": 1,
+                "quote_unverified_count": 0,
+                "entity_logged_count": 0,
+                "fanout_discovered_count": None,
+                "fanout_queued_count": None,
+                "parity_features": {
+                    "quote_verification_supported": True,
+                    "pass_d_outcomes_exposed": True,
+                    "entity_logging_supported": True,
+                    "fanout_count_supported": True,
+                    "context_reuse_supported": True,
+                },
+            },
+        )
+
+    snapshot = evaluate_and_persist_quality(persist=False, report_key="legacy-receipts")
+    youtube = snapshot["lanes"]["youtube"]
+
+    assert youtube["metrics"]["fanout_yield"] is None
+    assert "fanout_yield_low" not in youtube["reasons"]
 
 
 def test_evaluate_and_persist_quality_marks_partial_when_grounding_misses_trusted_threshold(tmp_path: Path, monkeypatch) -> None:
@@ -377,7 +430,7 @@ def test_evaluate_and_persist_quality_marks_partial_when_grounding_misses_truste
             "tags: []\n"
             "domains:\n  - learning\n"
             "source_type: book\n"
-            "source_kind: research\n"
+            "source_kind: unknown\n"
             "source_date: 2026-04-10\n"
             "---\n\n# Summary\n",
             encoding="utf-8",

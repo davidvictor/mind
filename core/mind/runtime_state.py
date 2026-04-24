@@ -101,7 +101,6 @@ class RuntimeState:
                     last_light TEXT,
                     last_deep TEXT,
                     last_rem TEXT,
-                    last_weave TEXT,
                     light_passes_since_deep INTEGER NOT NULL DEFAULT 0,
                     deep_passes_since_rem INTEGER NOT NULL DEFAULT 0,
                     last_lock_holder TEXT,
@@ -204,10 +203,6 @@ class RuntimeState:
                 str(row["name"])
                 for row in conn.execute("PRAGMA table_info(runs)").fetchall()
             }
-            existing_dream_columns = {
-                str(row["name"])
-                for row in conn.execute("PRAGMA table_info(dream_state)").fetchall()
-            }
             if "queue_name" not in existing_run_columns:
                 conn.execute("ALTER TABLE runs ADD COLUMN queue_name TEXT")
             if "item_ref" not in existing_run_columns:
@@ -216,8 +211,6 @@ class RuntimeState:
                 conn.execute("ALTER TABLE runs ADD COLUMN retry_count INTEGER NOT NULL DEFAULT 0")
             if "next_attempt_at" not in existing_run_columns:
                 conn.execute("ALTER TABLE runs ADD COLUMN next_attempt_at TEXT")
-            if "last_weave" not in existing_dream_columns:
-                conn.execute("ALTER TABLE dream_state ADD COLUMN last_weave TEXT")
             now = _utc_now_string()
             conn.execute(
                 """
@@ -233,16 +226,15 @@ class RuntimeState:
                 conn.execute(
                     """
                     INSERT INTO dream_state(
-                        id, last_light, last_deep, last_rem, last_weave,
+                        id, last_light, last_deep, last_rem,
                         light_passes_since_deep, deep_passes_since_rem,
                         last_lock_holder, last_lock_acquired_at, last_skip_reason, updated_at
-                    ) VALUES(1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    ) VALUES(1, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     """,
                     (
                         legacy.get("last_light_dream_at"),
                         legacy.get("last_deep_dream_at"),
                         legacy.get("last_rem_dream_at"),
-                        legacy.get("last_weave_dream_at"),
                         int(legacy.get("light_passes_since_deep") or 0),
                         int(legacy.get("deep_passes_since_rem") or 0),
                         legacy.get("last_lock_holder"),
@@ -373,7 +365,6 @@ class RuntimeState:
             last_light=row["last_light"],
             last_deep=row["last_deep"],
             last_rem=row["last_rem"],
-            last_weave=row["last_weave"],
             light_passes_since_deep=int(row["light_passes_since_deep"]),
             deep_passes_since_rem=int(row["deep_passes_since_rem"]),
             last_lock_holder=row["last_lock_holder"],
@@ -388,7 +379,6 @@ class RuntimeState:
         last_light: str | None | object = UNSET,
         last_deep: str | None | object = UNSET,
         last_rem: str | None | object = UNSET,
-        last_weave: str | None | object = UNSET,
         light_passes_since_deep: int | object = UNSET,
         deep_passes_since_rem: int | object = UNSET,
         last_lock_holder: str | None | object = UNSET,
@@ -402,7 +392,6 @@ class RuntimeState:
                 last_light=last_light,
                 last_deep=last_deep,
                 last_rem=last_rem,
-                last_weave=last_weave,
                 light_passes_since_deep=light_passes_since_deep,
                 deep_passes_since_rem=deep_passes_since_rem,
                 last_lock_holder=last_lock_holder,
@@ -419,7 +408,6 @@ class RuntimeState:
             "last_light": current["last_light"],
             "last_deep": current["last_deep"],
             "last_rem": current["last_rem"],
-            "last_weave": current["last_weave"],
             "light_passes_since_deep": int(current["light_passes_since_deep"]),
             "deep_passes_since_rem": int(current["deep_passes_since_rem"]),
             "last_lock_holder": current["last_lock_holder"],
@@ -436,7 +424,6 @@ class RuntimeState:
             SET last_light = ?,
                 last_deep = ?,
                 last_rem = ?,
-                last_weave = ?,
                 light_passes_since_deep = ?,
                 deep_passes_since_rem = ?,
                 last_lock_holder = ?,
@@ -449,7 +436,6 @@ class RuntimeState:
                 payload["last_light"],
                 payload["last_deep"],
                 payload["last_rem"],
-                payload["last_weave"],
                 payload["light_passes_since_deep"],
                 payload["deep_passes_since_rem"],
                 payload["last_lock_holder"],

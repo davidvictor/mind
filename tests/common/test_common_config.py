@@ -150,13 +150,9 @@ def test_brain_config_campaign_defaults_and_override_load(tmp_path: Path):
     assert cfg.dream.campaign.yearly.apply_cap_miss_lifecycle_changes is False
     assert cfg.dream.campaign.yearly.write_audit_nudges is False
     assert cfg.dream.campaign.yearly.emit_verbose_mutations is False
-    assert cfg.dream.weave.enabled is True
-    assert cfg.dream.weave.run_after_rem is True
-    assert cfg.dream.weave.candidate_cap == 400
-    assert cfg.dream.weave.cluster_limit == 12
 
 
-def test_brain_config_weave_override_loads(tmp_path: Path):
+def test_brain_config_ignores_legacy_weave_override(tmp_path: Path):
     from scripts.common.config import BrainConfig
 
     cfg_path = tmp_path / "config.yaml"
@@ -177,11 +173,7 @@ def test_brain_config_weave_override_loads(tmp_path: Path):
 
     cfg = BrainConfig.load(cfg_path)
 
-    assert cfg.dream.weave.enabled is True
-    assert cfg.dream.weave.run_after_rem is False
-    assert cfg.dream.weave.candidate_cap == 120
-    assert cfg.dream.weave.min_cluster_size == 4
-    assert cfg.dream.weave.hub_link_member_limit == 2
+    assert not hasattr(cfg.dream, "weave")
 
 
 def test_brain_config_dream_v2_override_loads(tmp_path: Path):
@@ -205,9 +197,7 @@ def test_brain_config_dream_v2_override_loads(tmp_path: Path):
     cfg = BrainConfig.load(cfg_path)
 
     assert cfg.dream.v2.artifact_root == "raw/reports/dream/v2-custom"
-    assert cfg.dream.v2.weave_shadow_enabled is True
-    assert cfg.dream.v2.weave_window_size == 18
-    assert cfg.dream.v2.weave_max_local_clusters == 2
+    assert not hasattr(cfg.dream.v2, "weave_shadow_enabled")
 
 
 def test_brain_config_loads_route_knobs_from_yaml(tmp_path: Path):

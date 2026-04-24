@@ -277,6 +277,13 @@ def _run_pass_d_for_file_source(source: NormalizedSource, *, summary: dict[str, 
         recorded_on=today,
         source_link=f"[[{source.source_id}]]",
         repo_root=repo_root,
+        source_id=source.source_id,
+        source_kind=source.source_kind,
+        source_date=today,
+        creator_id=str((source.creator_candidates[0] or {}).get("id") or "") if source.creator_candidates else "",
+        topics=[str(item) for item in list(summary.get("topics") or [])],
+        entities=[str(item) for item in list(summary.get("entities") or [])],
+        discovered_via=str(source.provenance.get("discovered_via") or ""),
     )
     return {
         "evidence_updates": dispatch.evidence_updates,

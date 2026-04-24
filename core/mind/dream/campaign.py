@@ -21,17 +21,14 @@ from .common import (
     vault,
 )
 from .v2.runtime import run_dream_v2_stage
-from .v2.weave_stage import run_weave_v2_shadow
 
 CAMPAIGN_ADAPTER = "dream.campaign"
 CAMPAIGN_REPORT_ROOT = ("raw", "reports", "dream", "campaign")
-STAGE_ORDER = ("light", "deep", "rem", "weave")
+STAGE_ORDER = ("light", "deep", "rem")
 CONFIG_SNAPSHOT_KEYS = (
     "light_interval_days",
     "deep_interval_days",
     "rem_interval_days",
-    "weave_enabled",
-    "weave_run_after_rem",
     "light_working_set_cap",
     "deep_probationary_cap",
     "deep_progress_every_probationaries",
@@ -65,8 +62,6 @@ class CampaignResolvedConfig:
     light_interval_days: int
     deep_interval_days: int
     rem_interval_days: int
-    weave_enabled: bool
-    weave_run_after_rem: bool
     light_working_set_cap: int
     deep_probationary_cap: int
     deep_progress_every_probationaries: int
@@ -100,8 +95,6 @@ def _resolve_campaign_config(*, raw_config, dream_config, profile: str) -> Campa
         light_interval_days=int(raw_config.light_interval_days),
         deep_interval_days=int(raw_config.deep_interval_days),
         rem_interval_days=int(raw_config.rem_interval_days),
-        weave_enabled=bool(dream_config.weave.enabled and profile == "yearly"),
-        weave_run_after_rem=bool(dream_config.weave.run_after_rem and profile == "yearly"),
         light_working_set_cap=int(raw_config.light_working_set_cap),
         deep_probationary_cap=int(raw_config.deep_probationary_cap),
         deep_progress_every_probationaries=int(raw_config.deep_progress_every_probationaries),
@@ -135,8 +128,6 @@ def _resolve_campaign_config(*, raw_config, dream_config, profile: str) -> Campa
         light_interval_days=int(override("light_interval_days", resolved.light_interval_days)),
         deep_interval_days=int(override("deep_interval_days", resolved.deep_interval_days)),
         rem_interval_days=int(override("rem_interval_days", resolved.rem_interval_days)),
-        weave_enabled=resolved.weave_enabled,
-        weave_run_after_rem=resolved.weave_run_after_rem,
         light_working_set_cap=int(override("light_working_set_cap", resolved.light_working_set_cap)),
         deep_probationary_cap=int(override("deep_probationary_cap", resolved.deep_probationary_cap)),
         deep_progress_every_probationaries=int(
@@ -224,8 +215,6 @@ def _build_schedule(*, start_date: str, days: int, config) -> list[CampaignDayPl
     start = _parse_iso_date(start_date)
     end = start + timedelta(days=days - 1)
     rem_dates = _monthly_rem_dates(start=start, end=end)
-    weave_enabled = bool(getattr(config, "weave_enabled", False))
-    weave_run_after_rem = bool(getattr(config, "weave_run_after_rem", False))
     schedule: list[CampaignDayPlan] = []
     for day_index in range(days):
         effective_date = (start + timedelta(days=day_index)).isoformat()
@@ -236,8 +225,6 @@ def _build_schedule(*, start_date: str, days: int, config) -> list[CampaignDayPl
             stages.append("deep")
         if effective_date in rem_dates:
             stages.append("rem")
-            if weave_enabled and weave_run_after_rem:
-                stages.append("weave")
         schedule.append(CampaignDayPlan(day_index=day_index, effective_date=effective_date, stages=tuple(stages)))
     return schedule
 
@@ -320,7 +307,6 @@ def _write_plan_report(
         f"- Projected Light runs: {projected_counts['light']}",
         f"- Projected Deep runs: {projected_counts['deep']}",
         f"- Projected REM runs: {projected_counts['rem']}",
-        f"- Projected Weave runs: {projected_counts['weave']}",
         "",
         "## Schedule",
         "",
@@ -353,7 +339,6 @@ def _write_daily_report(
         f"- Completed Light runs: {completed_counts['light']}",
         f"- Completed Deep runs: {completed_counts['deep']}",
         f"- Completed REM runs: {completed_counts['rem']}",
-        f"- Completed Weave runs: {completed_counts['weave']}",
         "",
     ]
     if resumed_from_stage and not stage_results:
@@ -445,7 +430,6 @@ def _render_preview(schedule: list[CampaignDayPlan], *, projected_counts: dict[s
         f"Projected Light runs: {projected_counts['light']}",
         f"Projected Deep runs: {projected_counts['deep']}",
         f"Projected REM runs: {projected_counts['rem']}",
-        f"Projected Weave runs: {projected_counts['weave']}",
         "Preview:",
     ]
     preview_days = schedule if len(schedule) <= 8 else schedule[:5]
@@ -526,7 +510,7 @@ def run_campaign(
         summary = (
             f"Campaign rehearsal planned for {len(schedule)} simulated days "
             f"from {start_date} through {end_date}: "
-            f"light={projected_counts['light']} deep={projected_counts['deep']} rem={projected_counts['rem']} weave={projected_counts['weave']}."
+            f"light={projected_counts['light']} deep={projected_counts['deep']} rem={projected_counts['rem']}."
         )
         return DreamResult(
             stage="campaign",
@@ -707,6 +691,6 @@ def run_campaign(
     summary = (
         f"Campaign processed {len(schedule)} simulated days "
         f"from {start_date} through {end_date}: "
-        f"light={completed_counts['light']} deep={completed_counts['deep']} rem={completed_counts['rem']} weave={completed_counts['weave']}."
+        f"light={completed_counts['light']} deep={completed_counts['deep']} rem={completed_counts['rem']}."
     )
     return DreamResult(stage="campaign", dry_run=False, summary=summary, mutations=mutations, warnings=warnings)

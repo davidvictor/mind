@@ -129,6 +129,11 @@ def test_mind_repair_personalization_links_help_exposes_repair_surface():
     assert option_strings(parser, "repair", "personalization-links") >= {"--lane", "--path", "--today", "--limit", "--source-id", "--apply"}
 
 
+def test_mind_repair_weave_cleanup_help_exposes_repair_surface():
+    parser = build_parser()
+    assert option_strings(parser, "repair", "weave-cleanup") >= {"--apply"}
+
+
 def test_mind_readiness_help_exposes_first_run_flags():
     parser = build_parser()
     assert option_strings(parser, "readiness") >= {"--scope", "--dropbox-limit", "--lane-limit", "--include-promotion-gate", "--skip-source-checks"}
@@ -238,7 +243,7 @@ def test_mind_doctor_reports_runtime_shape(tmp_path: Path, monkeypatch, capsys):
     assert "Wiki path:" in out
 
 
-@pytest.mark.parametrize("mode", ["light", "deep", "rem", "weave"])
+@pytest.mark.parametrize("mode", ["light", "deep", "rem"])
 def test_mind_dream_commands_have_stable_contract(tmp_path: Path, monkeypatch, capsys, mode: str):
     _write_config(tmp_path)
     _patch_project_root(monkeypatch, tmp_path)
@@ -246,12 +251,6 @@ def test_mind_dream_commands_have_stable_contract(tmp_path: Path, monkeypatch, c
         f"mind.commands.dream.run_{mode}",
         lambda dry_run=False, _mode=mode: SimpleNamespace(
             render=lambda: f"Dream stage: {_mode}\nMode: {'dry-run' if dry_run else 'live'}\nsummary",
-        ),
-    )
-    monkeypatch.setattr(
-        "mind.commands.dream.run_weave",
-        lambda dry_run=False: SimpleNamespace(
-            render=lambda: f"Dream stage: weave\nMode: {'dry-run' if dry_run else 'live'}\nsummary",
         ),
     )
     rc = main(["dream", mode])
@@ -1178,8 +1177,6 @@ def test_mind_dream_simulate_year_help_exposes_current_flags():
     assert "simulate-year" in subcommand_names(parser, "dream")
     assert option_strings(parser, "dream", "simulate-year") >= {"--days", "--start-date", "--run-id", "--dry-run"}
 
-
-def test_mind_dream_weave_help_exposes_current_flags():
+def test_mind_dream_does_not_expose_fourth_stage():
     parser = build_parser()
-    assert "weave" in subcommand_names(parser, "dream")
-    assert option_strings(parser, "dream", "weave") >= {"--dry-run", "--shadow-v2"}
+    assert "weave" not in subcommand_names(parser, "dream")

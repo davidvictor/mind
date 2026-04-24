@@ -262,18 +262,40 @@ def _build_lane_record(
         route_policy_compliant = any(identity_matches(identity, candidate) for candidate in acceptable_identities)
     missing_essential = bool(receipt.get("synthesized")) and identity is None
 
-    total_claims = int(receipt.get("quote_claim_count") or 0)
-    unverified_claims = int(receipt.get("quote_unverified_count") or 0)
-    entity_count = int(receipt.get("entity_logged_count") or 0)
+    derived_total_claims, derived_unverified_claims = _quote_metrics(
+        repo_root,
+        lane=lane,
+        source_id=identifiers["quote_source_id"],
+    )
+    total_claims = max(int(receipt.get("quote_claim_count") or 0), derived_total_claims)
+    unverified_claims = max(int(receipt.get("quote_unverified_count") or 0), derived_unverified_claims)
+    entity_count = max(
+        int(receipt.get("entity_logged_count") or 0),
+        _entity_count(repo_root, lane=lane, source_id=identifiers["quote_source_id"]),
+        _entity_count(repo_root, lane=lane, source_id=identifiers["summary_source_id"]),
+    )
     fanout_discovered_count = _as_optional_int(receipt.get("fanout_discovered_count"))
     fanout_queued_count = _as_optional_int(receipt.get("fanout_queued_count"))
     parity_features = dict(receipt.get("parity_features") or PARITY_FEATURES.get(lane, {}))
+    if fanout_discovered_count is None and fanout_queued_count is None:
+        parity_features["fanout_count_supported"] = False
+    if entity_count > 0:
+        parity_features["entity_logging_supported"] = True
+    source_grounded = receipt.get("source_grounded")
+    derived_source_grounded = _source_grounded(
+        repo_root,
+        lane=lane,
+        frontmatter=frontmatter,
+        source_id=identifiers["quote_source_id"],
+    )
+    if derived_source_grounded is True or source_grounded is None:
+        source_grounded = derived_source_grounded
 
     return LaneSourceRecord(
         summary_id=identifiers["summary_source_id"],
         lane=lane,
         source_date=str(frontmatter.get("source_date") or frontmatter.get("last_updated") or frontmatter.get("created") or ""),
-        source_grounded=receipt.get("source_grounded"),
+        source_grounded=source_grounded,
         pass_d_success=pass_d_success,
         route_policy_compliant=route_policy_compliant,
         missing_essential_receipt=missing_essential,
@@ -334,7 +356,9 @@ def _source_grounded(repo_root: Path, *, lane: str, frontmatter: dict[str, Any],
         return bool(transcript and str(payload.get("transcription_path") or "").strip())
     if lane == "book":
         source_kind = str(frontmatter.get("source_kind") or "").strip().lower()
-        return source_kind in {"document", "audio"}
+        if source_kind in {"document", "audio", "research"}:
+            return True
+        return bool(str(frontmatter.get("source_path") or "").strip())
     return None
 
 
@@ -429,7 +453,10 @@ def _synthesize_receipt(
         "warning" if pass_d_outcomes else ("ok" if pass_d_payload else "missing")
     )
     total_claims, unverified_claims = _quote_metrics(repo_root, lane=lane, source_id=identifiers["quote_source_id"])
-    entity_count = _entity_count(repo_root, lane=lane, source_id=identifiers["summary_source_id"])
+    entity_count = max(
+        _entity_count(repo_root, lane=lane, source_id=identifiers["quote_source_id"]),
+        _entity_count(repo_root, lane=lane, source_id=identifiers["summary_source_id"]),
+    )
     return {
         "source_id": identifiers["pass_d_source_id"],
         "source_kind": lane,
@@ -580,7 +607,7 @@ def _fanout_yield(records: list[LaneSourceRecord]) -> float | None:
 
 
 def _merge_parity_features(records: list[LaneSourceRecord], *, lane: str) -> dict[str, bool]:
-    merged = dict(PARITY_FEATURES.get(lane, {}))
+    merged = {key: False for key in PARITY_FEATURES.get(lane, {})}
     for item in records:
         for key, value in item.parity_features.items():
             merged[key] = merged.get(key, False) or bool(value)

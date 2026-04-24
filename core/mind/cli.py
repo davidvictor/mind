@@ -809,7 +809,6 @@ def cmd_state_summary(_args: argparse.Namespace) -> int:
         f"light={dream.last_light or '-'} "
         f"deep={dream.last_deep or '-'} "
         f"rem={dream.last_rem or '-'} "
-        f"weave={dream.last_weave or '-'} "
         f"light_since_deep={dream.light_passes_since_deep} "
         f"deep_since_rem={dream.deep_passes_since_rem}"
     )

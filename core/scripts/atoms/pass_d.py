@@ -7,6 +7,7 @@ Historical design notes are kept outside the public release tree.
 """
 from __future__ import annotations
 
+from dataclasses import replace
 import json
 from pathlib import Path
 import re
@@ -28,6 +29,16 @@ PASS_D_COMPAT_PROMPT_VERSIONS = (PASS_D_PROMPT_VERSION, "dream.pass-d.v2")
 _SUPPORTED_ATOM_TYPES = {"concept", "playbook", "stance", "inquiry"}
 _SUPPORTED_POLARITIES = {"for", "against", "neutral"}
 _SUPPORTED_CONFIDENCE = {"low", "medium", "high"}
+_SUPPORTED_EVIDENCE_STRENGTH = {"anecdotal", "empirical", "theoretical", "experiential"}
+_SUPPORTED_RELATION_KINDS = {
+    "supports",
+    "contradicts",
+    "example_of",
+    "applies_to",
+    "depends_on",
+    "extends",
+    "adjacent_to",
+}
 _FIRST_SENTENCE_RE = re.compile(r"(.+?[.!?])(?:\s|$)")
 
 
@@ -73,12 +84,26 @@ def pass_d_cache_identities(service: Any | None = None) -> list[Any]:
     identities: list[Any] = []
     seen: set[str] = set()
     for prompt_version in PASS_D_COMPAT_PROMPT_VERSIONS:
-        for task_class in (PASS_D_TASK_CLASS, *PASS_D_LEGACY_TASK_CLASSES):
+        canonical_identities = list(llm.cache_identities(task_class=PASS_D_TASK_CLASS, prompt_version=prompt_version))
+        for identity in canonical_identities:
+            key = json.dumps(identity.to_dict(), sort_keys=True)
+            if key in seen:
+                continue
+            identities.append(identity)
+            seen.add(key)
+        for task_class in PASS_D_LEGACY_TASK_CLASSES:
             for identity in llm.cache_identities(task_class=task_class, prompt_version=prompt_version):
                 key = json.dumps(identity.to_dict(), sort_keys=True)
                 if key in seen:
                     continue
                 identities.append(identity)
+                seen.add(key)
+            for identity in canonical_identities:
+                mirrored = replace(identity, task_class=task_class)
+                key = json.dumps(mirrored.to_dict(), sort_keys=True)
+                if key in seen:
+                    continue
+                identities.append(mirrored)
                 seen.add(key)
     return identities
 
@@ -285,12 +310,15 @@ def _parse_q1_match(item: Mapping[str, object], *, index: int, warnings: list[st
     )
     if atom_type is None:
         return None
+    polarity = _normalize_polarity(item.get("polarity"), item_kind="q1_matches", index=index, warnings=warnings)
     return Q1Match(
         atom_id=normalize_identifier(str(item.get("atom_id") or "")),
         atom_type=atom_type,
         snippet=str(item.get("snippet") or ""),
-        polarity=_normalize_polarity(item.get("polarity"), item_kind="q1_matches", index=index, warnings=warnings),
+        polarity=polarity,
         confidence=_normalize_confidence(item.get("confidence"), item_kind="q1_matches", index=index, warnings=warnings),
+        evidence_strength=_normalize_evidence_strength(item.get("evidence_strength"), item_kind="q1_matches", index=index, warnings=warnings),
+        relation_kind=_normalize_relation_kind(item.get("relation_kind"), polarity=polarity, item_kind="q1_matches", index=index, warnings=warnings),
     )
 
 
@@ -384,6 +412,37 @@ def _normalize_confidence(value: object, *, item_kind: str, index: int, warnings
     if raw not in _SUPPORTED_CONFIDENCE:
         warnings.append(f"{item_kind}[{index}]: unsupported confidence {raw!r}; defaulted to 'low'")
         return "low"
+    return raw
+
+
+def _normalize_evidence_strength(value: object, *, item_kind: str, index: int, warnings: list[str]) -> str:
+    raw = str(value or "").strip()
+    if not raw:
+        warnings.append(f"{item_kind}[{index}]: defaulted empty evidence_strength to 'anecdotal'")
+        return "anecdotal"
+    if raw not in _SUPPORTED_EVIDENCE_STRENGTH:
+        warnings.append(f"{item_kind}[{index}]: unsupported evidence_strength {raw!r}; defaulted to 'anecdotal'")
+        return "anecdotal"
+    return raw
+
+
+def _normalize_relation_kind(
+    value: object,
+    *,
+    polarity: str,
+    item_kind: str,
+    index: int,
+    warnings: list[str],
+) -> str:
+    raw = str(value or "").strip()
+    if not raw:
+        default = "contradicts" if polarity == "against" else "supports" if polarity == "for" else "adjacent_to"
+        warnings.append(f"{item_kind}[{index}]: defaulted empty relation_kind to {default!r}")
+        return default
+    if raw not in _SUPPORTED_RELATION_KINDS:
+        default = "contradicts" if polarity == "against" else "supports" if polarity == "for" else "adjacent_to"
+        warnings.append(f"{item_kind}[{index}]: unsupported relation_kind {raw!r}; defaulted to {default!r}")
+        return default
     return raw
 
 

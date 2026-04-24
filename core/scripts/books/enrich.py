@@ -691,6 +691,12 @@ def run_pass_d_for_book(
             recorded_on=today,
             source_link=f"[[{source_page_id}]]",
             repo_root=repo_root,
+            source_id=f"book-{source_suffix}",
+            source_kind="book",
+            source_date=evidence_date or today,
+            creator_id=str(getattr(book, "author", "") or ""),
+            topics=[str(item) for item in list((summary or {}).get("topics") or [])],
+            entities=[str(item) for item in list((summary or {}).get("entities") or [])],
         )
     except Exception as exc:
         payload.update(

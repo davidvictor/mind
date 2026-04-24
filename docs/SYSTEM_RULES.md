@@ -41,15 +41,13 @@ These are the current high-level rules for the Brain runtime.
 - Dream readiness depends on validated onboarding state plus projected core onboarding outputs, not only on file existence.
 - Ingest lanes materialize one canonical durable source page per item under configured memory `sources/...`; summary pages are reserved for synthetic/operator outputs.
 - Pass D is the only ordinary per-source encoding layer.
+- Successful evidence appends must preserve a structured evidence edge under configured raw `evidence-edges/`; markdown is the readable view, not the whole substrate.
 - Light Dream runs through the Dream v2 stage dispatcher and stays a bounded cross-source consolidator over shared distillation selectors.
 - Deep Dream runs through the Dream v2 stage dispatcher as the weekly relation editor and may regenerate digest/index/open-inquiries outputs.
 - REM Dream runs through the Dream v2 stage dispatcher as the monthly graph-pruning and reflection pass. Its canonical durable outputs live under configured memory `dreams/rem/` and `me/reflections/`.
-- Weave Dream runs through the Dream v2 stage dispatcher as the monthly structural clustering layer. It consumes the latest persisted REM hotset carryover when available and on live runs may follow REM immediately when `dream.weave.run_after_rem` is enabled.
-- Weave pages under configured memory `dreams/weave/` are durable documents, should appear through the document-search/query surface, and are not first-class canonical graph nodes in v1.
-- Dream v2 artifacts are durable operator evidence under configured raw `reports/dream/v2/`. In canonical write mode they record the live REM/Weave artifact ladder; in explicit shadow mode they remain non-canonical evidence only.
-- `mind dream weave --shadow-v2` is an explicit debug/compare lane. It runs the shadow artifact ladder only and does not change the canonical live writer.
-- `dream.v2.weave_shadow_enabled` is a legacy compare toggle only. It no longer appends a shadow pass to direct REM -> Weave handoffs, campaign runs, or unattended daily orchestration.
-- In campaign mode, Weave is appended only in profile `yearly` and only on REM-scheduled days.
+- Dream v2 artifacts are durable operator evidence under configured raw `reports/dream/v2/`.
+- Structural link-weaving belongs inside Light as safe relation hints or inside Deep as bounded consolidation. It is not a standalone Dream stage.
+- REM must interpret what the graph is becoming; it must not depend on a separate structural clustering handoff.
 
 ## Documentation Rules
 

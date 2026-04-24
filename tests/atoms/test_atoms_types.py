@@ -56,9 +56,13 @@ def test_q1_match_construction():
         snippet="becoming as iterative process",
         polarity="for",
         confidence="high",
+        evidence_strength="empirical",
+        relation_kind="example_of",
     )
     assert m.polarity == "for"
     assert m.confidence == "high"
+    assert m.evidence_strength == "empirical"
+    assert m.relation_kind == "example_of"
 
 
 def test_q2_candidate_construction():

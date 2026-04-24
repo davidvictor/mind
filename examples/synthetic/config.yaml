@@ -63,19 +63,6 @@ dream:
   rem_prune_brake_pct: 15
   nudge_auto_archive_days: 30
   probationary_stale_warn_days: 90
-  weave:
-    enabled: true
-    run_after_rem: true
-    candidate_cap: 400
-    min_cluster_size: 3
-    cluster_limit: 12
-    top_neighbors_per_atom: 5
-    min_edge_weight: 3
-    hub_link_min_weight: 4
-    hub_link_member_limit: 3
-    report_bridge_limit: 12
-    report_merge_limit: 12
-    auto_apply_mode: safe
 
 anti_sales:
   enabled: true

@@ -12,7 +12,7 @@ from scripts.common.config import BrainConfig
 from scripts.common.inbox_log import append_to_inbox_log
 from scripts.common.vault import raw_path, wiki_path
 from scripts.search_signals.contracts import SearchSignal, build_search_signals
-from scripts.web_discovery.contracts import EvidenceEdge, WebCandidate
+from scripts.web_discovery.contracts import DiscoveryEventEdge, WebCandidate
 from scripts.web_discovery.firecrawl import FirecrawlClient, FirecrawlError
 from scripts.web_discovery.materialize import load_existing_record, merge_candidate, write_web_discovery_page
 from scripts.web_discovery.triage import build_candidate_seed, is_query_private, triage_candidate
@@ -49,7 +49,7 @@ def build_web_candidates(events: list[ChromeEvent], *, repo_root: Path) -> list[
     for signal in build_search_signals(events):
         query_ids_by_key[(signal.chrome_profile, signal.searched_at, signal.query_text, signal.engine_domain)] = signal.query_id
 
-    grouped: dict[str, list[EvidenceEdge]] = defaultdict(list)
+    grouped: dict[str, list[DiscoveryEventEdge]] = defaultdict(list)
     titles: dict[str, str] = {}
     urls: dict[str, str] = {}
     for event in events:
@@ -63,7 +63,7 @@ def build_web_candidates(events: list[ChromeEvent], *, repo_root: Path) -> list[
         if event.query_text:
             query_id = query_ids_by_key.get((event.chrome_profile, event.occurred_at, event.query_text, event.engine_domain), "")
         grouped[canonical].append(
-            EvidenceEdge(
+            DiscoveryEventEdge(
                 edge_type="history" if event.event_type == "history_visit" else event.event_type.replace("_visit", ""),
                 event_id=event.event_id,
                 occurred_at=event.occurred_at,

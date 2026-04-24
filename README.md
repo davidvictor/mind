@@ -30,15 +30,14 @@ Those atoms are not just tags. They carry evidence logs, source links, dates,
 polarity, lifecycle state, and graph relations. Dreaming is the maintenance
 cycle that revisits this substrate after more evidence accumulates.
 
+### Dreaming: Light, Deep, REM
+
 - **Light Dream** scans recent source pages and the tail of the graph, appends
   low-risk evidence, finds possible links, and creates review nudges.
 - **Deep Dream** handles slower editorial work: promotions, holds, merges,
   relationship updates, digest/index regeneration, and external grounding.
 - **REM Dream** looks at hot or stale clusters against the owner's identity
   context, writes reflections, and proposes pruning or lifecycle changes.
-- **Weave Dream** clusters mature atoms into structural reports and durable
-  pages under `memory/dreams/weave/`, giving the graph a higher-level map of
-  related ideas.
 
 The user-facing result is a brain that gets more useful because it can notice
 recurrence, tension, and structure across sources. Instead of only remembering
@@ -179,7 +178,8 @@ Run Dream directly:
 .venv/bin/python -m mind dream light --dry-run
 .venv/bin/python -m mind dream deep --dry-run
 .venv/bin/python -m mind dream rem --dry-run
-.venv/bin/python -m mind dream weave --dry-run
+.venv/bin/python -m mind digest
+.venv/bin/python -m mind state
 ```
 
 Run operator schedules:

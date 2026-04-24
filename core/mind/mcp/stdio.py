@@ -153,10 +153,6 @@ def _handle_start_dream_rem(server: BrainMCPServer, arguments: dict[str, Any]) -
     return server.start_dream_rem(_validate(StartDreamRequest, arguments))
 
 
-def _handle_start_dream_weave(server: BrainMCPServer, arguments: dict[str, Any]) -> Any:
-    return server.start_dream_weave(_validate(StartDreamRequest, arguments))
-
-
 def _handle_start_dream_bootstrap(server: BrainMCPServer, arguments: dict[str, Any]) -> Any:
     return server.start_dream_bootstrap(_validate(StartDreamBootstrapRequest, arguments))
 
@@ -208,7 +204,6 @@ def build_tool_specs() -> list[ToolSpec]:
         ToolSpec("start_dream_light", "Unsupported over MCP; use direct CLI operator commands for Light Dream.", _model_schema(StartDreamRequest), _handle_start_dream_light),
         ToolSpec("start_dream_deep", "Unsupported over MCP; use direct CLI operator commands for Deep Dream.", _model_schema(StartDreamRequest), _handle_start_dream_deep),
         ToolSpec("start_dream_rem", "Unsupported over MCP; use direct CLI operator commands for REM Dream.", _model_schema(StartDreamRequest), _handle_start_dream_rem),
-        ToolSpec("start_dream_weave", "Unsupported over MCP; use direct CLI operator commands for Weave Dream.", _model_schema(StartDreamRequest), _handle_start_dream_weave),
         ToolSpec(
             "start_dream_bootstrap",
             "Unsupported over MCP; use direct CLI operator commands for bootstrap Dream replay.",

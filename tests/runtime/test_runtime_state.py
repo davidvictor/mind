@@ -77,7 +77,6 @@ def test_bootstrap_creates_schema_and_imports_legacy_dream_state(tmp_path: Path)
 
     dream = state.get_dream_state()
     assert dream.last_light == "2026-04-07T10:00:00Z"
-    assert dream.last_weave is None
     assert dream.light_passes_since_deep == 2
     assert dream.last_lock_holder == "legacy-holder"
     assert dream.last_skip_reason == "legacy-skip"
@@ -149,12 +148,11 @@ def test_update_dream_state_can_clear_nullable_fields(tmp_path: Path):
     _write_config(tmp_path)
     state = RuntimeState.for_repo_root(tmp_path)
 
-    state.update_dream_state(last_skip_reason="skip-me", last_light="2026-04-08T12:00:00Z", last_weave="2026-04-09")
-    updated = state.update_dream_state(last_skip_reason=None, last_light=None, last_weave=None)
+    state.update_dream_state(last_skip_reason="skip-me", last_light="2026-04-08T12:00:00Z")
+    updated = state.update_dream_state(last_skip_reason=None, last_light=None)
 
     assert updated.last_skip_reason is None
     assert updated.last_light is None
-    assert updated.last_weave is None
 
 
 def test_runtime_updates_do_not_mutate_brain_state_atom_cache(tmp_path: Path):

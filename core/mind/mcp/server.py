@@ -89,7 +89,6 @@ class BrainMCPServer:
             last_light=summary.dream_state.last_light,
             last_deep=summary.dream_state.last_deep,
             last_rem=summary.dream_state.last_rem,
-            last_weave=summary.dream_state.last_weave,
             light_passes_since_deep=summary.dream_state.light_passes_since_deep,
             deep_passes_since_rem=summary.dream_state.deep_passes_since_rem,
         )
@@ -354,10 +353,6 @@ class BrainMCPServer:
     def start_dream_rem(self, request: StartDreamRequest) -> EnqueueResponse:
         self._authorize(request)
         return self._reject_dream_queue("rem")
-
-    def start_dream_weave(self, request: StartDreamRequest) -> EnqueueResponse:
-        self._authorize(request)
-        return self._reject_dream_queue("weave")
 
     def start_dream_bootstrap(self, request: StartDreamBootstrapRequest) -> EnqueueResponse:
         self._authorize(request)

@@ -285,7 +285,7 @@ def _merge_frontmatter(
     merged = dict(left)
     merged["id"] = canonical_id
     merged["aliases"] = _dedupe([*_coerce_list(left.get("aliases")), *_coerce_list(right.get("aliases")), old_id])
-    for key in ("domains", "sources", "relates_to", "weave_cluster_refs", "tags"):
+    for key in ("domains", "sources", "relates_to", "tags"):
         merged[key] = _dedupe([*_coerce_list(left.get(key)), *_coerce_list(right.get(key))])
     merged["typed_relations"] = _merge_typed_relations(left.get("typed_relations"), right.get("typed_relations"))
     for key in ("created",):

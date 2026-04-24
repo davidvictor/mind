@@ -87,6 +87,14 @@ def test_append_evidence_is_idempotent_and_writes_contradiction_nudge(tmp_path: 
         source_link="[[summary-example-seed]]",
         snippet="challenge to ownership assumptions",
         polarity="against",
+        confidence="high",
+        evidence_strength="theoretical",
+        relation_kind="contradicts",
+        source_id="summary-example-seed",
+        source_kind="summary",
+        source_date="2026-04-09",
+        topics=["ownership"],
+        entities=["AI"],
         repo_root=root,
     )
     again = append_evidence(
@@ -104,6 +112,13 @@ def test_append_evidence_is_idempotent_and_writes_contradiction_nudge(tmp_path: 
     assert again is False
     nudge = root / "memory" / "inbox" / "nudges" / "2026-04-09-contradiction-user-owned-ai.md"
     assert nudge.exists()
+    edge_path = root / "raw" / "evidence-edges" / "summary" / "summary-example-seed.jsonl"
+    edges = [json.loads(line) for line in edge_path.read_text(encoding="utf-8").splitlines()]
+    assert len(edges) == 1
+    assert edges[0]["atom_id"] == "user-owned-ai"
+    assert edges[0]["relation_kind"] == "contradicts"
+    assert edges[0]["evidence_strength"] == "theoretical"
+    assert edges[0]["topics"] == ["ownership"]
 
 
 def test_append_evidence_dedupe_by_source_blocks_repeated_source_on_new_date(tmp_path: Path):
@@ -320,8 +335,6 @@ def test_deep_promotes_probationary_and_updates_indexes(tmp_path: Path, monkeypa
 def test_rem_dry_and_live_generates_monthly_graph_outputs(tmp_path: Path, monkeypatch, capsys):
     root = _copy_harness(tmp_path, auto_activate=True)
     _patch_roots(monkeypatch, root)
-    cfg = root / "config.yaml"
-    cfg.write_text(cfg.read_text(encoding="utf-8").replace("run_after_rem: true", "run_after_rem: false", 1), encoding="utf-8")
     assert not (root / "memory" / "me" / "reflections").exists()
     assert not (root / "memory" / "me" / "timeline.md").exists()
     assert not (root / "skills").exists()

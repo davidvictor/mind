@@ -20,7 +20,6 @@ class RuntimeStatusResponse(BaseModel):
     last_light: Optional[str]
     last_deep: Optional[str]
     last_rem: Optional[str]
-    last_weave: Optional[str]
     light_passes_since_deep: int
     deep_passes_since_rem: int
 

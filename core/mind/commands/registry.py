@@ -13,7 +13,6 @@ from .dream import (
     cmd_dream_light,
     cmd_dream_rem,
     cmd_dream_simulate_year,
-    cmd_dream_weave,
 )
 from .expand import cmd_expand
 from .graph import (
@@ -59,6 +58,7 @@ from .repair import (
     cmd_repair_identifiers,
     cmd_repair_personalization_links,
     cmd_repair_vault_housekeeping,
+    cmd_repair_weave_cleanup,
 )
 from .reset import cmd_reset
 from .seed import DEFAULT_PRESET, PRESET_CHOICES, cmd_seed
@@ -312,6 +312,9 @@ def register_additional_commands(sub: argparse._SubParsersAction[argparse.Argume
     repair_vault_housekeeping_p = repair_sub.add_parser("vault-housekeeping", help="Audit and clean legacy summary residue, duplicate source titles, and naming drift")
     repair_vault_housekeeping_p.add_argument("--apply", action="store_true")
     repair_vault_housekeeping_p.set_defaults(func=cmd_repair_vault_housekeeping)
+    repair_weave_cleanup_p = repair_sub.add_parser("weave-cleanup", help="Strip legacy Weave metadata and archive experimental Weave pages")
+    repair_weave_cleanup_p.add_argument("--apply", action="store_true")
+    repair_weave_cleanup_p.set_defaults(func=cmd_repair_weave_cleanup)
 
     llm_p = sub.add_parser("llm", help="Inspect local LLM telemetry and optional gateway enrichment")
     llm_sub = llm_p.add_subparsers(dest="llm_command", required=True)
@@ -392,10 +395,6 @@ def register_additional_commands(sub: argparse._SubParsersAction[argparse.Argume
     dream_rem_p = dream_sub.add_parser("rem", help="Run or validate REM Dream")
     dream_rem_p.add_argument("--dry-run", action="store_true")
     dream_rem_p.set_defaults(func=cmd_dream_rem)
-    dream_weave_p = dream_sub.add_parser("weave", help="Run or validate Weave Dream")
-    dream_weave_p.add_argument("--dry-run", action="store_true")
-    dream_weave_p.add_argument("--shadow-v2", action="store_true", help="Run the Dream v2 Weave shadow/compare lane without canonical writes")
-    dream_weave_p.set_defaults(func=cmd_dream_weave)
     dream_bootstrap_p = dream_sub.add_parser("bootstrap", help="Replay historical sources through bootstrap consolidation")
     dream_bootstrap_p.add_argument("--dry-run", action="store_true")
     dream_bootstrap_p.add_argument("--force-pass-d", action="store_true")

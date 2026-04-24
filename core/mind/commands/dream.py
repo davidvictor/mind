@@ -2,12 +2,11 @@ from __future__ import annotations
 
 import argparse
 
-from mind.dream.common import DreamPreconditionError, vault as dream_vault
+from mind.dream.common import DreamPreconditionError
 from mind.dream.bootstrap import run_bootstrap
 from mind.dream.campaign import run_campaign
 from mind.dream.simulation import run_simulate_year
 from mind.dream.v2.runtime import run_dream_v2_stage
-from mind.dream.v2.weave_stage import run_weave_v2_shadow
 from mind.services.cli_progress import progress_for_args
 
 from .common import project_root
@@ -25,20 +24,16 @@ def run_rem(*, dry_run: bool):
     return run_dream_v2_stage(stage="rem", dry_run=dry_run)
 
 
-def run_weave(*, dry_run: bool):
-    return run_dream_v2_stage(stage="weave", dry_run=dry_run)
-
-
 def _run(stage: str, *, dry_run: bool) -> int:
     try:
         if stage == "light":
             result = run_light(dry_run=dry_run)
         elif stage == "deep":
             result = run_deep(dry_run=dry_run)
-        elif stage == "weave":
-            result = run_weave(dry_run=dry_run)
-        else:
+        elif stage == "rem":
             result = run_rem(dry_run=dry_run)
+        else:
+            raise KeyError(stage)
     except DreamPreconditionError as exc:
         print(f"mind dream {stage}: {exc}")
         return 1
@@ -55,37 +50,7 @@ def cmd_dream_deep(args: argparse.Namespace) -> int:
 
 
 def cmd_dream_rem(args: argparse.Namespace) -> int:
-    dry_run = bool(args.dry_run)
-    try:
-        rem = run_rem(dry_run=dry_run)
-    except DreamPreconditionError as exc:
-        print(f"mind dream rem: {exc}")
-        return 1
-    print(rem.render())
-    weave_cfg = dream_vault().config.dream.weave
-    if dry_run or not weave_cfg.enabled or not weave_cfg.run_after_rem:
-        return 0
-    try:
-        weave = run_weave(dry_run=False)
-    except DreamPreconditionError as exc:
-        print(f"\nmind dream weave: {exc}")
-        return 1
-    print()
-    print(weave.render())
-    return 0
-
-
-def cmd_dream_weave(args: argparse.Namespace) -> int:
-    dry_run = bool(args.dry_run)
-    if bool(getattr(args, "shadow_v2", False)):
-        try:
-            shadow = run_weave_v2_shadow(dry_run=dry_run)
-        except DreamPreconditionError as exc:
-            print(f"mind dream weave --shadow-v2: {exc}")
-            return 1
-        print(shadow.render())
-        return 0
-    return _run("weave", dry_run=dry_run)
+    return _run("rem", dry_run=bool(args.dry_run))
 
 
 def cmd_dream_bootstrap(args: argparse.Namespace) -> int:

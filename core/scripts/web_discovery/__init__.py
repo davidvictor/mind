@@ -1,4 +1,4 @@
-from .contracts import EvidenceEdge, TriageResult, WebCandidate, WebDiscoveryRecord
+from .contracts import DiscoveryEventEdge, TriageResult, WebCandidate, WebDiscoveryRecord
 from .pipeline import (
     WebDiscoveryDrainResult,
     WebDiscoveryIngestResult,
@@ -9,7 +9,7 @@ from .pipeline import (
 )
 
 __all__ = [
-    "EvidenceEdge",
+    "DiscoveryEventEdge",
     "TriageResult",
     "WebCandidate",
     "WebDiscoveryRecord",

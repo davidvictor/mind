@@ -16,7 +16,6 @@ def _copy_harness(tmp_path: Path) -> Path:
     shutil.copytree(EXAMPLES_ROOT, target)
     cfg = target / "config.yaml"
     text = cfg.read_text(encoding="utf-8").replace("enabled: false", "enabled: true", 1)
-    text = text.replace("run_after_rem: true", "run_after_rem: false", 1)
     cfg.write_text(text, encoding="utf-8")
     return target
 

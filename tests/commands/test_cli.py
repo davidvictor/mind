@@ -126,6 +126,19 @@ def test_mind_repair_vault_housekeeping_dispatches_service(tmp_path, capsys):
     mock_run.assert_called_once_with(tmp_path, apply=True)
 
 
+def test_mind_repair_weave_cleanup_dispatches_service(tmp_path, capsys):
+    _write_config(tmp_path)
+    fake_report = types.SimpleNamespace(render=lambda: "weave cleanup report")
+
+    with patch("mind.commands.repair.project_root", return_value=tmp_path), \
+         patch("mind.commands.repair.run_weave_cleanup", return_value=fake_report) as mock_run:
+        rc = main(["repair", "weave-cleanup", "--apply"])
+
+    assert rc == 0
+    assert "weave cleanup report" in capsys.readouterr().out
+    mock_run.assert_called_once_with(tmp_path, apply=True)
+
+
 def test_mind_repair_identifiers_dispatches_service(tmp_path, capsys):
     _write_config(tmp_path)
     fake_report = types.SimpleNamespace(render=lambda: "identifier repair report")
@@ -721,30 +734,7 @@ def test_mind_dream_simulate_year_dispatches_runtime(tmp_path, monkeypatch, caps
     }
     assert "simulate-year-ok" in capsys.readouterr().out
 
-
-def test_mind_dream_weave_shadow_v2_dispatches_runtime(tmp_path, capsys):
-    _write_config(tmp_path)
-    seen: list[tuple[str, bool]] = []
-
-    def fake_run_weave(*, dry_run):
-        seen.append(("v1", dry_run))
-        return types.SimpleNamespace(render=lambda: "weave-v1-ok")
-
-    def fake_run_weave_v2_shadow(*, dry_run):
-        seen.append(("v2-shadow", dry_run))
-        return types.SimpleNamespace(render=lambda: "weave-v2-shadow-ok")
-
-    with patch("mind.commands.dream.run_weave", fake_run_weave), \
-         patch("mind.commands.dream.run_weave_v2_shadow", fake_run_weave_v2_shadow):
-        rc = main(["dream", "weave", "--dry-run", "--shadow-v2"])
-
-    assert rc == 0
-    assert seen == [("v2-shadow", True)]
-    out = capsys.readouterr().out
-    assert "weave-v2-shadow-ok" in out
-
-
-def test_mind_dream_rem_runs_weave_handoff_when_enabled(tmp_path, capsys):
+def test_mind_dream_rem_does_not_handoff_to_fourth_stage(tmp_path, capsys):
     _write_config(tmp_path)
     seen: list[tuple[str, bool]] = []
 
@@ -752,16 +742,10 @@ def test_mind_dream_rem_runs_weave_handoff_when_enabled(tmp_path, capsys):
         seen.append(("rem", dry_run))
         return types.SimpleNamespace(render=lambda: "rem-ok")
 
-    def fake_run_weave(*, dry_run):
-        seen.append(("weave", dry_run))
-        return types.SimpleNamespace(render=lambda: "weave-ok")
-
-    with patch("mind.commands.dream.run_rem", fake_run_rem), \
-         patch("mind.commands.dream.run_weave", fake_run_weave):
+    with patch("mind.commands.dream.run_rem", fake_run_rem):
         rc = main(["dream", "rem"])
 
     assert rc == 0
-    assert seen == [("rem", False), ("weave", False)]
+    assert seen == [("rem", False)]
     out = capsys.readouterr().out
     assert "rem-ok" in out
-    assert "weave-ok" in out

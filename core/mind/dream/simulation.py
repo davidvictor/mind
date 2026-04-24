@@ -240,12 +240,6 @@ def _write_simulation_config(live_vault: Vault, roots: _SimulationRoots) -> Path
         "retrieval": {
             "vector_db": (roots.state / "graph-vectors.sqlite3").as_posix(),
         },
-        "dream": {
-            "weave": {
-                "enabled": False,
-                "run_after_rem": False,
-            }
-        },
     }
     config_path.write_text(yaml.safe_dump(payload, sort_keys=False), encoding="utf-8")
     return config_path
@@ -333,7 +327,7 @@ def _relation_changes(
     modified: list[str],
 ) -> list[dict[str, Any]]:
     changes: list[dict[str, Any]] = []
-    keys = ("relates_to", "typed_relations", "weave_cluster_refs", "sources")
+    keys = ("relates_to", "typed_relations", "sources")
     for path in modified:
         prior = before[path].frontmatter
         current = after[path].frontmatter
@@ -409,7 +403,6 @@ def _render_markdown_report(payload: dict[str, Any]) -> str:
         f"- Light runs: {stage_counts.get('light', 0)}",
         f"- Deep runs: {stage_counts.get('deep', 0)}",
         f"- REM runs: {stage_counts.get('rem', 0)}",
-        "- Weave runs: 0",
         "",
         "## Graph Deltas",
         "",

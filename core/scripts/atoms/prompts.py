@@ -92,7 +92,8 @@ def build_pass_d_prompt(
         '    {"atom_id": "string", "atom_type": "concept|playbook|stance|inquiry", '
         '"snippet": "string", "polarity": "for|against|neutral", '
         '"confidence": "low|medium|high", '
-        '"evidence_strength": "anecdotal|empirical|theoretical|experiential"}\n'
+        '"evidence_strength": "anecdotal|empirical|theoretical|experiential", '
+        '"relation_kind": "supports|contradicts|example_of|applies_to|depends_on|extends|adjacent_to"}\n'
         "  ],\n"
         '  "q2_candidates": [\n'
         '    {"type": "concept|playbook|stance|inquiry", "proposed_id": "string", '
